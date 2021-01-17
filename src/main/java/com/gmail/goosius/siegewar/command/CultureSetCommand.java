@@ -1,13 +1,14 @@
 package com.gmail.goosius.siegewar.command;
 
-import com.gmail.goosius.siegewar.enums.SiegeWarPermissionNodes;
 import com.gmail.goosius.siegewar.metadata.TownMetaDataController;
 import com.gmail.goosius.siegewar.settings.Translation;
+import com.palmergames.bukkit.towny.TownyMessaging;
 import com.palmergames.bukkit.towny.TownyUniverse;
 import com.palmergames.bukkit.towny.exceptions.NotRegisteredException;
 import com.palmergames.bukkit.towny.object.Resident;
 import com.palmergames.bukkit.towny.object.Town;
 import com.palmergames.bukkit.util.ChatTools;
+import com.palmergames.bukkit.util.NameValidation;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -43,13 +44,26 @@ public class CultureSetCommand implements CommandExecutor, TabCompleter {
 		if(!resident.hasTown() || !resident.isMayor())
 			player.sendMessage(Translation.of("msg_err_command_disable"));
 
-		//Set town culture
 		try {
 			Town town = resident.getTown();
-			TownMetaDataController.setTownCulture(town, args[0]);
-			//Todo - success message
+			String newCulture = args[0];
+
+			if (!newCulture.equals("none")) {
+				if (!NameValidation.isValidString(newCulture)) {
+					TownyMessaging.sendErrorMsg(player, com.palmergames.bukkit.towny.object.Translation.of("msg_err_invalid_string_culture_not_set"));
+					return true;
+				}
+				// TownyFormatter shouldn't be given any string longer than 159, or it has trouble splitting lines.
+				if (newCulture.length() > 159)
+					newCulture = newCulture.substring(0, 159);
+			} else
+				newCulture = "";
+
+			//Set town culture
+			TownMetaDataController.setTownCulture(town, newCulture);
+			TownyMessaging.sendPrefixedTownMessage(town, com.palmergames.bukkit.towny.object.Translation.of("msg_town_set_culture", newCulture));
 		} catch (NotRegisteredException e) {
-			//Won't get here as we already checked for resident
+			//We probably won't get here as we already checked for resident
 		}
 
 		return true;

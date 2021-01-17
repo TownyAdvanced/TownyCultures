@@ -1,5 +1,5 @@
 name: SiegeWar
-version: 0.05
+version: 0.06
 language: english
 author: Goosius
 website: 'http://townyadvanced.github.io/'
@@ -122,7 +122,6 @@ msg_siege_war_banner_control_session_failure: '&cBanner control session failed!.
 msg_war_siege_zone_milk_bucket_forbidden_while_attempting_banner_control: 'You cannot use this item while in a banner control session.'
 
 #Town Info Siege Section
-status_town_culture: '&2Culture: &a%s'
 status_town_revolt_immunity_timer: '&2Revolt Immunity Timer: &a%s'
 status_town_siege_status: '&2Siege: &a%s'
 status_town_siege_status_in_progress: 'In Progress'
@@ -248,3 +247,10 @@ dynmap_siege_status_pending_surrender: 'Pending Surrender'
 dynmap_siege_status_pending_abandon: 'Pending Abandon'
 dynmap_siege_time_left: 'Time Left: %s'
 dynmap_siege_war_chest: 'War Chest: %s'
+
+#Addedin 0.06
+                            #help_4: 'Culture Chat'
+status_town_culture: '&2Culture: &a%s'
+msg_err_invalid_string_culture_not_set: 'Invalid string, Town culture not set.'
+msg_town_set_culture: 'Town culture set to %s'
+                            #town_help_13: 'Irish'
