@@ -2,6 +2,7 @@ package com.gmail.goosius.siegewar;
 
 import com.gmail.goosius.siegewar.command.CultureCommunicationCommand;
 import com.gmail.goosius.siegewar.command.CultureSetCommand;
+import com.gmail.goosius.siegewar.settings.SiegeWarSettings;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
@@ -106,8 +107,10 @@ public class SiegeWar extends JavaPlugin {
 	private void registerCommands() {
 		getCommand("siegewar").setExecutor(new SiegeWarCommand());
 		getCommand("siegewaradmin").setExecutor(new SiegeWarAdminCommand());
-		getCommand("setculture").setExecutor(new CultureSetCommand());
-		//getCommand("cc").setExecutor(new CultureCommunicationCommand());
+		if(SiegeWarSettings.isTownCultureEnabled()) {
+			getCommand("setculture").setExecutor(new CultureSetCommand());
+			//getCommand("cc").setExecutor(new CultureCommunicationCommand());
+		}
 	}
 
 	private void printSickASCIIArt() {
