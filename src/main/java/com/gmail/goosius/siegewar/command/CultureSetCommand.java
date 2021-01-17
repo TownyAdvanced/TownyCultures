@@ -1,5 +1,6 @@
 package com.gmail.goosius.siegewar.command;
 
+import com.gmail.goosius.siegewar.Messaging;
 import com.gmail.goosius.siegewar.metadata.TownMetaDataController;
 import com.gmail.goosius.siegewar.settings.Translation;
 import com.palmergames.bukkit.towny.TownyMessaging;
@@ -50,7 +51,7 @@ public class CultureSetCommand implements CommandExecutor, TabCompleter {
 
 			if (!newCulture.equals("none")) {
 				if (!NameValidation.isValidString(newCulture)) {
-					TownyMessaging.sendErrorMsg(player, Translation.of("msg_err_invalid_string_culture_not_set"));
+					Messaging.sendErrorMsg(player, Translation.of("msg_err_invalid_string_culture_not_set"));
 					return true;
 				}
 				// TownyFormatter shouldn't be given any string longer than 159, or it has trouble splitting lines.
@@ -61,7 +62,7 @@ public class CultureSetCommand implements CommandExecutor, TabCompleter {
 
 			//Set town culture
 			TownMetaDataController.setTownCulture(town, newCulture);
-			TownyMessaging.sendPrefixedTownMessage(town, Translation.of("msg_town_set_culture", newCulture));
+			TownyMessaging.sendPrefixedTownMessage(town, String.format(Translation.of("msg_town_set_culture"), newCulture));
 		} catch (NotRegisteredException e) {
 			//We probably won't get here as we already checked for resident
 		}
