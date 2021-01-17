@@ -1,7 +1,7 @@
 package com.gmail.goosius.siegewar.command;
 
 import com.gmail.goosius.siegewar.enums.SiegeWarPermissionNodes;
-import com.gmail.goosius.siegewar.metadata.SiegeMetaDataController;
+import com.gmail.goosius.siegewar.metadata.TownMetaDataController;
 import com.gmail.goosius.siegewar.settings.Translation;
 import com.palmergames.bukkit.towny.TownyUniverse;
 import com.palmergames.bukkit.towny.exceptions.NotRegisteredException;
@@ -27,31 +27,33 @@ public class CultureSetCommand implements CommandExecutor, TabCompleter {
 	}
 
 	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
-		if (sender instanceof Player && args.length == 1) {
-			Player player = (Player)sender;
+		if(!(sender instanceof Player))
+			return true;
 
-			//Check for permission
-			if (!player.hasPermission(SiegeWarPermissionNodes.SIEGEWAR_COMMAND_SIEGEWAR_NATION.getNode(args[0]))) {
-				player.sendMessage(Translation.of("msg_err_command_disable"));
-				return true;
-			}
-
-			//Check for resident
-			Resident resident = TownyUniverse.getInstance().getResident(player.getName());
-			if (resident == null)
-				return true;
-
-			//Set culture
-			try {
-				Town town = resident.getTown();
-				SiegeMetaDataController.setTownCulture(town, args[0]);
-			} catch (NotRegisteredException e) {
-				//No town //Todo
-			}
-
-		} else {
+		if (args.length != 1)
 			sender.sendMessage(ChatTools.formatCommand("Eg", "/town set culture", "[culture]", ""));
+
+		//Check for permission
+		Player player = (Player)sender;
+		if (!player.hasPermission(SiegeWarPermissionNodes.SIEGEWAR_COMMAND_SIEGEWAR_NATION.getNode(args[0]))) {
+			player.sendMessage(Translation.of("msg_err_command_disable"));
+			return true;
 		}
+
+		//Check for resident
+		Resident resident = TownyUniverse.getInstance().getResident(player.getName());
+		if (resident == null)
+			return true;
+
+		//Set town culture
+		try {
+			Town town = resident.getTown();
+			TownMetaDataController.setTownCulture(town, args[0]);
+		} catch (NotRegisteredException e) {
+			//No town //Todo
+			return true;
+		}
+
 		return true;
 	}
 }
