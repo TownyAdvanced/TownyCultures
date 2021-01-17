@@ -104,6 +104,8 @@ public class SiegeWar extends JavaPlugin {
 	private void registerCommands() {
 		getCommand("siegewar").setExecutor(new SiegeWarCommand());
 		getCommand("siegewaradmin").setExecutor(new SiegeWarAdminCommand());
+		getCommand("town set culture").setExecutor(new SiegeWarAdminCommand());
+		getCommand("cc").setExecutor(new SiegeWarAdminCommand());
 	}
 
 	private void printSickASCIIArt() {
