@@ -50,7 +50,7 @@ public class CultureSetCommand implements CommandExecutor, TabCompleter {
 
 			if (!newCulture.equals("none")) {
 				if (!NameValidation.isValidString(newCulture)) {
-					TownyMessaging.sendErrorMsg(player, com.palmergames.bukkit.towny.object.Translation.of("msg_err_invalid_string_culture_not_set"));
+					TownyMessaging.sendErrorMsg(player, Translation.of("msg_err_invalid_string_culture_not_set"));
 					return true;
 				}
 				// TownyFormatter shouldn't be given any string longer than 159, or it has trouble splitting lines.
@@ -61,7 +61,7 @@ public class CultureSetCommand implements CommandExecutor, TabCompleter {
 
 			//Set town culture
 			TownMetaDataController.setTownCulture(town, newCulture);
-			TownyMessaging.sendPrefixedTownMessage(town, com.palmergames.bukkit.towny.object.Translation.of("msg_town_set_culture", newCulture));
+			TownyMessaging.sendPrefixedTownMessage(town, Translation.of("msg_town_set_culture", newCulture));
 		} catch (NotRegisteredException e) {
 			//We probably won't get here as we already checked for resident
 		}
