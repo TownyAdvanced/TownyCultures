@@ -305,7 +305,12 @@ public class SiegeWarTownEventListener implements Listener {
 		if (SiegeWarSettings.getWarSiegeEnabled()) {
 			List<String> out = new ArrayList<>();
 			Town town = event.getTown();
-			
+
+			//Culture: Azurian
+			if(SiegeWarSettings.isTownCultureEnabled()) {
+				out.add(Translation.of("status_town_culture", TownMetaDataController.getTownCulture(town)));
+			}
+
 	        //Revolt Immunity Timer: 71.8 hours
 	        if (SiegeWarSettings.getWarSiegeRevoltEnabled() && System.currentTimeMillis() < TownMetaDataController.getRevoltImmunityEndTime(town)) {        	
 	        	String time = TimeMgmt.getFormattedTimeValue(TownMetaDataController.getRevoltImmunityEndTime(town)- System.currentTimeMillis());        	

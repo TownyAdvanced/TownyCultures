@@ -5,6 +5,7 @@ import com.palmergames.bukkit.towny.object.Town;
 import com.palmergames.bukkit.towny.object.metadata.BooleanDataField;
 import com.palmergames.bukkit.towny.object.metadata.IntegerDataField;
 import com.palmergames.bukkit.towny.object.metadata.LongDataField;
+import com.palmergames.bukkit.towny.object.metadata.StringDataField;
 
 /**
  * 
@@ -19,7 +20,8 @@ public class TownMetaDataController {
 	private static BooleanDataField desiredPeacefulness = new BooleanDataField("siegewar_desiredPeaceSetting", false);
 	private static LongDataField revoltImmunityEndTime = new LongDataField("siegewar_revoltImmunityEndTime", 0l);
 	private static LongDataField siegeImmunityEndTime = new LongDataField("siegewar_siegeImmunityEndTime", 0l);
-	
+	private static StringDataField townCulture = new StringDataField("siegewar_culture", "");
+
 	public TownMetaDataController(SiegeWar plugin) {
 		this.plugin = plugin;
 	}
@@ -103,4 +105,21 @@ public class TownMetaDataController {
 			town.addMetaData(new LongDataField("siegewar_siegeImmunityEndTime", time));
 		}
 	}
+
+	public static String getTownCulture(Town town) {
+		StringDataField sdf = (StringDataField) townCulture.clone();
+		if (town.hasMeta(sdf.getKey()))
+			return MetaDataUtil.getString(town, sdf);
+		return null;
+	}
+
+	public static void setTownCulture(Town town, String culture) {
+		StringDataField sdf = (StringDataField) townCulture.clone();
+		if (town.hasMeta(sdf.getKey()))
+			MetaDataUtil.setString(town, sdf, culture);
+		else
+			town.addMetaData(new StringDataField("siegewar_culture", culture));
+	}
+
+
 }

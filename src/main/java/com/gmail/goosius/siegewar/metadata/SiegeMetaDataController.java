@@ -3,7 +3,6 @@ package com.gmail.goosius.siegewar.metadata;
 import org.jetbrains.annotations.Nullable;
 
 import com.gmail.goosius.siegewar.SiegeWar;
-import com.gmail.goosius.siegewar.metadata.MetaDataUtil;
 import com.palmergames.bukkit.towny.object.Town;
 import com.palmergames.bukkit.towny.object.metadata.BooleanDataField;
 import com.palmergames.bukkit.towny.object.metadata.DecimalDataField;
@@ -35,8 +34,7 @@ public class SiegeMetaDataController {
 	private static LongDataField startTime = new LongDataField("siegewar_startTime", 0l);
 	private static LongDataField endTime = new LongDataField("siegewar_endTime", 0l);
 	private static LongDataField actualEndTime = new LongDataField("siegewar_actualEndTime", 0l);
-	
-	
+
 	public SiegeMetaDataController(SiegeWar plugin) {
 		this.plugin = plugin;
 	}

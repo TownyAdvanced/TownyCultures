@@ -582,7 +582,22 @@ public enum ConfigNodes {
 			"true",
 			"",
 			"# If this value is true, then a town under occupation cannot unclaim.",
-			"#  This setting is recommended, to avoid occupation escape exploits.");	
+			"#  This setting is recommended, to avoid occupation escape exploits."),
+
+	TOWN_CULTURE("town_culture",
+		   "",
+		   "#########################################################",
+		   "# +------------------------------------------------------+ #",
+		   "# |              Town Culture settings                 | #",
+		   "# +------------------------------------------------------+ #",
+		   "############################################################",
+		   ""),
+	TOWN_CULTURE_ENABLED(
+			"town_culture.enabled",
+			"true",
+			"",
+			"# If this value is true, then blah.",
+			"# Blaahhhhh.");
 
 	private final String Root;
 	private final String Default;

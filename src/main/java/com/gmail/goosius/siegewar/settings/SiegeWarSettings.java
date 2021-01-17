@@ -330,4 +330,7 @@ public class SiegeWarSettings {
 		return Settings.getBoolean(ConfigNodes.PEACEFUL_TOWNS_ALLOWED_TO_TOGGLE_PVP);
 	}
 
+	public static boolean isTownCultureEnabled() {
+		return Settings.getBoolean(ConfigNodes.TOWN_CULTURE_ENABLED);
+	}
 }

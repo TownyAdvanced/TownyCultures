@@ -122,6 +122,7 @@ msg_siege_war_banner_control_session_failure: '&cBanner control session failed!.
 msg_war_siege_zone_milk_bucket_forbidden_while_attempting_banner_control: 'You cannot use this item while in a banner control session.'
 
 #Town Info Siege Section
+status_town_culture: '&2Culture: &a%s'
 status_town_revolt_immunity_timer: '&2Revolt Immunity Timer: &a%s'
 status_town_siege_status: '&2Siege: &a%s'
 status_town_siege_status_in_progress: 'In Progress'
