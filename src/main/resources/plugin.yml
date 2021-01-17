@@ -15,9 +15,9 @@ commands:
         aliases: [sw]
     siegewaradmin:
         aliases: [swa]
-    town set culture:
-        aliases: [t set culture]
-        
+    setculture:
+        aliases: [sc]
+
 permissions:
     siegewar.admin:
         description: User is able to use all siege war commands.

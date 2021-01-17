@@ -110,7 +110,8 @@ public class TownMetaDataController {
 		StringDataField sdf = (StringDataField) townCulture.clone();
 		if (town.hasMeta(sdf.getKey()))
 			return MetaDataUtil.getString(town, sdf);
-		return "/setculture [your_culture]";
+		else
+			return "/setculture [culture]";
 	}
 
 	public static void setTownCulture(Town town, String culture) {

@@ -107,7 +107,7 @@ public class SiegeWar extends JavaPlugin {
 		getCommand("siegewar").setExecutor(new SiegeWarCommand());
 		getCommand("siegewaradmin").setExecutor(new SiegeWarAdminCommand());
 		getCommand("setculture").setExecutor(new CultureSetCommand());
-		getCommand("cc").setExecutor(new CultureCommunicationCommand());
+		//getCommand("cc").setExecutor(new CultureCommunicationCommand());
 	}
 
 	private void printSickASCIIArt() {

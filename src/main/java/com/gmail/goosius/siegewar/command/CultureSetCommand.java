@@ -29,7 +29,7 @@ public class CultureSetCommand implements CommandExecutor, TabCompleter {
 			return true;
 
 		if (args.length != 1)
-			sender.sendMessage(ChatTools.formatCommand("Eg", "/setculture", "[your_culture]", ""));
+			sender.sendMessage(ChatTools.formatCommand("Eg", "/setculture", "[culture]", ""));
 
 		//Check for permission
 		Player player = (Player)sender;
