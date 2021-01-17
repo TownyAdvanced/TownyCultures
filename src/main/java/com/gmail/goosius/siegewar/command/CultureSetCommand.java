@@ -20,9 +20,7 @@ public class CultureSetCommand implements CommandExecutor, TabCompleter {
 
 	public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
 		List<String> allwords = new ArrayList<>();
-		allwords.add("town");
-		allwords.add("set");
-		allwords.add("culture");
+		allwords.add("setculture");
 		return allwords;
 	}
 
@@ -31,7 +29,7 @@ public class CultureSetCommand implements CommandExecutor, TabCompleter {
 			return true;
 
 		if (args.length != 1)
-			sender.sendMessage(ChatTools.formatCommand("Eg", "/town set culture", "[culture]", ""));
+			sender.sendMessage(ChatTools.formatCommand("Eg", "/setculture", "[your_culture]", ""));
 
 		//Check for permission
 		Player player = (Player)sender;
