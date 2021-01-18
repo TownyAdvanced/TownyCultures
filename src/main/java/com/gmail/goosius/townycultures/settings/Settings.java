@@ -1,9 +1,9 @@
-package com.townycultures.settings;
+package com.gmail.goosius.townycultures.settings;
 
 import java.io.File;
 import java.io.IOException;
 
-import com.townycultures.TownyCultures;
+import com.gmail.goosius.townycultures.TownyCultures;
 
 import io.github.townyadvanced.util.FileMgmt;
 
@@ -11,9 +11,9 @@ public class Settings {
 	private static CommentedConfiguration config, newConfig;
 
 	public static boolean loadSettingsAndLang() {
-		TownyCultures sw = TownyCultures.getTownyCultures();
+		TownyCultures townyCultures = TownyCultures.getTownyCultures();
 		try {
-			Settings.loadConfig(sw.getDataFolder().getPath() + File.separator + "config.yml", sw.getVersion());
+			Settings.loadConfig(townyCultures.getDataFolder().getPath() + File.separator + "config.yml", townyCultures.getVersion());
 		} catch (IOException e) {
             e.printStackTrace();
             System.err.println(TownyCultures.prefix + "Config.yml failed to load! Disabling!");
@@ -21,7 +21,7 @@ public class Settings {
         }
 
 		try {
-			Translation.loadLanguage(sw.getDataFolder().getPath() + File.separator, "english.yml");
+			Translation.loadLanguage(townyCultures.getDataFolder().getPath() + File.separator, "english.yml");
 		} catch (IOException e) {
 	        e.printStackTrace();
 	        System.err.println(TownyCultures.prefix + "Language file failed to load! Disabling!");

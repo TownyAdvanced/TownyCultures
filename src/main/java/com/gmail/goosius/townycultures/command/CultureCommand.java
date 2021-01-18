@@ -1,9 +1,9 @@
-package com.townycultures.command;
+package com.gmail.goosius.townycultures.command;
 
-import com.townycultures.Messaging;
-import com.townycultures.enums.TownyCulturesPermissionNodes;
-import com.townycultures.metadata.TownMetaDataController;
-import com.townycultures.settings.Translation;
+import com.gmail.goosius.townycultures.Messaging;
+import com.gmail.goosius.townycultures.enums.TownyCulturesPermissionNodes;
+import com.gmail.goosius.townycultures.metadata.TownMetaDataController;
+import com.gmail.goosius.townycultures.settings.Translation;
 import com.palmergames.bukkit.towny.TownyMessaging;
 import com.palmergames.bukkit.towny.TownyUniverse;
 import com.palmergames.bukkit.towny.exceptions.NotRegisteredException;

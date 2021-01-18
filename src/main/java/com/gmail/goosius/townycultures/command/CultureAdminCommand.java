@@ -1,19 +1,17 @@
-package com.townycultures.command;
+package com.gmail.goosius.townycultures.command;
 
 import com.palmergames.bukkit.towny.TownyMessaging;
 import com.palmergames.bukkit.towny.TownyUniverse;
-import com.palmergames.bukkit.towny.object.Nation;
 import com.palmergames.bukkit.towny.object.Town;
 import com.palmergames.bukkit.towny.utils.NameUtil;
 import com.palmergames.bukkit.util.ChatTools;
 import com.palmergames.bukkit.util.NameValidation;
 import com.palmergames.util.StringMgmt;
-import com.palmergames.util.TimeMgmt;
-import com.townycultures.Messaging;
-import com.townycultures.enums.TownyCulturesPermissionNodes;
-import com.townycultures.metadata.TownMetaDataController;
-import com.townycultures.settings.Settings;
-import com.townycultures.settings.Translation;
+import com.gmail.goosius.townycultures.Messaging;
+import com.gmail.goosius.townycultures.enums.TownyCulturesPermissionNodes;
+import com.gmail.goosius.townycultures.metadata.TownMetaDataController;
+import com.gmail.goosius.townycultures.settings.Settings;
+import com.gmail.goosius.townycultures.settings.Translation;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;

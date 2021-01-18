@@ -1,4 +1,4 @@
-package com.townycultures.settings;
+package com.gmail.goosius.townycultures.settings;
 
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.YamlConfiguration;

@@ -1,4 +1,4 @@
-package com.townycultures.enums;
+package com.gmail.goosius.townycultures.enums;
 
 /**
  * 

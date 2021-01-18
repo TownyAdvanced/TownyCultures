@@ -1,6 +1,6 @@
-package com.townycultures.settings;
+package com.gmail.goosius.townycultures.settings;
 
-import com.townycultures.TownyCultures;
+import com.gmail.goosius.townycultures.TownyCultures;
 import com.palmergames.bukkit.towny.command.HelpMenu;
 import com.palmergames.bukkit.util.Colors;
 import com.palmergames.util.StringMgmt;

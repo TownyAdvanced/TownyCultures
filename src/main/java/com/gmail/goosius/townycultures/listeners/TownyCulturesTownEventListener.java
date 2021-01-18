@@ -1,13 +1,13 @@
-package com.townycultures.listeners;
+package com.gmail.goosius.townycultures.listeners;
 
 import java.util.ArrayList;
 import java.util.List;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import com.townycultures.TownyCultures;
-import com.townycultures.metadata.TownMetaDataController;
-import com.townycultures.settings.TownyCulturesSettings;
-import com.townycultures.settings.Translation;
+import com.gmail.goosius.townycultures.TownyCultures;
+import com.gmail.goosius.townycultures.metadata.TownMetaDataController;
+import com.gmail.goosius.townycultures.settings.TownyCulturesSettings;
+import com.gmail.goosius.townycultures.settings.Translation;
 import com.palmergames.bukkit.towny.event.statusscreen.TownStatusScreenEvent;
 import com.palmergames.bukkit.towny.object.Town;
 

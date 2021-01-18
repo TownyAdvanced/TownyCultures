@@ -1,9 +1,9 @@
-package com.townycultures;
+package com.gmail.goosius.townycultures;
 
 import com.palmergames.bukkit.towny.TownyUniverse;
 import com.palmergames.bukkit.towny.exceptions.NotRegisteredException;
 import com.palmergames.bukkit.util.Colors;
-import com.townycultures.settings.Translation;
+import com.gmail.goosius.townycultures.settings.Translation;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;

@@ -1,13 +1,13 @@
-package com.townycultures;
+package com.gmail.goosius.townycultures;
 
-import com.townycultures.command.*;
-import com.townycultures.settings.TownyCulturesSettings;
+import com.gmail.goosius.townycultures.command.*;
+import com.gmail.goosius.townycultures.settings.TownyCulturesSettings;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
-import com.townycultures.settings.Settings;
+import com.gmail.goosius.townycultures.settings.Settings;
 import com.palmergames.bukkit.util.Version;
-import com.townycultures.listeners.TownyCulturesTownEventListener;
+import com.gmail.goosius.townycultures.listeners.TownyCulturesTownEventListener;
 
 public class TownyCultures extends JavaPlugin {
 	

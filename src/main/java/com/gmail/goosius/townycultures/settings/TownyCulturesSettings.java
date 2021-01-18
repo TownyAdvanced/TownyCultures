@@ -1,4 +1,4 @@
-package com.townycultures.settings;
+package com.gmail.goosius.townycultures.settings;
 
 public class TownyCulturesSettings {
 

@@ -1,4 +1,4 @@
-package com.townycultures.metadata;
+package com.gmail.goosius.townycultures.metadata;
 
 import com.palmergames.bukkit.towny.TownyUniverse;
 import com.palmergames.bukkit.towny.object.Town;

@@ -1,6 +1,6 @@
-package com.townycultures.metadata;
+package com.gmail.goosius.townycultures.metadata;
 
-import com.townycultures.TownyCultures;
+import com.gmail.goosius.townycultures.TownyCultures;
 import com.palmergames.bukkit.towny.object.Town;
 import com.palmergames.bukkit.towny.object.metadata.StringDataField;
 
