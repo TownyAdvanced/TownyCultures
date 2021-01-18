@@ -32,7 +32,7 @@ public class TownyCulturesTownEventListener implements Listener {
 			Town town = event.getTown();
 
 			//Culture: Azurian
-			if(TownyCulturesSettings.isCultureEnabled()) {
+			if(TownyCulturesSettings.isTownyCulturesEnabled()) {
 				out.add(Translation.of("status_town_culture", TownMetaDataController.getTownCulture(town)));
 			}
 
