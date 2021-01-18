@@ -12,10 +12,10 @@ description: A culture system made by Goosius for Towny.
 commands:
     culture:
         aliases: [c]
+    cultureAdmin:
+        aliases: [ca]
     cc:
         aliases: []
-    #cultureAdmin:
-    #    aliases: [ca]
 
 permissions:
     townycultures.set_town_culture:
