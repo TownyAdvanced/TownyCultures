@@ -70,17 +70,18 @@ public class CultureCommand implements CommandExecutor, TabCompleter {
 		if (resident == null)
 			return;
 
-		if (args.length != 1) {
-			player.sendMessage(ChatTools.formatCommand("Eg", "/c set", "[culture]", ""));
-			return;
-		}
-
 		if(!resident.hasTown())
 			player.sendMessage(Translation.of("msg_err_command_disable"));
 
 		try {
 			Town town = resident.getTown();
-			String newCulture = args[0];
+
+			StringBuilder stringBuilder = new StringBuilder();
+			stringBuilder.append(args[0]);
+			for(int i = 1; i < args.length; i++) {
+				stringBuilder.append(" ").append(args[i]);
+			}
+			String newCulture = stringBuilder.toString();
 
 			if (!newCulture.equals("none")) {
 				if (!NameValidation.isValidString(newCulture)) {

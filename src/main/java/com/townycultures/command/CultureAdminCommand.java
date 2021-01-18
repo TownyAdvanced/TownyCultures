@@ -126,7 +126,12 @@ public class CultureAdminCommand implements CommandExecutor, TabCompleter {
 				return;
 			}
 
-			String newCulture = args[3];
+			StringBuilder stringBuilder = new StringBuilder();
+			stringBuilder.append(args[0]);
+			for(int i = 1; i < args.length; i++) {
+				stringBuilder.append(" ").append(args[i]);
+			}
+			String newCulture = stringBuilder.toString();
 
 			if (!newCulture.equals("none")) {
 				if (!NameValidation.isValidString(newCulture)) {
