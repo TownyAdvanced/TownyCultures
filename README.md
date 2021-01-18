@@ -6,9 +6,9 @@ INTRODUCTION
 FEATURES
 - Each town has a 'culture' e.g. "Celtic", "Roman", "Azurian" etc.
 - Each town culture is displayed on the Town screen.
-- Town residents can quickly communicate with other residents of the same culture,
-  using the Culture Channel: `/cc <message>`
-- Town culture is fluid and quickly changing. 
+- Town residents can quickly communicate with other town residents (in any town) 
+  of the same culture, using the Culture Channel: `/cc <message>`
+- Town culture is fluid and dynamic. 
   There is no central administrator for each culture.
   A new culture can be created by a mayor, using: `/c set <culture>`".
   The same command can be used to join an existing culture.
