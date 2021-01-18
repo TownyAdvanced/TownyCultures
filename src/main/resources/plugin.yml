@@ -2,83 +2,29 @@ name: ${project.artifactId}
 main: ${project.groupId}.${project.name}.${project.artifactId}
 version: ${project.version}
 api-version: ${project.bukkitAPIVersion}
-author: [Goosius,LlmDl]
+author: [Goosius]
 website: 'townyadvanced.github.io'
 prefix: ${project.artifactId}
 depend: [Towny]
-softdepend: [dynmap]
 
-description: A war system made by Goosius for Towny.
+description: A culture system made by Goosius for Towny.
 
 commands:
-    siegewar:
-        aliases: [sw]
-    siegewaradmin:
-        aliases: [swa]
     culture:
         aliases: [c]
     cc:
         aliases: []
+    #cultureAdmin:
+    #    aliases: [ca]
 
 permissions:
-    siegewar.admin:
-        description: User is able to use all siege war commands.
-        default: op
-        children:
-            siegewar.command.siegewaradmin.*: true
-            siegewar.command.siegewar.*: true
-    
-    siegewar.command.siegewaradmin.*:
-        description: User is able to use all /siegewaradmin commands.
-        default: op
-        children:
-            siegewar.command.siegewaradmin.immunity: true
-            siegewar.command.siegewaradmin.reload: true
-            siegewar.command.siegewaradmin.siege: true
-            siegewar.command.siegewaradmin.town: true
+    townycultures.set_town_culture:
+        description: User is able to set town culture. (usually town mayors or assistants)
+        default: false
 
-    siegewar.command.siegewar.*:
-        description: User is able to do all /siegewar commands.
+    townycultures.admin:
+        description: User is able to use all TownyCulture admin commands.
         default: false
         children:
-            siegewar.command.siegewar.hud.*: true
-            siegewar.command.siegewar.nation.*: true
-
-    siegewar.command.siegewar.hud.*:
-        description: User is able to do all /siegewar hud commands.
-        default: false
-        children:
-            siegewar.command.siegewar.hud: true
-
-
-    siegewar.command.siegewar.nation.*:
-        description: User is able to do all /siegewar nation commands.
-        default: false
-        children:
-            siegewar.command.siegewar.nation.refund: true
-
-    siegewar.nation:
-        description: User holds all of the siegewar nation nodes.
-        default: false
-        children:
-            siegewar.nation.siege.points: true
-            siegewar.nation.siege.leadership: true
-            siegewar.nation.siege.attack: true
-            siegewar.nation.siege.abandon: true
-            siegewar.nation.siege.invade: true
-            siegewar.nation.siege.plunder: true
-
-    siegewar.town:
-        description: User holds all of the siegewar town nodes.
-        default: false
-        children:
-            siegewar.town.siege.points: true
-            siegewar.town.siege.surrender: true
-            
-    siegewar.immune.to.war.nausea:
-        description: User is immune to war nausea.
-        default: false
-        
-    siegewar.immune.to.battle.fatigue:
-        description: User is immune to battle fatigue
-        default: false
+            townycultures.admin.set_specified_town_culture: true
+            townycultures.admin.set_all_town_cultures: true

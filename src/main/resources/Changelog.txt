@@ -1,2 +1,2 @@
-Changes are tracked on the SiegeWar github's Milestones page.
-https://github.com/TownyAdvanced/SiegeWar/milestones
+Changes are tracked on the TownyCultures github's Milestones page.
+https://github.com/TownyAdvanced/TownyCultures/milestones
