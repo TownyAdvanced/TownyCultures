@@ -25,10 +25,10 @@ If applicable, add screenshots to help explain your problem.
 
 **Versions (please complete the following information):**
  - Towny: 
- - SiegeWar: 
+ - TownyCultures: 
  - Spigot/Paper:
 
 **Files**
 Startup log:
-SiegeWar config:
+TownyCultures config:
 Townyperms.yml:
