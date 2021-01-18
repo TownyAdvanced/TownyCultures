@@ -116,19 +116,19 @@ public class CultureAdminCommand implements CommandExecutor, TabCompleter {
 	}
 
 	private void parseCultureAdminTownCommand(CommandSender sender, String[] args) {
-		if (args.length == 4
+		if (args.length > 4
 			&& args[1].equalsIgnoreCase("set")
 			&& args[2].equalsIgnoreCase("culture")) {
 
-			Town town = TownyUniverse.getInstance().getTown(args[0]);
+			Town town = TownyUniverse.getInstance().getTown(args[3]);
 			if (town == null) {
 				Messaging.sendErrorMsg(sender, Translation.of("msg_err_town_not_registered", args[0]));
 				return;
 			}
 
 			StringBuilder stringBuilder = new StringBuilder();
-			stringBuilder.append(args[0]);
-			for(int i = 1; i < args.length; i++) {
+			stringBuilder.append(args[4]);
+			for(int i = 5; i < args.length; i++) {
 				stringBuilder.append(" ").append(args[i]);
 			}
 			String newCulture = stringBuilder.toString();
@@ -164,11 +164,16 @@ public class CultureAdminCommand implements CommandExecutor, TabCompleter {
 	}
 
 	private void parseCultureAdminAllTownsCommand(CommandSender sender, String[] args) {
-		if (args.length == 3
+		if (args.length > 3
 				&& args[0].equalsIgnoreCase("set")
 				&& args[1].equalsIgnoreCase("culture")) {
 
-			String newCulture = args[2];
+			StringBuilder stringBuilder = new StringBuilder();
+			stringBuilder.append(args[2]);
+			for(int i = 3; i < args.length; i++) {
+				stringBuilder.append(" ").append(args[i]);
+			}
+			String newCulture = stringBuilder.toString();
 
 			if (!newCulture.equals("none")) {
 				if (!NameValidation.isValidString(newCulture)) {
