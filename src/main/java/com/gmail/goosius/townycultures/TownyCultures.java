@@ -75,6 +75,7 @@ public class TownyCultures extends JavaPlugin {
 	
 	private void registerCommands() {
 		getCommand("culture").setExecutor(new CultureCommand());
+		getCommand("cultureadmin").setExecutor(new CultureAdminCommand());
 		getCommand("cc").setExecutor(new CultureChatCommand());
 	}
 

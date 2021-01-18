@@ -5,7 +5,7 @@ import java.io.IOException;
 
 import com.gmail.goosius.townycultures.TownyCultures;
 
-import io.github.townyadvanced.util.FileMgmt;
+import com.gmail.goosius.townycultures.utils.FileMgmt;
 
 public class Settings {
 	private static CommentedConfiguration config, newConfig;

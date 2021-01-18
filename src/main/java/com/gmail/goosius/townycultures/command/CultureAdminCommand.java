@@ -33,20 +33,18 @@ public class CultureAdminCommand implements CommandExecutor, TabCompleter {
 			case "alltowns":
 				if (args.length == 2)
 					return NameUtil.filterByStart(Arrays.asList("set"), args[1]);
-
-				if (args.length == 3)
+				else if (args.length == 3)
 					return NameUtil.filterByStart(Arrays.asList("culture"), args[2]);
-
+				else
+					return Collections.emptyList();
 			case "town":
 				if (args.length == 2)
 					return getTownsStartingWith(args[1]);
-
-				if (args.length == 3)
-					return NameUtil.filterByStart(Arrays.asList("set"), args[1]);
-
-				if (args.length == 4)
-					return NameUtil.filterByStart(Arrays.asList("culture"), args[2]);
-
+				else if (args.length == 3)
+					return NameUtil.filterByStart(Arrays.asList("set"), args[2]);
+				else if (args.length == 4)
+					return NameUtil.filterByStart(Arrays.asList("culture"), args[3]);
+				return Collections.emptyList();
 			default:
 				if (args.length == 1)
 					return NameUtil.filterByStart(townyCulturesAdminTabCompletes, args[0]);
@@ -114,19 +112,19 @@ public class CultureAdminCommand implements CommandExecutor, TabCompleter {
 	}
 
 	private void parseCultureAdminTownCommand(CommandSender sender, String[] args) {
-		if (args.length > 4
+		if (args.length > 3
 			&& args[1].equalsIgnoreCase("set")
 			&& args[2].equalsIgnoreCase("culture")) {
 
-			Town town = TownyUniverse.getInstance().getTown(args[3]);
+			Town town = TownyUniverse.getInstance().getTown(args[0]);
 			if (town == null) {
 				Messaging.sendErrorMsg(sender, Translation.of("msg_err_town_not_registered", args[0]));
 				return;
 			}
 
 			StringBuilder stringBuilder = new StringBuilder();
-			stringBuilder.append(args[4]);
-			for(int i = 5; i < args.length; i++) {
+			stringBuilder.append(args[3]);
+			for(int i = 4; i < args.length; i++) {
 				stringBuilder.append(" ").append(args[i]);
 			}
 			String newCulture = stringBuilder.toString();
@@ -153,16 +151,17 @@ public class CultureAdminCommand implements CommandExecutor, TabCompleter {
 			TownyMessaging.sendPrefixedTownMessage(town, String.format(Translation.of("msg_town_culture_set"), newCulture));
 			String messageForAdmin = String.format(Translation.of("msg_specific_town_cultures_set"), town.getName(), newCulture);
 			if(sender instanceof Player) {
-				Messaging.sendErrorMsg(sender, messageForAdmin);
+				Messaging.sendMsg(sender, messageForAdmin);
 			} else {
 				System.out.println(messageForAdmin);
 			}
-		} else
+		} else {
 			showCultureAdminTownHelp(sender);
+		}
 	}
 
 	private void parseCultureAdminAllTownsCommand(CommandSender sender, String[] args) {
-		if (args.length > 3
+		if (args.length > 2
 				&& args[0].equalsIgnoreCase("set")
 				&& args[1].equalsIgnoreCase("culture")) {
 
@@ -177,7 +176,7 @@ public class CultureAdminCommand implements CommandExecutor, TabCompleter {
 				if (!NameValidation.isValidString(newCulture)) {
 					String messageForAdmin = Translation.of("msg_err_invalid_string_town_culture_not_set");
 					if(sender instanceof Player) {
-						Messaging.sendErrorMsg(sender, messageForAdmin);
+						TownyMessaging.sendErrorMsg(sender, messageForAdmin);
 					} else {
 						System.out.println(messageForAdmin);
 					}
@@ -194,15 +193,14 @@ public class CultureAdminCommand implements CommandExecutor, TabCompleter {
 			for(Town town: TownyUniverse.getInstance().getTowns()) {
 				TownMetaDataController.setTownCulture(town, newCulture);
 			}
-			TownyMessaging.sendGlobalMessage(String.format(Translation.of("msg_all_town_cultures_set"), newCulture));
+			Messaging.sendGlobalMessage(String.format(Translation.of("msg_all_town_cultures_set"), newCulture));
 			String messageForAdmin = String.format(Translation.of("msg_all_town_cultures_set"), newCulture);
-			if(sender instanceof Player) {
-				Messaging.sendErrorMsg(sender, messageForAdmin);
-			} else {
+			if(!(sender instanceof Player)) {
 				System.out.println(messageForAdmin);
 			}
-		} else
+		} else {
 			showCultureAdminAllTownsHelp(sender);
+		}
 	}
 
 	/**
