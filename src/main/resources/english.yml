@@ -250,5 +250,5 @@ dynmap_siege_war_chest: 'War Chest: %s'
 
 #Addedin 0.06
 status_town_culture: '&2Culture: &a%s'
-msg_err_invalid_string_culture_not_set: '&cInvalid string, Town culture not set.'
-msg_town_set_culture: '&bTown culture set to %s'
+msg_err_invalid_string_town_culture_not_set: '&cInvalid string, Town culture not set.'
+msg_town_culture_set: '&bTown culture set to %s'

@@ -1,7 +1,6 @@
 package com.gmail.goosius.siegewar;
 
-import com.gmail.goosius.siegewar.command.CultureCommunicationCommand;
-import com.gmail.goosius.siegewar.command.CultureSetCommand;
+import com.gmail.goosius.siegewar.command.*;
 import com.gmail.goosius.siegewar.settings.SiegeWarSettings;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
@@ -12,8 +11,6 @@ import org.dynmap.DynmapAPI;
 import com.gmail.goosius.siegewar.settings.Settings;
 import com.gmail.goosius.siegewar.tasks.DynmapTask;
 import com.palmergames.bukkit.util.Version;
-import com.gmail.goosius.siegewar.command.SiegeWarAdminCommand;
-import com.gmail.goosius.siegewar.command.SiegeWarCommand;
 import com.gmail.goosius.siegewar.hud.SiegeHUDManager;
 import com.gmail.goosius.siegewar.listeners.SiegeWarActionListener;
 import com.gmail.goosius.siegewar.listeners.SiegeWarBukkitEventListener;
@@ -107,9 +104,9 @@ public class SiegeWar extends JavaPlugin {
 	private void registerCommands() {
 		getCommand("siegewar").setExecutor(new SiegeWarCommand());
 		getCommand("siegewaradmin").setExecutor(new SiegeWarAdminCommand());
-		if(SiegeWarSettings.isTownCultureEnabled()) {
-			getCommand("setculture").setExecutor(new CultureSetCommand());
-			//getCommand("cc").setExecutor(new CultureCommunicationCommand());
+		if(SiegeWarSettings.isCultureEnabled()) {
+			getCommand("culture").setExecutor(new CultureCommand());
+			getCommand("cc").setExecutor(new CultureCommunicationCommand());
 		}
 	}
 

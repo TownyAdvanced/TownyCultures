@@ -15,8 +15,10 @@ commands:
         aliases: [sw]
     siegewaradmin:
         aliases: [swa]
-    setculture:
-        aliases: [sc]
+    culture:
+        aliases: [c]
+    cc:
+        aliases: []
 
 permissions:
     siegewar.admin:

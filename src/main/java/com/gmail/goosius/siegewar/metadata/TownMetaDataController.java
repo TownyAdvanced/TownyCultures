@@ -111,7 +111,7 @@ public class TownMetaDataController {
 		if (town.hasMeta(sdf.getKey()))
 			return MetaDataUtil.getString(town, sdf);
 		else
-			return "/setculture [culture]";
+			return "/culture set [culture]";
 	}
 
 	public static void setTownCulture(Town town, String culture) {

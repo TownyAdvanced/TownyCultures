@@ -307,7 +307,7 @@ public class SiegeWarTownEventListener implements Listener {
 			Town town = event.getTown();
 
 			//Culture: Azurian
-			if(SiegeWarSettings.isTownCultureEnabled()) {
+			if(SiegeWarSettings.isCultureEnabled()) {
 				out.add(Translation.of("status_town_culture", TownMetaDataController.getTownCulture(town)));
 			}
 
