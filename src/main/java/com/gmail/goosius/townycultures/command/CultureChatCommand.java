@@ -1,6 +1,8 @@
 package com.gmail.goosius.townycultures.command;
 
+import com.gmail.goosius.townycultures.Messaging;
 import com.gmail.goosius.townycultures.metadata.TownMetaDataController;
+import com.palmergames.bukkit.towny.TownyFormatter;
 import com.palmergames.bukkit.towny.TownyUniverse;
 import com.palmergames.bukkit.towny.exceptions.NotRegisteredException;
 import com.palmergames.bukkit.towny.object.Resident;
@@ -22,7 +24,7 @@ public class CultureChatCommand implements CommandExecutor, TabCompleter {
 	}
 
 	private void showCultureCommunicationHelp(CommandSender sender) {
-		sender.sendMessage(ChatTools.formatTitle("/cc [msg]"));
+		sender.sendMessage(ChatTools.formatCommand("Eg", "/cc", "[msg]", ""));
 	}
 	
 	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
@@ -39,8 +41,9 @@ public class CultureChatCommand implements CommandExecutor, TabCompleter {
 	 */
 	private void parseCultureCommunicationCommand(Player player, String[] args) {
 		StringBuilder stringBuilder = new StringBuilder();
-		for(String messagePart: args) {
-			stringBuilder.append(" ").append(messagePart);
+		stringBuilder.append(args[0]);
+		for(int i = 1; i < args.length; i++) {
+			stringBuilder.append(" ").append(args[i]);
 		}
 		String basicMessage = stringBuilder.toString();
 
@@ -51,11 +54,15 @@ public class CultureChatCommand implements CommandExecutor, TabCompleter {
 			try{
 				townCulture = TownMetaDataController.getTownCulture(resident.getTown());
 			} catch (NotRegisteredException e) {
-				return; //Player town not found
+				Messaging.sendErrorMsg(player, Translation.of("msg_err_command_disable"));
+				return;
 			}
+		} else {
+			Messaging.sendErrorMsg(player, Translation.of("msg_err_command_disable"));
+			return;
 		}
 
-		String formattedMessage = String.format(Translation.of("culture_chat_message"), townCulture, player.getName(), basicMessage);
+		String formattedMessage = String.format(Translation.of("culture_chat_message"), townCulture, resident.getName(), basicMessage);
 
 		Resident otherResident;
 		for(Player otherPlayer: BukkitTools.getOnlinePlayers()) {

@@ -35,7 +35,7 @@ msg_err_invalid_string_town_culture_not_set: '&cInvalid string, Town culture not
 msg_town_culture_set: '&bTown culture set to %s'
 
 #chat
-culture_chat_message: '[CC] [%s] %s: %s'
+culture_chat_message: '&f[&5CC&f] &f[&6%s&f] %s: &d%s'
 
 #admin
 admin_help_1: 'Reload the config and language file.'
