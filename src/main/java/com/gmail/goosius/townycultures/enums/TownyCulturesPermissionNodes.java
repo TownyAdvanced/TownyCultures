@@ -10,8 +10,9 @@ public enum TownyCulturesPermissionNodes {
 	// Command Nodes:
 	TOWNYCULTURES_COMMAND_SET_TOWN_CULTURE("townycultures.set_town_culture"),
 	TOWNYCULTURES_COMMAND_ADMIN("townycultures.admin.*"),
-	TOWNYCULTURES_COMMAND_ADMIN_SET_SPECIFIED_TOWN_CULTURE("townycultures.admin.set_specified_town_culture"),
-	TOWNYCULTURES_COMMAND_ADMIN_SET_ALL_TOWN_CULTURES("townycultures.admin.set_all_town_cultures");
+	TOWNYCULTURES_COMMAND_ADMIN_RELOAD("townycultures.admin.reload"),
+	TOWNYCULTURES_COMMAND_ADMIN_SET_ALL_TOWN_CULTURES("townycultures.admin.alltowns"),
+	TOWNYCULTURES_COMMAND_ADMIN_SET_SPECIFIED_TOWN_CULTURE("townycultures.admin.town");
 
 	private String value;
 

@@ -60,7 +60,6 @@ public class CultureAdminCommand implements CommandExecutor, TabCompleter {
 
 	private void parseCultureAdminCommand(CommandSender sender, String[] args) {
 
-		//Todo - console access???
 		if (sender instanceof Player && !(sender.hasPermission(TownyCulturesPermissionNodes.TOWNYCULTURES_COMMAND_ADMIN.getNode(args[0])))) {
 			Messaging.sendErrorMsg(sender, Translation.of("msg_err_command_disable"));
 			return;

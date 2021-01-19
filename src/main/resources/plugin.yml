@@ -26,5 +26,6 @@ permissions:
         description: User is able to use all TownyCulture admin commands.
         default: false
         children:
-            townycultures.admin.set_specified_town_culture: true
-            townycultures.admin.set_all_town_cultures: true
+            townycultures.admin.reload: true
+            townycultures.admin.alltowns: true
+            townycultures.admin.town: true

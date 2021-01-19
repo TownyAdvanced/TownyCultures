@@ -86,7 +86,7 @@ public class TownyCultures extends JavaPlugin {
 		System.out.println("  |(   )\\  \\  /  |  | |  |  :    |  | | |  |  | |  (.-' `--.	");
 		System.out.println("  ' `-'  `' `'   '  `-`--|   `--'`--`-`-`-'`--`-'   `--'`--'	");
 		System.out.println("                         ;                                  	");
-		System.out.println("                      `-'                by Goosius             ");
+		System.out.println("                      `-'           by Goosius & LlmDl          ");
 		System.out.println("              			         							    ");
 	}
 }
