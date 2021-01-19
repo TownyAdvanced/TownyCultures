@@ -2,7 +2,7 @@ name: ${project.artifactId}
 main: ${project.groupId}.${project.name}.${project.artifactId}
 version: ${project.version}
 api-version: ${project.bukkitAPIVersion}
-author: [Goosius]
+author: [Goosius,LlmDl]
 website: 'townyadvanced.github.io'
 prefix: ${project.artifactId}
 depend: [Towny]
