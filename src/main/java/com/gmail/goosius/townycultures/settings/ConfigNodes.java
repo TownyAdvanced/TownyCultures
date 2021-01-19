@@ -28,8 +28,7 @@ public enum ConfigNodes {
 			"townycultures.enabled",
 			"true",
 			"",
-			"# If this value is true, then blah.",
-			"# Blaahhhhh.");
+			"# If this value is true, then TownyCultures is enabled.");
 
 	private final String Root;
 	private final String Default;
