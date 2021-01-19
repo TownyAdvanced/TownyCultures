@@ -23,9 +23,9 @@ FEATURES
 COMMANDS
 
     PLAYER
-    - `\c set culture` - As a mayor, have the town create or join a culture
     - `\cc <message>` - As a town resident, talk to others in the same culture
-
+    - `\c set culture` - As a mayor, have the town create or join a culture
+    
     ADMIN
     - `\ca reload` - Reload the plugin configs & language files
     - '\ca alltowns set culture <culture> - Set a culture for all towns
