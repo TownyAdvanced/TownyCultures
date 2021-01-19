@@ -6,20 +6,19 @@ INTRODUCTION
 FEATURES
 - Each town has a 'culture' e.g. "Celtic", "Roman", "Anglo-Saxon", "Azurian" etc.
 - Each town culture is displayed on the Town screen.
-- Town residents can communicate with all other town residents of the same culture (regardless of nation) 
-  , using the Culture Channel: `/cc <message>`.
+- Town residents can communicate with all other town residents of the same culture (regardless of nation), 
+  <br>using the Culture Channel: `/cc <message>`.
 - Town culture is fluid and dynamic. 
   There is no central administrator for each culture.
-  A new culture can be created by a mayor, using: `/c set <culture>`.
-  The same command can be used to join an existing culture.
+  <br>A new culture can be created by a mayor, using: `/c set <culture>`.
+  <br>The same command can be used to join an existing culture.
 - Nations do not create or specify culture in this way.
-  Instead their culture is the sum of whichever cultures 
-  their component towns identify with, 
-  and/or whichever culture(s) they might claim to be affiliated with.
-- Culture is important in wartime,
+  <br>Instead their culture is the sum of whichever cultures their component towns identify with, 
+  <br>and/or whichever culture(s) they might claim to be affiliated with.
+- Culture is important in war-time,
   because although a town might be captured by an enemy nation,
-  the residents can continue communicating with their friends in the same culture,
-  using the Culture Channel: `/cc <message>`.
+  <br>the residents can continue communicating with their friends in the same culture,
+  <br>using the Culture Channel: `/cc <message>`.
 
 COMMANDS
 
