@@ -10,7 +10,7 @@ FEATURES
   of the same culture, using the Culture Channel: `/cc <message>`.
 - Town culture is fluid and dynamic. 
   There is no central administrator for each culture.
-  A new culture can be created by a mayor, using: `/c set <culture>`".
+  A new culture can be created by a mayor, using: `/c set <culture>`.
   The same command can be used to join an existing culture.
 - Nations do not create or specify culture in this way.
   Instead their culture is the sum of whichever cultures 
