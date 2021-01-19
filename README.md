@@ -33,7 +33,7 @@ COMMANDS
     - '\ca town <town> set culture <culture> - Set a culture for 1 town
       
 INSTALLATION STEPS
-1. Download the TownyCultures jar file.
+1. Download the TownyCultures jar file here: https://github.com/TownyAdvanced/TownyCultures/releases
 2. Drop the jar file into your normal plugins folder.
 3. Stop your server.
 4. Start your server.
