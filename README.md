@@ -4,7 +4,7 @@ INTRODUCTION
 - TownyCultures is an add on plugin for Towny, which enables "cultures" on Towny servers.
  
 FEATURES
-- Each town has a 'culture' e.g. "Celtic", "Roman", "Anglo-Saxon", "Azurian" etc.
+- Each town has a 'culture' e.g. "Greek", "Celtic", "Roman", "Azurian" etc.
 - Each town culture is displayed on the Town screen.
 - Town residents can communicate with all other town residents of the same culture (regardless of nation), 
   <br>using the Culture Channel: `/cc <message>`.
