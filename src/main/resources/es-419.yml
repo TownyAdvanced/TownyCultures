@@ -1,0 +1,46 @@
+name: TownyCultures
+version: 0.01
+language: es-419
+author: Goosius, EuGNosii
+website: 'http://townyadvanced.github.io/'
+description: >
+    Archivo de lenguaje para todos los mensajes del juego.  No alteres este archivo.
+    Si quieres cambiar algun mensaje, crea una copia de este archivo con otro nombre.
+    Los archivos de lenguajes alternativos pueden ser activados alterando la entrada
+    [language] en config.yml.
+#
+#
+#         ¡Debes mantener los espacios en los textos!
+#  Si un texto comienza o termina con un espacio, debe permanecer así.
+#
+#
+#       %s = datos suministrados por Towny.
+
+# Colores en el texto
+# --------------
+# Negro = &0, Azul Marino = &1, Verde = &2, Azul = &3, Rojo = &4
+# Morado = &5, Dorado = &6, Gris Claro = &7, Gris = &8
+# Morado Oscuro = &9, Verde Claro = &a, Azul Claro = &b
+# Rosa = &c, Morado Claro = &d, Amarillo = &e, Claro = &f
+
+# Cosas basicas
+plugin_prefix: '&f[&6TownyCultures&f] '
+msg_err_command_disable: '&cNo tienes los permisos necesarios para usar ese comando.'
+
+# Pantalla de ciudad
+status_town_culture: '&2Cultura: &a%s'
+
+# Cambio de cultura
+msg_err_invalid_string_town_culture_not_set: '&cCadena inválida, no se cambió la cultura.'
+msg_town_culture_set: '&bLa ciudad ahora pertenece a la cultura %s'
+
+# Chat
+culture_chat_message: '&f[&5CC&f] &f[&6%s&f] %s: &d%s'
+
+# Admin
+admin_help_1: 'Reload the config and language file.'
+config_and_lang_file_reloaded_successfully: 'Configuración y archivos de idioma recargados.'
+config_and_lang_file_could_not_be_loaded: 'Ocurrió un error al recargar la configuración y los archivos de idioma. Revisa la consola para más detalles.'
+msg_all_town_cultures_set: '&bSe cambió la cultura de todas las ciudades a %s'
+msg_specific_town_cultures_set: '&b%s ahora pertenece a la cultura %s'
+msg_err_town_not_registered: '&cLa ciudad %s no está registrada.'
