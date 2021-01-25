@@ -38,7 +38,7 @@ msg_town_culture_set: '&bLa ciudad ahora pertenece a la cultura %s'
 culture_chat_message: '&f[&5CC&f] &f[&6%s&f] %s: &d%s'
 
 # Admin
-admin_help_1: 'Reload the config and language file.'
+admin_help_1: 'Recargar la configuración y el archivo de idioma del plugin.'
 config_and_lang_file_reloaded_successfully: 'Configuración y archivos de idioma recargados.'
 config_and_lang_file_could_not_be_loaded: 'Ocurrió un error al recargar la configuración y los archivos de idioma. Revisa la consola para más detalles.'
 msg_all_town_cultures_set: '&bSe cambió la cultura de todas las ciudades a %s'
