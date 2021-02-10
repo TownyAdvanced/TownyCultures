@@ -20,11 +20,11 @@ commands:
 permissions:
     townycultures.set_town_culture:
         description: User is able to set town culture. (usually town mayors or assistants)
-        default: false
+        default: op
 
     townycultures.admin:
         description: User is able to use all TownyCulture admin commands.
-        default: false
+        default: op
         children:
             townycultures.admin.reload: true
             townycultures.admin.alltowns: true
