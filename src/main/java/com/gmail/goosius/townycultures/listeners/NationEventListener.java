@@ -51,7 +51,7 @@ public class NationEventListener implements Listener {
 			else 
 				output = cultures.get(0);
 			
-			event.setLines(Arrays.asList(Translation.of("status_nation_culture", output)));
+			event.setLines(Arrays.asList(Translation.of("status_town_culture", output)));
 		}
 	}
 
