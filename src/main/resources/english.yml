@@ -1,5 +1,5 @@
 name: TownyCultures
-version: 0.01
+version: 0.02
 language: english
 author: Goosius
 website: 'http://townyadvanced.github.io/'
@@ -44,3 +44,6 @@ config_and_lang_file_could_not_be_loaded: 'Reload unsuccessful. See console for 
 msg_all_town_cultures_set: '&bCulture of all towns set to %s'
 msg_specific_town_cultures_set: '&bCulture of town %s set to %s'
 msg_err_town_not_registered: '&cTown %s is not registered.'
+
+#nation screen
+status_nation_culture: '&2Culture: &a%s'
