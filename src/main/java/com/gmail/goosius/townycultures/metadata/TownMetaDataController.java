@@ -35,5 +35,10 @@ public class TownMetaDataController {
 			town.addMetaData(new StringDataField("townycultures_culture", culture));
 	}
 
+	public static boolean hasTownCulture(Town town) {
+		StringDataField sdf = (StringDataField) townCulture.clone();
+		return town.hasMeta(sdf.getKey());
+	}
+
 
 }
