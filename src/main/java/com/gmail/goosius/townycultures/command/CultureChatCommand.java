@@ -2,7 +2,6 @@ package com.gmail.goosius.townycultures.command;
 
 import com.gmail.goosius.townycultures.Messaging;
 import com.gmail.goosius.townycultures.metadata.TownMetaDataController;
-import com.palmergames.bukkit.towny.TownyFormatter;
 import com.palmergames.bukkit.towny.TownyUniverse;
 import com.palmergames.bukkit.towny.exceptions.NotRegisteredException;
 import com.palmergames.bukkit.towny.object.Resident;

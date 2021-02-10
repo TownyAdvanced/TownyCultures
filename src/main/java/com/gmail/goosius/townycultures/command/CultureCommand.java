@@ -61,7 +61,12 @@ public class CultureCommand implements CommandExecutor, TabCompleter {
 
 	private void parseCultureSetCommand(Player player, String[] args) {
 
-		if (!player.hasPermission(TownyCulturesPermissionNodes.TOWNYCULTURES_COMMAND_SET_TOWN_CULTURE.getNode(args[0]))) {
+		if (args.length == 0) {
+			showCultureHelp(player);
+			return;
+		}	
+		
+		if (!player.hasPermission(TownyCulturesPermissionNodes.TOWNYCULTURES_COMMAND_SET_TOWN_CULTURE.getNode())) {
 			Messaging.sendErrorMsg(player, Translation.of("msg_err_command_disable"));
 			return;
 		}
