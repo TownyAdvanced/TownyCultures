@@ -35,6 +35,9 @@ public class NationEventListener implements Listener {
 				}
 			}
 			
+			if (cultureStrength.size() == 0)
+				return;
+			
 			List<String> cultures = new ArrayList<>(cultureStrength.size());
 			int pop = nation.getNumResidents();
 			for (String culture : cultureStrength.keySet()) {
