@@ -39,7 +39,7 @@ public class NationEventListener implements Listener {
 				return;
 			
 			List<String> cultures = new ArrayList<>(cultureStrength.size());
-			int pop = nation.getNumResidents();
+			double pop = nation.getNumResidents();
 			for (String culture : cultureStrength.keySet()) {
 				int percent = (int) (cultureStrength.get(culture) / pop * 100);
 				cultures.add(culture + " " + percent + "%");
@@ -51,7 +51,7 @@ public class NationEventListener implements Listener {
 			else 
 				output = cultures.get(0);
 			
-			event.setLines(Arrays.asList(Translation.of("status_town_culture", output)));
+			event.addLines(Arrays.asList(Translation.of("status_town_culture", output)));
 		}
 	}
 
