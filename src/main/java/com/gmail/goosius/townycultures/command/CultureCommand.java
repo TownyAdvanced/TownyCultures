@@ -89,7 +89,7 @@ public class CultureCommand implements CommandExecutor, TabCompleter {
 			String newCulture = stringBuilder.toString();
 
 			if (!newCulture.equals("none")) {
-				if (!NameValidation.isValidString(newCulture)) {
+				if (!NameValidation.isValidString(newCulture) || newCulture.contains("%")) {
 					Messaging.sendErrorMsg(player, Translation.of("msg_err_invalid_string_town_culture_not_set"));
 					return;
 				}
