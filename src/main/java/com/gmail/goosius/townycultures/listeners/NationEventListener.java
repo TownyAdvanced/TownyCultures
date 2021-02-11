@@ -40,14 +40,11 @@ public class NationEventListener implements Listener {
 			for (Town town : event.getNation().getTowns())
 				assignStrength(town, cultureStrength);
 
-			// Sort the map from strongest culture to weakest culture.
-			Map<String, Integer> sortedCultureStrengthMap = sortMap(cultureStrength);
-
 			/*
 			 * Create a double map of culture percentages
 			 */
 			Map<String,Double> culturePercentageDouble = new HashMap<>();
-			for (Map.Entry<String, Integer> entry: sortedCultureStrengthMap.entrySet()) {
+			for (Map.Entry<String, Integer> entry: cultureStrength.entrySet()) {
 				double percentDouble = ((double)entry.getValue()) / totalNationPopulation * 100;
 				culturePercentageDouble.put(entry.getKey(), percentDouble);
 			}
@@ -100,6 +97,9 @@ public class NationEventListener implements Listener {
 				updatedPercent = mainCulturePercentageInteger.get(capitalCulture) + remainder;
 				mainCulturePercentageInteger.put(capitalCulture, updatedPercent);
 			}
+
+			// Sort the map from strongest culture to weakest culture.
+			mainCulturePercentageInteger = sortMap(cultureStrength);
 
 			// Turn it into a list of "Culturename ###%" strings.
 			List<String> cultures = new ArrayList<>(mainCulturePercentageInteger.size());
