@@ -8,7 +8,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import com.gmail.goosius.townycultures.settings.Settings;
 import com.palmergames.bukkit.util.Version;
 import com.gmail.goosius.townycultures.listeners.NationEventListener;
-import com.gmail.goosius.townycultures.listeners.TownyCulturesTownEventListener;
+import com.gmail.goosius.townycultures.listeners.TownEventListener;
 
 public class TownyCultures extends JavaPlugin {
 	
@@ -71,7 +71,7 @@ public class TownyCultures extends JavaPlugin {
 	
 	private void registerListeners() {
 		PluginManager pm = Bukkit.getServer().getPluginManager();
-		pm.registerEvents(new TownyCulturesTownEventListener(this), this);
+		pm.registerEvents(new TownEventListener(), this);
 		pm.registerEvents(new NationEventListener(), this);
 	}
 	
