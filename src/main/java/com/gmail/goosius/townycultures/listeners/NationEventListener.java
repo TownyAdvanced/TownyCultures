@@ -138,15 +138,6 @@ public class NationEventListener implements Listener {
 		}
 	}
 
-	private int findRemainder(double pop, Map<String, Integer> cultureStrength) {
-		int remainder = 100;
-		for (String culture : cultureStrength.keySet()) {
-			int percent = (int) (cultureStrength.get(culture) / pop * 100);
-			remainder -= percent;
-		}
-		return remainder;
-	}
-
 	private Map<String, Integer> sortMap(Map<String, Integer> cultureStrength) {
 		
         List<Map.Entry<String, Integer>> list = new LinkedList<Map.Entry<String, Integer>>(cultureStrength.entrySet());
