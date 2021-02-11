@@ -87,7 +87,7 @@ public class NationEventListener implements Listener {
 			for(int individualCulturePercent: mainCulturePercentageInteger.values()) {
 				totalCulturePercent += individualCulturePercent;
 			}
-			int remainder = totalCulturePercent - 100;
+			int remainder = 100 - totalCulturePercent;
 			if(remainder != 0) {
 				Town capital = event.getNation().getCapital();
 				String capitalCulture;
