@@ -99,7 +99,7 @@ public class NationEventListener implements Listener {
 			}
 
 			// Sort the map from strongest culture to weakest culture.
-			mainCulturePercentageInteger = sortMap(cultureStrength);
+			mainCulturePercentageInteger = sortMap(mainCulturePercentageInteger);
 
 			// Turn it into a list of "Culturename ###%" strings.
 			List<String> cultures = new ArrayList<>(mainCulturePercentageInteger.size());
