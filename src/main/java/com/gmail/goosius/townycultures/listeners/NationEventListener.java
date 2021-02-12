@@ -88,9 +88,7 @@ public class NationEventListener implements Listener {
 	 * Assigns the strength to the given Town's culture or to the "Unknown" category.
 	 */
 	private void assignStrength(Town town, int strength, Map<String, Integer> cultureStrength) {
-		String culture = "Unknown";
-		if (TownMetaDataController.hasTownCulture(town)) // If the town has a culture, use that instead.
-			culture = TownMetaDataController.getTownCulture(town);
+		String culture = TownMetaDataController.getTownCulture(town); // Returns the culture or "Unknown".
 
 		if (cultureStrength.containsKey(culture)) // Culture already exists in the map. Add the strength to it.
 			strength += cultureStrength.get(culture);

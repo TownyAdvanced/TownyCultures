@@ -1,5 +1,5 @@
 name: TownyCultures
-version: 0.01
+version: 0.02
 language: es-419
 author: Goosius, EuGNosii
 website: 'http://townyadvanced.github.io/'
@@ -33,6 +33,8 @@ status_town_culture: '&2Cultura: &a%s'
 # Cambio de cultura
 msg_err_invalid_string_town_culture_not_set: '&cCadena inválida, no se cambió la cultura.'
 msg_town_culture_set: '&bLa ciudad ahora pertenece a la cultura %s'
+msg_culture_removed: '&bTown culture removed.'
+msg_culture_removed_all_towns: '&bTown culture removed from all towns.'
 
 # Chat
 culture_chat_message: '&f[&5CC&f] &f[&6%s&f] %s: &d%s'

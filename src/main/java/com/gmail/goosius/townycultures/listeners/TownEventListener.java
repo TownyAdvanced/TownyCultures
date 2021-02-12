@@ -7,6 +7,7 @@ import com.gmail.goosius.townycultures.metadata.TownMetaDataController;
 import com.gmail.goosius.townycultures.settings.TownyCulturesSettings;
 import com.gmail.goosius.townycultures.settings.Translation;
 import com.palmergames.bukkit.towny.event.statusscreen.TownStatusScreenEvent;
+import com.palmergames.util.StringMgmt;
 
 /**
  * 
@@ -18,6 +19,9 @@ public class TownEventListener implements Listener {
 	@EventHandler
 	public void onTownStatusScreen(TownStatusScreenEvent event) {
 		if (TownyCulturesSettings.isTownyCulturesEnabled())
-	        event.addLines(Arrays.asList(Translation.of("status_town_culture", TownMetaDataController.getTownCulture(event.getTown()))));
+			if (TownMetaDataController.hasTownCulture(event.getTown()))
+				event.addLines(Arrays.asList(Translation.of("status_town_culture", StringMgmt.capitalize(TownMetaDataController.getTownCulture(event.getTown())))));
+			else
+				event.addLines(Arrays.asList(Translation.of("status_town_culture", "/culture set [culture]")));
 	}
 }

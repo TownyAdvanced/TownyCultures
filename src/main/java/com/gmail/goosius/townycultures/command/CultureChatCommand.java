@@ -7,7 +7,10 @@ import com.palmergames.bukkit.towny.exceptions.NotRegisteredException;
 import com.palmergames.bukkit.towny.object.Resident;
 import com.palmergames.bukkit.util.BukkitTools;
 import com.palmergames.bukkit.util.ChatTools;
+import com.palmergames.util.StringMgmt;
 import com.gmail.goosius.townycultures.settings.Translation;
+import com.gmail.goosius.townycultures.utils.CultureUtil;
+
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -39,45 +42,28 @@ public class CultureChatCommand implements CommandExecutor, TabCompleter {
 	 * Send message to any online players in culture
 	 */
 	private void parseCultureCommunicationCommand(Player player, String[] args) {
-		StringBuilder stringBuilder = new StringBuilder();
-		stringBuilder.append(args[0]);
-		for(int i = 1; i < args.length; i++) {
-			stringBuilder.append(" ").append(args[i]);
-		}
-		String basicMessage = stringBuilder.toString();
-
 		//Ensure the sender is in a town
 		String townCulture = "";
 		Resident resident = TownyUniverse.getInstance().getResident(player.getUniqueId());
-		if(resident != null && resident.hasTown()) {
-			try{
+		try {
+			if (resident != null && resident.hasTown() && TownMetaDataController.hasTownCulture(resident.getTown())) {
 				townCulture = TownMetaDataController.getTownCulture(resident.getTown());
-			} catch (NotRegisteredException e) {
+			} else {
 				Messaging.sendErrorMsg(player, Translation.of("msg_err_command_disable"));
 				return;
 			}
-		} else {
-			Messaging.sendErrorMsg(player, Translation.of("msg_err_command_disable"));
-			return;
-		}
+		} catch (NotRegisteredException ignored) {}
 
-		String formattedMessage = String.format(Translation.of("culture_chat_message"), townCulture, resident.getName(), basicMessage);
+		String formattedMessage = Translation.of("culture_chat_message", StringMgmt.capitalize(townCulture), resident.getName(), StringMgmt.join(args, " "));
 
 		Resident otherResident;
 		for(Player otherPlayer: BukkitTools.getOnlinePlayers()) {
-			try {
-				otherResident = TownyUniverse.getInstance().getResident(otherPlayer.getUniqueId());
-				if (otherResident != null
-						&& otherResident.hasTown()
-						&& TownMetaDataController.getTownCulture(otherResident.getTown()).equalsIgnoreCase(townCulture)) {
+			otherResident = TownyUniverse.getInstance().getResident(otherPlayer.getUniqueId());
+			if (otherResident != null && CultureUtil.isSameCulture(otherResident, townCulture)) {
 
-					//Send message
-					otherPlayer.sendMessage(formattedMessage);
-					//TownyMessaging........
-				}
-
-			} catch (NotRegisteredException nre) {
-				//Player town not found
+				//Send message
+				otherPlayer.sendMessage(formattedMessage);
+				//TownyMessaging........
 			}
 		}
 	}

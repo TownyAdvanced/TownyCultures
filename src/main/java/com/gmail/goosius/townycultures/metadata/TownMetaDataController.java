@@ -24,14 +24,19 @@ public class TownMetaDataController {
 		if (town.hasMeta(sdf.getKey()))
 			return MetaDataUtil.getString(town, sdf);
 		else
-			return "/culture set [culture]";
+			return "Unknown";
 	}
 
 	public static void setTownCulture(Town town, String culture) {
 		StringDataField sdf = (StringDataField) townCulture.clone();
 		if (town.hasMeta(sdf.getKey()))
-			MetaDataUtil.setString(town, sdf, culture);
+			if (culture.isEmpty())
+				town.removeMetaData(sdf);
+			else 
+				MetaDataUtil.setString(town, sdf, culture);
 		else
+			if (culture.isEmpty())
+				return;
 			town.addMetaData(new StringDataField("townycultures_culture", culture));
 	}
 
