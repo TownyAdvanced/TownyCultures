@@ -5,13 +5,14 @@ import com.palmergames.bukkit.towny.TownyUniverse;
 import com.palmergames.bukkit.towny.object.Town;
 import com.palmergames.bukkit.towny.utils.NameUtil;
 import com.palmergames.bukkit.util.ChatTools;
-import com.palmergames.bukkit.util.NameValidation;
 import com.palmergames.util.StringMgmt;
 import com.gmail.goosius.townycultures.Messaging;
 import com.gmail.goosius.townycultures.enums.TownyCulturesPermissionNodes;
 import com.gmail.goosius.townycultures.metadata.TownMetaDataController;
 import com.gmail.goosius.townycultures.settings.Settings;
 import com.gmail.goosius.townycultures.settings.Translation;
+import com.gmail.goosius.townycultures.utils.CultureUtil;
+
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -126,29 +127,29 @@ public class CultureAdminCommand implements CommandExecutor, TabCompleter {
 			for(int i = 4; i < args.length; i++) {
 				stringBuilder.append(" ").append(args[i]);
 			}
-			String newCulture = stringBuilder.toString();
 
-			if (!newCulture.equals("none")) {
-				if (!NameValidation.isValidString(newCulture)) {
-					String messageForAdmin = Translation.of("msg_err_invalid_string_town_culture_not_set");
-					if(sender instanceof Player) {
-						Messaging.sendErrorMsg(sender, messageForAdmin);
-					} else {
-						System.out.println(messageForAdmin);
-					}
-					return;
+			String newCulture = CultureUtil.validateCultureName(stringBuilder.toString());
+			if (newCulture == null) {
+				String messageForAdmin = Translation.of("msg_err_invalid_string_town_culture_not_set");
+				if(sender instanceof Player) {
+					Messaging.sendErrorMsg(sender, messageForAdmin);
+				} else {
+					System.out.println(messageForAdmin);
 				}
-				// TownyFormatter shouldn't be given any string longer than 159, or it has trouble splitting lines.
-				if (newCulture.length() > 159)
-					newCulture = newCulture.substring(0, 159);
-			} else {
-				newCulture = "";
+				return;
 			}
 
 			//Set culture
 			TownMetaDataController.setTownCulture(town, newCulture);
-			TownyMessaging.sendPrefixedTownMessage(town, String.format(Translation.of("msg_town_culture_set"), newCulture));
-			String messageForAdmin = String.format(Translation.of("msg_specific_town_cultures_set"), town.getName(), newCulture);
+			String messageForAdmin;
+			if (!newCulture.isEmpty()) {
+				newCulture = StringMgmt.capitalize(newCulture);
+				TownyMessaging.sendPrefixedTownMessage(town, Translation.of("msg_town_culture_set", newCulture));
+				messageForAdmin = Translation.of("msg_specific_town_cultures_set", town.getName(), newCulture);
+			} else {
+				TownyMessaging.sendPrefixedTownMessage(town, Translation.of("msg_culture_removed"));
+				messageForAdmin = Translation.of("msg_culture_removed");
+			}
 			if(sender instanceof Player) {
 				Messaging.sendMsg(sender, messageForAdmin);
 			} else {
@@ -169,31 +170,32 @@ public class CultureAdminCommand implements CommandExecutor, TabCompleter {
 			for(int i = 3; i < args.length; i++) {
 				stringBuilder.append(" ").append(args[i]);
 			}
-			String newCulture = stringBuilder.toString();
 
-			if (!newCulture.equals("none")) {
-				if (!NameValidation.isValidString(newCulture)) {
-					String messageForAdmin = Translation.of("msg_err_invalid_string_town_culture_not_set");
-					if(sender instanceof Player) {
-						TownyMessaging.sendErrorMsg(sender, messageForAdmin);
-					} else {
-						System.out.println(messageForAdmin);
-					}
-					return;
+			String newCulture = CultureUtil.validateCultureName(stringBuilder.toString());
+			if (newCulture == null) {
+				String messageForAdmin = Translation.of("msg_err_invalid_string_town_culture_not_set");
+				if(sender instanceof Player) {
+					Messaging.sendErrorMsg(sender, messageForAdmin);
+				} else {
+					System.out.println(messageForAdmin);
 				}
-				// TownyFormatter shouldn't be given any string longer than 159, or it has trouble splitting lines.
-				if (newCulture.length() > 159)
-					newCulture = newCulture.substring(0, 159);
-			} else {
-				newCulture = "";
+				return;
 			}
 
 			//Set culture in all towns
 			for(Town town: TownyUniverse.getInstance().getTowns()) {
 				TownMetaDataController.setTownCulture(town, newCulture);
 			}
-			Messaging.sendGlobalMessage(String.format(Translation.of("msg_all_town_cultures_set"), newCulture));
-			String messageForAdmin = String.format(Translation.of("msg_all_town_cultures_set"), newCulture);
+			String messageForAdmin;
+			if (!newCulture.isEmpty()) {
+				newCulture = StringMgmt.capitalize(newCulture);
+				Messaging.sendGlobalMessage(Translation.of("msg_all_town_cultures_set", newCulture));
+				messageForAdmin = Translation.of("msg_all_town_cultures_set", newCulture);
+			} else {
+				Messaging.sendGlobalMessage(Translation.of("msg_culture_removed_all_towns"));
+				messageForAdmin = Translation.of("msg_culture_removed_all_towns");
+			}
+			
 			if(!(sender instanceof Player)) {
 				System.out.println(messageForAdmin);
 			}

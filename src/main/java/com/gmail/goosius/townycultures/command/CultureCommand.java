@@ -4,6 +4,7 @@ import com.gmail.goosius.townycultures.Messaging;
 import com.gmail.goosius.townycultures.enums.TownyCulturesPermissionNodes;
 import com.gmail.goosius.townycultures.metadata.TownMetaDataController;
 import com.gmail.goosius.townycultures.settings.Translation;
+import com.gmail.goosius.townycultures.utils.CultureUtil;
 import com.palmergames.bukkit.towny.TownyMessaging;
 import com.palmergames.bukkit.towny.TownyUniverse;
 import com.palmergames.bukkit.towny.exceptions.NotRegisteredException;
@@ -11,7 +12,6 @@ import com.palmergames.bukkit.towny.object.Resident;
 import com.palmergames.bukkit.towny.object.Town;
 import com.palmergames.bukkit.towny.utils.NameUtil;
 import com.palmergames.bukkit.util.ChatTools;
-import com.palmergames.bukkit.util.NameValidation;
 import com.palmergames.util.StringMgmt;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -87,21 +87,17 @@ public class CultureCommand implements CommandExecutor, TabCompleter {
 				stringBuilder.append(" ").append(args[i]);
 			}
 			String newCulture = stringBuilder.toString();
-
-			if (!newCulture.equals("none")) {
-				if (!NameValidation.isValidString(newCulture) || newCulture.contains("%")) {
-					Messaging.sendErrorMsg(player, Translation.of("msg_err_invalid_string_town_culture_not_set"));
-					return;
-				}
-				// TownyFormatter shouldn't be given any string longer than 159, or it has trouble splitting lines.
-				if (newCulture.length() > 159)
-					newCulture = newCulture.substring(0, 159);
-			} else
-				newCulture = "";
-
-			//Set town culture
-			TownMetaDataController.setTownCulture(town, newCulture);
-			TownyMessaging.sendPrefixedTownMessage(town, String.format(Translation.of("msg_town_culture_set"), newCulture));
+			newCulture = CultureUtil.validateCultureName(newCulture);
+			if (newCulture == null) {
+				Messaging.sendErrorMsg(player, Translation.of("msg_err_invalid_string_town_culture_not_set"));
+			} else {
+				//Set town culture
+				TownMetaDataController.setTownCulture(town, newCulture);
+				if (newCulture.isEmpty())
+					TownyMessaging.sendPrefixedTownMessage(town, Translation.of("msg_culture_removed"));
+				else
+					TownyMessaging.sendPrefixedTownMessage(town, Translation.of("msg_town_culture_set", StringMgmt.capitalize(newCulture)));
+			}
 		} catch (NotRegisteredException e) {
 			//We probably won't get here as we already checked for resident
 		}
