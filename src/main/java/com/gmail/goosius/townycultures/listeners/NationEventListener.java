@@ -35,36 +35,49 @@ public class NationEventListener implements Listener {
 			 */
 			Map<String,Integer> cultureStrength = new HashMap<>();
 			for (Town town : event.getNation().getTowns())
-				cultureStrength = assignStrength(town, town.getNumResidents(), cultureStrength);
-			
-			/*
-			 * Doubles cast to int will round downwards resulting in a likely chance 
-			 * that there will be some remaining percents left over after strengths
-			 * are calculated. If there is any remainder this will either:
-			 * - assign it to the capital city if it has a culture, or
-			 * - prescribe it as an unknown.
-			 */
-			double pop = event.getNation().getNumResidents();
-			int remainder = findRemainder(pop, cultureStrength);
-			if (remainder > 0)
-				cultureStrength = assignStrength(event.getNation().getCapital(), remainder, cultureStrength);
-			
-			// Sort the map from strongest culture to weakest culture.
-			Map<String, Integer> sortedMap = sortMap(cultureStrength);
-			
-			// Turn it into a list of "Culturename ###%" strings.
-			List<String> cultures = new ArrayList<>(sortedMap.size());
-			for (String culture : sortedMap.keySet()) {
-				int percent = (int) (sortedMap.get(culture) / pop * 100);
-				cultures.add(StringMgmt.capitalize(culture) + " " + percent + "%");
-			}
+				assignStrength(town, town.getNumResidents(), cultureStrength);
 
-			// Join the above lines if needed.
-			String output = "";
-			if (cultures.size() > 1)
-				output = String.join(", ", cultures);
-			else 
-				output = cultures.get(0);
+			/*
+			 * Create a double map of culture percentages, filtering out <1% to "Other".
+			 */
+			Map<String,Double> cultureDoubleMap = new HashMap<>();
+			for (Map.Entry<String, Integer> entry: cultureStrength.entrySet())
+				assignPercent(entry.getKey(), entry.getValue(), event.getNation().getNumResidents(), cultureDoubleMap);
+
+			/*
+			 * Create an int map of culture percentages, adding 0.5 to effectively
+			 * round up instead of down if the % ends in a number greater than .5.
+			 */
+			Map<String,Integer> cultureIntegerMap = new HashMap<>();
+			for (Map.Entry<String, Double> entry: cultureDoubleMap.entrySet())
+				cultureIntegerMap.put(entry.getKey(), (int) (entry.getValue() + 0.5)); //Round half up
+
+			/*
+			 * Check if the percentages add up to 100% at this point. If not:
+			 * - assign the remainder to the capital city if it has a culture, or
+			 * - prescribe it as an unknown.
+			 * Remainder can be positive or negative but will always result in an even 100%.
+			 */
+			int remainder = 100 - cultureIntegerMap.values().stream().reduce(0, Integer::sum); // 100 - sum of values()
+			if (remainder != 0) 
+				assignStrength(event.getNation().getCapital(), remainder, cultureIntegerMap);
+
+			/*
+			 * Sort the map from strongest culture to weakest culture.
+			 */
+			if (cultureIntegerMap.size() > 1)
+				cultureIntegerMap = sortMap(cultureIntegerMap);
+
+			/*
+			 * Turn it into a list of "Culturename ###%" strings.
+			 */
+			List<String> cultures = new ArrayList<>(cultureIntegerMap.size());
+			for (Map.Entry<String, Integer> entry: cultureIntegerMap.entrySet())
+				cultures.add(StringMgmt.capitalize(entry.getKey()) + " " + entry.getValue() + "%");
+
+			String output = cultures.get(0);
+			if (cultures.size() > 1)                  // Join the lines if  
+				output = String.join(", ", cultures); // there's more than one.
 			
 			// Add our line to the NationStatusScreenEvent.
 			event.addLines(Arrays.asList(Translation.of("status_town_culture", output)));
@@ -72,31 +85,35 @@ public class NationEventListener implements Listener {
 	}
 
 	/*
-	 * Assigns the strength to the Town's culture or to the "Unknown" category.
+	 * Assigns the strength to the given Town's culture or to the "Unknown" category.
 	 */
-	private Map<String, Integer> assignStrength(Town town, int strength, Map<String, Integer> cultureStrength) {
-		String culture;
-		if (TownMetaDataController.hasTownCulture(town))
+	private void assignStrength(Town town, int strength, Map<String, Integer> cultureStrength) {
+		String culture = "Unknown";
+		if (TownMetaDataController.hasTownCulture(town)) // If the town has a culture, use that instead.
 			culture = TownMetaDataController.getTownCulture(town);
-		else 
-			culture = "Unknown";
 
-		if (cultureStrength.containsKey(culture))
+		if (cultureStrength.containsKey(culture)) // Culture already exists in the map. Add the strength to it.
 			strength += cultureStrength.get(culture);
-		
+
 		cultureStrength.put(culture, strength);
-		return cultureStrength;
 	}
 
-	private int findRemainder(double pop, Map<String, Integer> cultureStrength) {
-		int remainder = 100;
-		for (String culture : cultureStrength.keySet()) {
-			int percent = (int) (cultureStrength.get(culture) / pop * 100);
-			remainder -= percent;
-		}
-		return remainder;
+	/*
+	 * Assigns the percentage strength for a Nation's culture, filtering <1% to "Other".
+	 */
+	private void assignPercent(String culture, int value, int nationPop, Map<String, Double> cultureStrength) {
+		double percent = ((double)value) / nationPop * 100;
+		if (percent < 1)       // Change culture over to 
+			culture = "Other"; // "Other" if less than 1%.
+		if (cultureStrength.containsKey(culture))    // If culture is already present,
+			percent += cultureStrength.get(culture); // add new strength to it.
+		
+		cultureStrength.put(culture, percent); // Place culture and strength into double map.
 	}
 
+	/*
+	 * Sorts a nation's cultures into largest -> smallest based on their %.
+	 */
 	private Map<String, Integer> sortMap(Map<String, Integer> cultureStrength) {
 		
         List<Map.Entry<String, Integer>> list = new LinkedList<Map.Entry<String, Integer>>(cultureStrength.entrySet());
