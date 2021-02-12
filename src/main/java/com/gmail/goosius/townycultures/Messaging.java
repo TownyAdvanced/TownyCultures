@@ -1,7 +1,6 @@
 package com.gmail.goosius.townycultures;
 
-import com.palmergames.bukkit.towny.TownyUniverse;
-import com.palmergames.bukkit.towny.exceptions.NotRegisteredException;
+import com.palmergames.bukkit.towny.TownyAPI;
 import com.palmergames.bukkit.util.Colors;
 import com.gmail.goosius.townycultures.settings.Translation;
 import org.bukkit.Bukkit;
@@ -27,13 +26,8 @@ public class Messaging {
 	public static void sendGlobalMessage(String message) {
         System.out.println(prefix + message);
         for (Player player : Bukkit.getOnlinePlayers()) {
-            if (player != null)
-                try {
-                    if (TownyUniverse.getInstance().getDataSource().getWorld(player.getLocation().getWorld().getName()).isUsingTowny())
-                        sendMsg(player, message);
-                } catch (NotRegisteredException e) {
-                    e.printStackTrace();
-                }
+            if (player != null && TownyAPI.getInstance().isTownyWorld(player.getWorld()))
+            	sendMsg(player, message);
         }
 	}
 }
