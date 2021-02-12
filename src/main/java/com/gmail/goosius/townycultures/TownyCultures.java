@@ -82,13 +82,18 @@ public class TownyCultures extends JavaPlugin {
 	}
 
 	private void printSickASCIIArt() {
-		System.out.println(".---.                        .--.     . . 		      	        ");
-		System.out.println("  |                         :         |_|_                  	");
-		System.out.println("  | .-..  .    ._.--. .  .  |    .  . | |  .  . .--..-. .--.	");
-		System.out.println("  |(   )\\  \\  /  |  | |  |  :    |  | | |  |  | |  (.-' `--.	");
-		System.out.println("  ' `-'  `' `'   '  `-`--|   `--'`--`-`-`-'`--`-'   `--'`--'	");
-		System.out.println("                         ;                                  	");
-		System.out.println("                      `-'           by Goosius & LlmDl          ");
-		System.out.println("              			         							    ");
+		System.out.println("   .---.                                     ");
+		System.out.println("     |                                       ");
+		System.out.println("     | .-..  .    ._.--. .  .                ");
+		System.out.println("     |(   )\\  \\  /  |  | |  |              ");
+		System.out.println("     ' `-'  `' `'   '  `-`--|                ");
+		System.out.println("                            ;                ");
+		System.out.println("          .--.     . .   `-'                 ");
+		System.out.println("         :         |_|_                      ");
+		System.out.println("         |    .  . | |  .  . .--..-. .--.    ");
+		System.out.println("         :    |  | | |  |  | |  (.-' `--.    ");
+		System.out.println("          `--'`--`-`-`-'`--`-'   `--'`--'    ");
+		System.out.println("                          by Goosius & LlmDl ");
+		System.out.println("");
 	}
 }
