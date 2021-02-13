@@ -1,11 +1,11 @@
 package com.gmail.goosius.townycultures.utils;
 
-import org.jetbrains.annotations.Nullable;
-
 import com.gmail.goosius.townycultures.metadata.TownMetaDataController;
+
 import com.palmergames.bukkit.towny.TownyAPI;
-import com.palmergames.bukkit.towny.TownySettings;
+import com.gmail.goosius.townycultures.settings.TownyCulturesSettings;
 import com.palmergames.bukkit.towny.object.Resident;
+import com.palmergames.bukkit.towny.object.Translation;
 import com.palmergames.bukkit.util.NameValidation;
 
 public class CultureUtil {
@@ -15,13 +15,15 @@ public class CultureUtil {
 	 * @param newCulture
 	 * @return returns new name or null if name is invalid.
 	 */
-	@Nullable
-	public static String validateCultureName(String newCulture) {
+	public static String validateCultureName(String newCulture) throws Exception {
 		String culture = "";
 		if (!newCulture.equalsIgnoreCase("none")) {
-			if (!NameValidation.isValidString(newCulture) || newCulture.length() > TownySettings.getMaxNameLength()) {
-				return null;
-			}
+			if (!NameValidation.isValidString(newCulture))
+				throw new Exception(Translation.of("msg_err_invalid_characters"));
+			
+			if (newCulture.length() > TownyCulturesSettings.maxNameLength()) 
+				throw new Exception(Translation.of("msg_err_culture_name_too_long", TownyCulturesSettings.maxNameLength()));
+			
 			culture = newCulture.toLowerCase();
 		}
 		return culture;
