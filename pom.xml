@@ -50,6 +50,11 @@
       <artifactId>dynmap-api</artifactId>
       <version>2.5</version>
     </dependency>
+    <dependency>
+      <groupId>com.github.TownyAdvanced</groupId>
+      <artifactId>Dynmap-Towny</artifactId>
+      <version>0.85</version>
+    </dependency>
   </dependencies>
 
   <build>

@@ -1,6 +1,7 @@
 package com.gmail.goosius.townycultures;
 
 import com.gmail.goosius.townycultures.command.*;
+import com.gmail.goosius.townycultures.listeners.TownyDynmapListener;
 import com.gmail.goosius.townycultures.settings.TownyCulturesSettings;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.PluginManager;
@@ -73,6 +74,7 @@ public class TownyCultures extends JavaPlugin {
 		PluginManager pm = Bukkit.getServer().getPluginManager();
 		pm.registerEvents(new TownEventListener(), this);
 		pm.registerEvents(new NationEventListener(), this);
+		pm.registerEvents(new TownyDynmapListener(), this);
 	}
 	
 	private void registerCommands() {
