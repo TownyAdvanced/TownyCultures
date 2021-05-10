@@ -15,7 +15,7 @@ public class TownyCultures extends JavaPlugin {
 	
 	private static TownyCultures plugin;
 	public static String prefix = "[TownyCultures] ";
-	private static Version requiredTownyVersion = Version.fromString("0.96.6.0");
+	private static Version requiredTownyVersion = Version.fromString("0.97.0.0");
 
 	public static TownyCultures getTownyCultures() {
 		return plugin;
