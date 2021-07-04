@@ -28,7 +28,12 @@ public enum ConfigNodes {
 			"townycultures.enabled",
 			"true",
 			"",
-			"# If this value is true, then TownyCultures is enabled.");
+			"# If this value is true, then TownyCultures is enabled."),
+	MAXIMUM_NAME_LENGTH(
+			"townycultures.maximum_culture_name_length",
+			"20",
+			"",
+			"# The maximum number of characters a culture name can be.");
 
 	private final String Root;
 	private final String Default;

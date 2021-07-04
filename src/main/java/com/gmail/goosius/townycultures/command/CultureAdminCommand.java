@@ -128,13 +128,14 @@ public class CultureAdminCommand implements CommandExecutor, TabCompleter {
 				stringBuilder.append(" ").append(args[i]);
 			}
 
-			String newCulture = CultureUtil.validateCultureName(stringBuilder.toString());
-			if (newCulture == null) {
-				String messageForAdmin = Translation.of("msg_err_invalid_string_town_culture_not_set");
+			String newCulture;
+			try {
+				newCulture = CultureUtil.validateCultureName(stringBuilder.toString());
+			} catch (Exception e) {
 				if(sender instanceof Player)
-					Messaging.sendErrorMsg(sender, messageForAdmin);
+					Messaging.sendErrorMsg(sender, e.getMessage());
 				else
-					System.out.println(messageForAdmin);
+					System.err.println(e.getMessage());
 				return;
 			}
 
@@ -169,13 +170,14 @@ public class CultureAdminCommand implements CommandExecutor, TabCompleter {
 				stringBuilder.append(" ").append(args[i]);
 			}
 
-			String newCulture = CultureUtil.validateCultureName(stringBuilder.toString());
-			if (newCulture == null) {
-				String messageForAdmin = Translation.of("msg_err_invalid_string_town_culture_not_set");
+			String newCulture;
+			try {
+				newCulture = CultureUtil.validateCultureName(stringBuilder.toString());
+			} catch (Exception e) {
 				if(sender instanceof Player)
-					Messaging.sendErrorMsg(sender, messageForAdmin);
+					Messaging.sendErrorMsg(sender, e.getMessage());
 				else
-					System.out.println(messageForAdmin);
+					System.err.println(e.getMessage());
 				return;
 			}
 

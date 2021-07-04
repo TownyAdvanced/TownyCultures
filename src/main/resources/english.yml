@@ -1,5 +1,5 @@
 name: TownyCultures
-version: 0.02
+version: 0.03
 language: english
 author: Goosius
 website: 'http://townyadvanced.github.io/'
@@ -31,10 +31,12 @@ msg_err_command_disable: '&cYou don''t have enough permissions for that command.
 status_town_culture: '&2Culture: &a%s'
 
 #culture setting
-msg_err_invalid_string_town_culture_not_set: '&cInvalid string, Town culture not set.'
 msg_town_culture_set: '&bTown culture set to %s'
 msg_culture_removed: '&bTown culture removed.'
 msg_culture_removed_all_towns: '&bTown culture removed from all towns.'
+msg_err_invalid_characters: '&cInvalid characters used, unable to set culture.'
+msg_err_culture_name_too_long: '&cCulture name longer than character limit (%d), unable to set culture.'
+
 
 #chat
 culture_chat_message: '&f[&5CC&f] &f[&6%s&f] %s: &d%s'
