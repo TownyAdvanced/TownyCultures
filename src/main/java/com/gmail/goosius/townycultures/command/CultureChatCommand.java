@@ -2,8 +2,8 @@ package com.gmail.goosius.townycultures.command;
 
 import com.gmail.goosius.townycultures.Messaging;
 import com.gmail.goosius.townycultures.metadata.TownMetaDataController;
+import com.palmergames.bukkit.towny.TownyAPI;
 import com.palmergames.bukkit.towny.TownyUniverse;
-import com.palmergames.bukkit.towny.exceptions.NotRegisteredException;
 import com.palmergames.bukkit.towny.object.Resident;
 import com.palmergames.bukkit.util.BukkitTools;
 import com.palmergames.bukkit.util.ChatTools;
@@ -45,14 +45,12 @@ public class CultureChatCommand implements CommandExecutor, TabCompleter {
 		//Ensure the sender is in a town
 		String townCulture = "";
 		Resident resident = TownyUniverse.getInstance().getResident(player.getUniqueId());
-		try {
-			if (resident != null && resident.hasTown() && TownMetaDataController.hasTownCulture(resident.getTown())) {
-				townCulture = TownMetaDataController.getTownCulture(resident.getTown());
-			} else {
-				Messaging.sendErrorMsg(player, Translation.of("msg_err_command_disable"));
-				return;
-			}
-		} catch (NotRegisteredException ignored) {}
+		if (resident != null && resident.hasTown() && TownMetaDataController.hasTownCulture(TownyAPI.getInstance().getResidentTownOrNull(resident))) {
+			townCulture = TownMetaDataController.getTownCulture(TownyAPI.getInstance().getResidentTownOrNull(resident));
+		} else {
+			Messaging.sendErrorMsg(player, Translation.of("msg_err_command_disable"));
+			return;
+		}
 
 		String formattedMessage = Translation.of("culture_chat_message", StringMgmt.capitalize(townCulture), resident.getName(), StringMgmt.join(args, " "));
 

@@ -6,9 +6,9 @@ import com.gmail.goosius.townycultures.events.PreCultureSetEvent;
 import com.gmail.goosius.townycultures.metadata.TownMetaDataController;
 import com.gmail.goosius.townycultures.settings.Translation;
 import com.gmail.goosius.townycultures.utils.CultureUtil;
+import com.palmergames.bukkit.towny.TownyAPI;
 import com.palmergames.bukkit.towny.TownyMessaging;
 import com.palmergames.bukkit.towny.TownyUniverse;
-import com.palmergames.bukkit.towny.exceptions.NotRegisteredException;
 import com.palmergames.bukkit.towny.object.Resident;
 import com.palmergames.bukkit.towny.object.Town;
 import com.palmergames.bukkit.towny.utils.NameUtil;
@@ -81,37 +81,33 @@ public class CultureCommand implements CommandExecutor, TabCompleter {
 		if(!resident.hasTown())
 			player.sendMessage(Translation.of("msg_err_command_disable"));
 
-		try {
-			Town town = resident.getTown();
+		Town town = TownyAPI.getInstance().getResidentTownOrNull(resident);
 
-			StringBuilder stringBuilder = new StringBuilder();
-			stringBuilder.append(args[0]);
-			for(int i = 1; i < args.length; i++) {
-				stringBuilder.append(" ").append(args[i]);
+		StringBuilder stringBuilder = new StringBuilder();
+		stringBuilder.append(args[0]);
+		for(int i = 1; i < args.length; i++) {
+			stringBuilder.append(" ").append(args[i]);
+		}
+		String newCulture = stringBuilder.toString();
+		newCulture = CultureUtil.validateCultureName(newCulture);
+		if (newCulture == null) {
+			Messaging.sendErrorMsg(player, Translation.of("msg_err_invalid_string_town_culture_not_set"));
+		} else {
+			
+			//Fire cancellable event.
+			PreCultureSetEvent event = new PreCultureSetEvent(newCulture, town);
+			Bukkit.getPluginManager().callEvent(event);
+			if (event.isCancelled()) {
+				TownyMessaging.sendErrorMsg(player, event.getCancelMessage());
+				return;
 			}
-			String newCulture = stringBuilder.toString();
-			newCulture = CultureUtil.validateCultureName(newCulture);
-			if (newCulture == null) {
-				Messaging.sendErrorMsg(player, Translation.of("msg_err_invalid_string_town_culture_not_set"));
-			} else {
-				
-				//Fire cancellable event.
-				PreCultureSetEvent event = new PreCultureSetEvent(newCulture, town);
-				Bukkit.getPluginManager().callEvent(event);
-				if (event.isCancelled()) {
-					TownyMessaging.sendErrorMsg(player, event.getCancelMessage());
-					return;
-				}
-				
-				//Set town culture
-				TownMetaDataController.setTownCulture(town, newCulture);
-				if (newCulture.isEmpty())
-					TownyMessaging.sendPrefixedTownMessage(town, Translation.of("msg_culture_removed"));
-				else
-					TownyMessaging.sendPrefixedTownMessage(town, Translation.of("msg_town_culture_set", StringMgmt.capitalize(newCulture)));
-			}
-		} catch (NotRegisteredException e) {
-			//We probably won't get here as we already checked for resident
+			
+			//Set town culture
+			TownMetaDataController.setTownCulture(town, newCulture);
+			if (newCulture.isEmpty())
+				TownyMessaging.sendPrefixedTownMessage(town, Translation.of("msg_culture_removed"));
+			else
+				TownyMessaging.sendPrefixedTownMessage(town, Translation.of("msg_town_culture_set", StringMgmt.capitalize(newCulture)));
 		}
 	}
 }
