@@ -2,6 +2,7 @@ package com.gmail.goosius.townycultures.command;
 
 import com.gmail.goosius.townycultures.Messaging;
 import com.gmail.goosius.townycultures.enums.TownyCulturesPermissionNodes;
+import com.gmail.goosius.townycultures.events.PreCultureSetEvent;
 import com.gmail.goosius.townycultures.metadata.TownMetaDataController;
 import com.gmail.goosius.townycultures.settings.Translation;
 import com.gmail.goosius.townycultures.utils.CultureUtil;
@@ -13,6 +14,8 @@ import com.palmergames.bukkit.towny.object.Town;
 import com.palmergames.bukkit.towny.utils.NameUtil;
 import com.palmergames.bukkit.util.ChatTools;
 import com.palmergames.util.StringMgmt;
+
+import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -91,6 +94,15 @@ public class CultureCommand implements CommandExecutor, TabCompleter {
 			if (newCulture == null) {
 				Messaging.sendErrorMsg(player, Translation.of("msg_err_invalid_string_town_culture_not_set"));
 			} else {
+				
+				//Fire cancellable event.
+				PreCultureSetEvent event = new PreCultureSetEvent(newCulture, town);
+				Bukkit.getPluginManager().callEvent(event);
+				if (event.isCancelled()) {
+					TownyMessaging.sendErrorMsg(player, event.getCancelMessage());
+					return;
+				}
+				
 				//Set town culture
 				TownMetaDataController.setTownCulture(town, newCulture);
 				if (newCulture.isEmpty())
