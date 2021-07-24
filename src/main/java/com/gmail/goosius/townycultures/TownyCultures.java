@@ -21,7 +21,8 @@ public class TownyCultures extends JavaPlugin {
 	
 	private static TownyCultures plugin;
 	public static String prefix = "[TownyCultures] ";
-	private static Version requiredTownyVersion = Version.fromString("0.97.1.0");
+	private static Version requiredTownyVersion = Version.fromString("0.97.0.16");
+	private static boolean dynmapTowny = false;
 
 	public static TownyCultures getTownyCultures() {
 		return plugin;
@@ -49,11 +50,12 @@ public class TownyCultures extends JavaPlugin {
         }
 
 		if(TownyCulturesSettings.isTownyCulturesEnabled()) {
+
+			checkPlugins();
+
 			registerListeners();
 
 			registerCommands();
-			
-			checkPlugins();
 
 			System.out.println(prefix + "TownyCultures loaded successfully.");
 		} else {
@@ -68,6 +70,9 @@ public class TownyCultures extends JavaPlugin {
             System.out.println(prefix + "Found PlaceholderAPI. Enabling support...");
 		}
 		
+		test = getServer().getPluginManager().getPlugin("Dynmap-Towny");
+		if (test != null)
+			dynmapTowny = true;
 		
 	}
 
@@ -92,7 +97,8 @@ public class TownyCultures extends JavaPlugin {
 		PluginManager pm = Bukkit.getServer().getPluginManager();
 		pm.registerEvents(new TownEventListener(), this);
 		pm.registerEvents(new NationEventListener(), this);
-		pm.registerEvents(new TownyDynmapListener(), this);
+		if (dynmapTowny)
+			pm.registerEvents(new TownyDynmapListener(), this);
 	}
 	
 	private void registerCommands() {

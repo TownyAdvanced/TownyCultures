@@ -60,16 +60,16 @@ public class CultureAdminCommand implements CommandExecutor, TabCompleter {
 	}
 
 	private void parseCultureAdminCommand(CommandSender sender, String[] args) {
-
-		if (sender instanceof Player && !(sender.hasPermission(TownyCulturesPermissionNodes.TOWNYCULTURES_COMMAND_ADMIN.getNode(args[0])))) {
-			Messaging.sendErrorMsg(sender, Translation.of("msg_err_command_disable"));
-			return;
-		}
-
 		/*
 		 * Parse Command.
 		 */
 		if (args.length > 0) {
+
+			if (sender instanceof Player && !(sender.hasPermission(TownyCulturesPermissionNodes.TOWNYCULTURES_COMMAND_ADMIN.getNode(args[0])))) {
+				Messaging.sendErrorMsg(sender, Translation.of("msg_err_command_disable"));
+				return;
+			}
+
 			switch (args[0]) {
 			case "reload":
 				parseCultureAdminReloadCommand(sender);
