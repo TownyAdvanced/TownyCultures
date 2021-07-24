@@ -24,6 +24,10 @@
       <id>dynmap-repo</id>
       <url>http://repo.mikeprimm.com/</url>
     </repository>
+    <repository>
+      <id>placeholderapi</id>
+      <url>https://repo.extendedclip.com/content/repositories/placeholderapi/</url>
+    </repository>
   </repositories>
   
   <dependencies>
@@ -36,7 +40,7 @@
 	<dependency>
 	  <groupId>com.github.TownyAdvanced</groupId>
 	  <artifactId>Towny</artifactId>
-	  <version>0.97.0.0</version>
+	  <version>0.97.0.16</version>
 	  <scope>provided</scope>
 	</dependency>
     <dependency>
@@ -54,6 +58,12 @@
       <groupId>com.github.TownyAdvanced</groupId>
       <artifactId>Dynmap-Towny</artifactId>
       <version>0.85</version>
+    </dependency>
+    <dependency>
+      <groupId>me.clip</groupId>
+      <artifactId>placeholderapi</artifactId>
+      <version>2.10.9</version>
+      <scope>provided</scope>
     </dependency>
   </dependencies>
 

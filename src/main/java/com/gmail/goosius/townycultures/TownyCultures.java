@@ -2,11 +2,17 @@ package com.gmail.goosius.townycultures;
 
 import com.gmail.goosius.townycultures.command.*;
 import com.gmail.goosius.townycultures.listeners.TownyDynmapListener;
+import com.gmail.goosius.townycultures.metadata.TownMetaDataController;
 import com.gmail.goosius.townycultures.settings.TownyCulturesSettings;
 import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import com.gmail.goosius.townycultures.settings.Settings;
+import com.palmergames.bukkit.towny.TownyAPI;
+import com.palmergames.bukkit.towny.object.Resident;
+import com.palmergames.bukkit.towny.object.Town;
 import com.palmergames.bukkit.util.Version;
 import com.gmail.goosius.townycultures.listeners.NationEventListener;
 import com.gmail.goosius.townycultures.listeners.TownEventListener;
@@ -15,7 +21,7 @@ public class TownyCultures extends JavaPlugin {
 	
 	private static TownyCultures plugin;
 	public static String prefix = "[TownyCultures] ";
-	private static Version requiredTownyVersion = Version.fromString("0.97.0.0");
+	private static Version requiredTownyVersion = Version.fromString("0.97.1.0");
 
 	public static TownyCultures getTownyCultures() {
 		return plugin;
@@ -46,6 +52,8 @@ public class TownyCultures extends JavaPlugin {
 			registerListeners();
 
 			registerCommands();
+			
+			checkPlugins();
 
 			System.out.println(prefix + "TownyCultures loaded successfully.");
 		} else {
@@ -53,7 +61,17 @@ public class TownyCultures extends JavaPlugin {
 		}
     }
     
-    @Override
+    private void checkPlugins() {
+		Plugin test = getServer().getPluginManager().getPlugin("PlaceholderAPI");
+		if (test != null) {
+            new TownyCulturesPlaceholderExpansion(this).register();
+            System.out.println(prefix + "Found PlaceholderAPI. Enabling support...");
+		}
+		
+		
+	}
+
+	@Override
     public void onDisable() {
     	System.err.println(prefix + "Shutting down....");
     }
@@ -97,5 +115,22 @@ public class TownyCultures extends JavaPlugin {
 		System.out.println("          `--'`--`-`-`-'`--`-'   `--'`--'    ");
 		System.out.println("                          by Goosius & LlmDl ");
 		System.out.println("");
+	}
+	
+	public static String getCulture(Player player) {
+		Resident resident = TownyAPI.getInstance().getResident(player.getUniqueId());
+		if (resident == null)
+			return "None";
+		return getCulture(resident);
+	}
+	
+	public static String getCulture(Resident resident) {
+		if (resident.hasTown())
+			return getCulture(resident.getTownOrNull());
+		return "None";
+	}
+	
+	public static String getCulture(Town town) {
+		return TownMetaDataController.getTownCulture(town);
 	}
 }
