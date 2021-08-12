@@ -16,7 +16,7 @@ public class Settings {
 			Settings.loadConfig(townyCultures.getDataFolder().getPath() + File.separator + "config.yml", townyCultures.getVersion());
 		} catch (IOException e) {
             e.printStackTrace();
-            System.err.println(TownyCultures.prefix + "Config.yml failed to load! Disabling!");
+            TownyCultures.severe("Config.yml failed to load! Disabling!");
             return false;
         }
 
@@ -24,7 +24,7 @@ public class Settings {
 			Translation.loadLanguage(townyCultures.getDataFolder().getPath() + File.separator, "english.yml");
 		} catch (IOException e) {
 	        e.printStackTrace();
-	        System.err.println(TownyCultures.prefix + "Language file failed to load! Disabling!");
+	        TownyCultures.severe("Language file failed to load! Disabling!");
 	        return false;
 	    }
 		return true;
@@ -37,7 +37,7 @@ public class Settings {
 			// read the config.yml into memory
 			config = new CommentedConfiguration(file);
 			if (!config.load())
-				System.out.print("Failed to load Config!");
+				TownyCultures.severe("Failed to load Config!");
 
 			setDefaults(version, file);
 			config.save();
@@ -102,7 +102,7 @@ public class Settings {
 
 	private static void sendError(String msg) {
 
-		System.out.println("Error could not read " + msg);
+		TownyCultures.severe("Error could not read " + msg);
 	}
 
 	public static boolean getBoolean(ConfigNodes node) {

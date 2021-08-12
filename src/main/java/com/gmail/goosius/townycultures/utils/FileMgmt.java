@@ -13,6 +13,8 @@ import java.io.StringWriter;
 import java.io.Writer;
 import java.nio.charset.StandardCharsets;
 
+import com.gmail.goosius.townycultures.TownyCultures;
+
 public class FileMgmt {
 
 	/**
@@ -36,7 +38,7 @@ public class FileMgmt {
 				}
 				reader.close();
 			} catch (IOException e) {
-				System.out.println("Exception ");
+				TownyCultures.severe("Exception " + e.getStackTrace());
 			}
 			return writer.toString();
 		} else {
@@ -59,7 +61,7 @@ public class FileMgmt {
 			out.close();
 
 		} catch (IOException e) {
-			System.out.println("Exception ");
+			TownyCultures.severe("Exception " + e.getStackTrace());
 		}
 	}
 

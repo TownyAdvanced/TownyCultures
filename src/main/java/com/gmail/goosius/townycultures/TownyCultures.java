@@ -36,16 +36,16 @@ public class TownyCultures extends JavaPlugin {
     	printSickASCIIArt();
     	
         if (!townyVersionCheck(getTownyVersion())) {
-            System.err.println(prefix + "Towny version does not meet required minimum version: " + requiredTownyVersion.toString());
-            System.err.println(prefix + "Shutting down....");
+            severe("Towny version does not meet required minimum version: " + requiredTownyVersion.toString());
+            severe("Shutting down....");
             onDisable();
             return;
         } else {
-            System.out.println(prefix + "Towny version " + getTownyVersion() + " found.");
+            info("Towny version " + getTownyVersion() + " found.");
         }
         
         if (!Settings.loadSettingsAndLang()) {
-        	System.err.println(TownyCultures.prefix + "Shutting down....");
+        	severe("Shutting down....");
         	onDisable();
         }
 
@@ -57,9 +57,9 @@ public class TownyCultures extends JavaPlugin {
 
 			registerCommands();
 
-			System.out.println(prefix + "TownyCultures loaded successfully.");
+			info("TownyCultures loaded successfully.");
 		} else {
-			System.out.println(prefix + "TownyCultures loaded successfully but is disabled by config.");
+			info("TownyCultures loaded successfully but is disabled by config.");
 		}
     }
     
@@ -67,7 +67,7 @@ public class TownyCultures extends JavaPlugin {
 		Plugin test = getServer().getPluginManager().getPlugin("PlaceholderAPI");
 		if (test != null) {
             new TownyCulturesPlaceholderExpansion(this).register();
-            System.out.println(prefix + "Found PlaceholderAPI. Enabling support...");
+            info("Found PlaceholderAPI. Enabling support...");
 		}
 		
 		test = getServer().getPluginManager().getPlugin("Dynmap-Towny");
@@ -78,7 +78,7 @@ public class TownyCultures extends JavaPlugin {
 
 	@Override
     public void onDisable() {
-    	System.err.println(prefix + "Shutting down....");
+    	severe("Shutting down....");
     }
 
 	public String getVersion() {
@@ -108,19 +108,19 @@ public class TownyCultures extends JavaPlugin {
 	}
 
 	private void printSickASCIIArt() {
-		System.out.println("   .---.                                     ");
-		System.out.println("     |                                       ");
-		System.out.println("     | .-..  .    ._.--. .  .                ");
-		System.out.println("     |(   )\\  \\  /  |  | |  |              ");
-		System.out.println("     ' `-'  `' `'   '  `-`--|                ");
-		System.out.println("                            ;                ");
-		System.out.println("          .--.     . .   `-'                 ");
-		System.out.println("         :         |_|_                      ");
-		System.out.println("         |    .  . | |  .  . .--..-. .--.    ");
-		System.out.println("         :    |  | | |  |  | |  (.-' `--.    ");
-		System.out.println("          `--'`--`-`-`-'`--`-'   `--'`--'    ");
-		System.out.println("                          by Goosius & LlmDl ");
-		System.out.println("");
+		Bukkit.getLogger().info("   .---.                                     ");
+		Bukkit.getLogger().info("     |                                       ");
+		Bukkit.getLogger().info("     | .-..  .    ._.--. .  .                ");
+		Bukkit.getLogger().info("     |(   )\\  \\  /  |  | |  |              ");
+		Bukkit.getLogger().info("     ' `-'  `' `'   '  `-`--|                ");
+		Bukkit.getLogger().info("                            ;                ");
+		Bukkit.getLogger().info("          .--.     . .   `-'                 ");
+		Bukkit.getLogger().info("         :         |_|_                      ");
+		Bukkit.getLogger().info("         |    .  . | |  .  . .--..-. .--.    ");
+		Bukkit.getLogger().info("         :    |  | | |  |  | |  (.-' `--.    ");
+		Bukkit.getLogger().info("          `--'`--`-`-`-'`--`-'   `--'`--'    ");
+		Bukkit.getLogger().info("                          by Goosius & LlmDl ");
+		Bukkit.getLogger().info("");
 	}
 	
 	public static String getCulture(Player player) {
@@ -138,5 +138,13 @@ public class TownyCultures extends JavaPlugin {
 	
 	public static String getCulture(Town town) {
 		return TownMetaDataController.getTownCulture(town);
+	}
+	
+	public static void info(String message) {
+		plugin.getLogger().info(message);
+	}
+	
+	public static void severe(String message) {
+		plugin.getLogger().severe(message);
 	}
 }

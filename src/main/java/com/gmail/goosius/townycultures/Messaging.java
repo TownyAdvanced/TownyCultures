@@ -24,7 +24,7 @@ public class Messaging {
 	}
 	
 	public static void sendGlobalMessage(String message) {
-        System.out.println(prefix + message);
+        TownyCultures.info(message);
         for (Player player : Bukkit.getOnlinePlayers()) {
             if (player != null && TownyAPI.getInstance().isTownyWorld(player.getWorld()))
             	sendMsg(player, message);

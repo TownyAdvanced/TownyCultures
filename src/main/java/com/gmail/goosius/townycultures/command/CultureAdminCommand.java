@@ -7,6 +7,7 @@ import com.palmergames.bukkit.towny.utils.NameUtil;
 import com.palmergames.bukkit.util.ChatTools;
 import com.palmergames.util.StringMgmt;
 import com.gmail.goosius.townycultures.Messaging;
+import com.gmail.goosius.townycultures.TownyCultures;
 import com.gmail.goosius.townycultures.enums.TownyCulturesPermissionNodes;
 import com.gmail.goosius.townycultures.metadata.TownMetaDataController;
 import com.gmail.goosius.townycultures.settings.Settings;
@@ -135,7 +136,7 @@ public class CultureAdminCommand implements CommandExecutor, TabCompleter {
 				if(sender instanceof Player)
 					Messaging.sendErrorMsg(sender, e.getMessage());
 				else
-					System.err.println(e.getMessage());
+					TownyCultures.severe(e.getMessage());
 				return;
 			}
 
@@ -152,7 +153,7 @@ public class CultureAdminCommand implements CommandExecutor, TabCompleter {
 			if(sender instanceof Player)
 				Messaging.sendMsg(sender, message);
 			else
-				System.out.println(message); // Send message to console.
+				TownyCultures.severe(message); // Send message to console.
 
 		} else {
 			showCultureAdminTownHelp(sender);
@@ -177,7 +178,7 @@ public class CultureAdminCommand implements CommandExecutor, TabCompleter {
 				if(sender instanceof Player)
 					Messaging.sendErrorMsg(sender, e.getMessage());
 				else
-					System.err.println(e.getMessage());
+					TownyCultures.severe(e.getMessage());
 				return;
 			}
 
@@ -194,7 +195,7 @@ public class CultureAdminCommand implements CommandExecutor, TabCompleter {
 			Messaging.sendGlobalMessage(message);
 			
 			if(!(sender instanceof Player)) // Send message to console.
-				System.out.println(message);
+				TownyCultures.info(message);
 
 		} else {
 			showCultureAdminAllTownsHelp(sender);
