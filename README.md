@@ -19,6 +19,9 @@ FEATURES
   because although a town might be captured by an enemy nation,
   <br>the residents can continue communicating with their friends in the same culture,
   <br>using the Culture Channel: `/cc <message>`.
+- Culture can be shown on your dynmap' town popups.
+  <br>Add %culture% in your Dynmap-Towny config's InfoWindow.
+- Culture can be shown using the placeholder: %townycultures_culture%
 
 COMMANDS
 
