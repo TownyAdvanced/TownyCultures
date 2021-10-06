@@ -78,8 +78,10 @@ public class CultureCommand implements CommandExecutor, TabCompleter {
 		if (resident == null)
 			return;
 
-		if(!resident.hasTown())
+		if(!resident.hasTown()) {
 			player.sendMessage(Translation.of("msg_err_command_disable"));
+			return;
+		}
 
 		Town town = TownyAPI.getInstance().getResidentTownOrNull(resident);
 
