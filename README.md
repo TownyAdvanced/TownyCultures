@@ -15,8 +15,8 @@ FEATURES
 - Nations do not create or specify culture in this way.
   <br>Instead their culture is the sum of whichever cultures their component towns identify with, 
   <br>and/or whichever culture(s) they might claim to be affiliated with.
-- Culture is important in war-time,
-  because although a town might be captured by an enemy nation,
+- Culture is important in war systems where town transfer-after-invasion is possible,
+  <br>because although a town might be transferred to an enemy nation,
   <br>the residents can continue communicating with their friends in the same culture,
   <br>using the Culture Channel: `/cc <message>`.
 - Culture can be shown on your dynmap' town popups.
