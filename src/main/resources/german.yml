@@ -1,0 +1,47 @@
+name: Stadtkulturen
+version: 0.02
+language: german
+author: Hinterix [ErythroCraft]
+website: 'http://townyadvanced.github.io/'
+description: >
+    Sprachdatei für alle Spielnachrichten. Ändern Sie diese Datei nicht.
+    Wenn Sie einen der Einträge ändern möchten, erstellen Sie eine Kopie mit einem anderen Namen.
+    Alternative Sprachdateien können durch Ändern der
+    [Sprache] Eintrag in config.yml
+###
+# Sie MÜSSEN die Abstände in den Texten beibehalten.
+# Wenn ein Text mit einem Leerzeichen beginnt oder endet, muss dies so bleiben.
+#
+#
+# %s = vom Plugin zu liefernde Daten.
+###
+# Schriftfarbe ändern
+# --------------
+# Schwarz = Black = &0, Navy = &1, Green = &2, Blue = &3, Red = &4
+# Violett/Lila = &5, Gold = &6, LightGray = &7, Gray = &8
+# Dunkelviolett/-lila = &9, LightGreen = &a, LightBlue = &b
+# Rosarot = &c, LightPurple = &d, Yellow = &e, White = &f
+###
+#Grundlegende Einstellungen
+plugin_prefix: '&f[&6TownyCultures&f]'
+msg_err_command_disable: '&cDu hast keine Berechtigung um diesen Befehl zu Verwenden.'
+
+#Stadt-Anzeige
+status_town_culture: '&2Kulturen: &a%s'
+
+#Kultureinstellung
+msg_err_invalid_string_town_culture_not_set: '&cUngültige Zeichenfolge, Stadtkultur nicht festgelegt.'
+msg_town_culture_set: '&bStädtische Kultur steht auf %s'
+msg_culture_removed: '&bStadtkultur wurde entfernt.'
+msg_culture_removed_all_towns: '&bStadtkultur wurde aus allen Städten entfernt.'
+
+#Chat
+culture_chat_message: '&f[&5CC&f] &f[&6%s&f] %s: &d%s'
+
+#Administrator
+admin_help_1: 'Laden Sie die Konfigurations- und Sprachdatei neu.'
+config_and_lang_file_reloaded_successfully: 'Konfigurations- und Sprachdatei erfolgreich neu geladen.'
+config_and_lang_file_could_not_be_loaded: 'Neuladen fehlgeschlagen. Siehe Konsole für Details.'
+msg_all_town_cultures_set: '&bKultur aller Städte auf %s gesetzt.'
+msg_specific_town_cultures_set: '&bKultur der Stadt %s auf %s gesetzt.'
+msg_err_town_not_registered: '&cDie Stadt %s wurde nicht registriert.'
