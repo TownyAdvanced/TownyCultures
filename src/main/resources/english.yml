@@ -8,6 +8,7 @@ description: >
     If you wish to change any of the entries, make a copy named something else.
     Alternate language files can be enabled by altering the
     [language] entry in config.yml
+    e.g. language: FILENAME.yml
 #
 #
 #         You MUST retain spacing in the texts.
