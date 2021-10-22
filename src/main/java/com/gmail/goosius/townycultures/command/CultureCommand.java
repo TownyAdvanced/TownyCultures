@@ -95,6 +95,7 @@ public class CultureCommand implements CommandExecutor, TabCompleter {
 			newCulture = CultureUtil.validateCultureName(newCulture);
 		} catch (Exception e) {
 			TownyMessaging.sendErrorMsg(player, e.getMessage());
+			return;
 		}
 		if (newCulture == null) {
 			Messaging.sendErrorMsg(player, Translation.of("msg_err_invalid_string_town_culture_not_set"));
