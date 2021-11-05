@@ -1,6 +1,7 @@
 package com.gmail.goosius.townycultures.command;
 
 import com.gmail.goosius.townycultures.Messaging;
+import com.gmail.goosius.townycultures.TownyCultures;
 import com.gmail.goosius.townycultures.metadata.TownMetaDataController;
 import com.palmergames.bukkit.towny.TownyAPI;
 import com.palmergames.bukkit.towny.TownyUniverse;
@@ -46,13 +47,13 @@ public class CultureChatCommand implements CommandExecutor, TabCompleter {
 		String townCulture = "";
 		Resident resident = TownyUniverse.getInstance().getResident(player.getUniqueId());
 		if (resident != null && resident.hasTown() && TownMetaDataController.hasTownCulture(TownyAPI.getInstance().getResidentTownOrNull(resident))) {
-			townCulture = TownMetaDataController.getTownCulture(TownyAPI.getInstance().getResidentTownOrNull(resident));
+			townCulture = TownyCultures.getCulture(TownyAPI.getInstance().getResidentTownOrNull(resident));
 		} else {
 			Messaging.sendErrorMsg(player, Translation.of("msg_err_command_disable"));
 			return;
 		}
 
-		String formattedMessage = Translation.of("culture_chat_message", StringMgmt.capitalize(townCulture), resident.getName(), StringMgmt.join(args, " "));
+		String formattedMessage = Translation.of("culture_chat_message", townCulture, resident.getName(), StringMgmt.join(args, " "));
 
 		Resident otherResident;
 		for(Player otherPlayer: BukkitTools.getOnlinePlayers()) {

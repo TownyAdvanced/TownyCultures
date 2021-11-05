@@ -1,5 +1,6 @@
 package com.gmail.goosius.townycultures.listeners;
 
+import com.gmail.goosius.townycultures.TownyCultures;
 import com.gmail.goosius.townycultures.metadata.TownMetaDataController;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -18,7 +19,7 @@ public class TownyDynmapListener implements Listener {
             if (event.getDescription().contains("%culture%")) {
                 String finalDescription;
                     if (TownMetaDataController.hasTownCulture(event.getTown())) {
-                        finalDescription = event.getDescription().replace("%culture%", TownMetaDataController.getTownCulture(event.getTown()));
+                        finalDescription = event.getDescription().replace("%culture%", TownyCultures.getCulture(event.getTown()));
                     } else {
                         finalDescription = event.getDescription().replace("%culture%", "");
                     }

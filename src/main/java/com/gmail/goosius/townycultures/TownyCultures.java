@@ -14,6 +14,7 @@ import com.palmergames.bukkit.towny.TownyAPI;
 import com.palmergames.bukkit.towny.object.Resident;
 import com.palmergames.bukkit.towny.object.Town;
 import com.palmergames.bukkit.util.Version;
+import com.palmergames.util.StringMgmt;
 import com.gmail.goosius.townycultures.listeners.NationEventListener;
 import com.gmail.goosius.townycultures.listeners.TownEventListener;
 
@@ -137,7 +138,7 @@ public class TownyCultures extends JavaPlugin {
 	}
 	
 	public static String getCulture(Town town) {
-		return TownMetaDataController.getTownCulture(town);
+		return StringMgmt.capitalize(TownMetaDataController.getTownCulture(town));
 	}
 	
 	public static void info(String message) {
