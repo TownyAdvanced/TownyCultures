@@ -29,6 +29,10 @@ public class CultureUtil {
 		return culture;
 	}
 
+	public static boolean isValidCultureName(String culture) {
+		return !culture.isEmpty() && !culture.equalsIgnoreCase("none") && !culture.equalsIgnoreCase("unknown");
+	}
+	
 	/**
 	 * Given a resident, does this resident have the given culture?
 	 * @param res Resident to check.

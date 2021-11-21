@@ -1,5 +1,5 @@
 name: TownyCultures
-version: 0.03
+version: 0.04
 language: english
 author: Goosius
 website: 'http://townyadvanced.github.io/'
@@ -49,3 +49,8 @@ config_and_lang_file_could_not_be_loaded: 'Reload unsuccessful. See console for 
 msg_all_town_cultures_set: '&bCulture of all towns set to %s'
 msg_specific_town_cultures_set: '&bCulture of town %s set to %s'
 msg_err_town_not_registered: '&cTown %s is not registered.'
+msg_err_no_cultures_found: '&cTownyCultures could not find any Towns with cultures set.'
+msg_cultures_found: 'Cultures Found:'
+msg_err_not_enough_args: '&cNot enough arguments, expected: %s'
+msg_culture_purged: 'The culture %s has been purged.'
+msg_err_no_towns_found_with_this_culture: '&cNo towns were found to have the culture %s.'

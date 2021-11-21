@@ -4,6 +4,8 @@ import com.gmail.goosius.townycultures.command.*;
 import com.gmail.goosius.townycultures.listeners.TownyDynmapListener;
 import com.gmail.goosius.townycultures.metadata.TownMetaDataController;
 import com.gmail.goosius.townycultures.settings.TownyCulturesSettings;
+import com.gmail.goosius.townycultures.utils.CultureUtil;
+
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
@@ -139,6 +141,17 @@ public class TownyCultures extends JavaPlugin {
 	
 	public static String getCulture(Town town) {
 		return StringMgmt.capitalize(TownMetaDataController.getTownCulture(town));
+	}
+	
+	public static boolean hasCulture(Object obj) {
+		if (obj instanceof Player) {
+			return !CultureUtil.isValidCultureName(getCulture((Player) obj));
+		} else if (obj instanceof Resident) {
+			return !CultureUtil.isValidCultureName(getCulture((Resident) obj));
+		} else if (obj instanceof Town) {
+			return TownMetaDataController.hasTownCulture((Town) obj);
+		}
+		return false;
 	}
 	
 	public static void info(String message) {

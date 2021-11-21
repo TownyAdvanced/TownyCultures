@@ -29,15 +29,17 @@ public class TownMetaDataController {
 
 	public static void setTownCulture(Town town, String culture) {
 		StringDataField sdf = (StringDataField) townCulture.clone();
-		if (town.hasMeta(sdf.getKey()))
-			if (culture.isEmpty())
+		if (town.hasMeta(sdf.getKey())) {
+			if (culture.isEmpty()) {
 				town.removeMetaData(sdf);
-			else 
+			} else { 
 				MetaDataUtil.setString(town, sdf, culture);
-		else
+			}
+		} else {
 			if (culture.isEmpty())
 				return;
 			town.addMetaData(new StringDataField("townycultures_culture", culture));
+		}
 	}
 
 	public static boolean hasTownCulture(Town town) {

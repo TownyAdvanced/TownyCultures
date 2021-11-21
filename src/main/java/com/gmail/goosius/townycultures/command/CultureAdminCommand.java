@@ -4,6 +4,7 @@ import com.palmergames.bukkit.towny.TownyMessaging;
 import com.palmergames.bukkit.towny.TownyUniverse;
 import com.palmergames.bukkit.towny.object.Town;
 import com.palmergames.bukkit.towny.utils.NameUtil;
+import com.palmergames.bukkit.util.BookFactory;
 import com.palmergames.bukkit.util.ChatTools;
 import com.palmergames.util.StringMgmt;
 import com.gmail.goosius.townycultures.Messaging;
@@ -17,6 +18,7 @@ import com.gmail.goosius.townycultures.utils.CultureUtil;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 
@@ -27,7 +29,7 @@ import java.util.List;
 
 public class CultureAdminCommand implements CommandExecutor, TabCompleter {
 
-	private static final List<String> townyCulturesAdminTabCompletes = Arrays.asList("reload", "alltowns", "town");
+	private static final List<String> townyCulturesAdminTabCompletes = Arrays.asList("reload", "alltowns", "town", "culturelist", "deleteculture");
 
 	public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
 
@@ -81,6 +83,12 @@ public class CultureAdminCommand implements CommandExecutor, TabCompleter {
 			case "town":
 				parseCultureAdminTownCommand(sender, StringMgmt.remFirstArg(args));
 				break;
+			case "culturelist":
+				parseCACultureListCommand(sender);
+				break;
+			case "deleteculture":
+				parseCADeleteCultureCommand(sender, StringMgmt.remFirstArg(args));
+				break;
 			default:
 				showHelp(sender);
 			}
@@ -88,12 +96,14 @@ public class CultureAdminCommand implements CommandExecutor, TabCompleter {
 			showHelp(sender);
 		}
 	}
-	
+
 	private void showHelp(CommandSender sender) {
 		sender.sendMessage(ChatTools.formatTitle("/cultureadmin"));
 		sender.sendMessage(ChatTools.formatCommand("Eg", "/ca", "reload", Translation.of("admin_help_1")));
 		sender.sendMessage(ChatTools.formatCommand("Eg", "/ca", "alltowns set culture [culture]", ""));
 		sender.sendMessage(ChatTools.formatCommand("Eg", "/ca", "town [town_name] set culture [culture]", ""));
+		sender.sendMessage(ChatTools.formatCommand("Eg", "/ca", "culturelist", ""));
+		sender.sendMessage(ChatTools.formatCommand("Eg", "/ca", "deleteculture [culturename]", ""));
 	}
 
 	private void showCultureAdminTownHelp(CommandSender sender) {
@@ -110,6 +120,58 @@ public class CultureAdminCommand implements CommandExecutor, TabCompleter {
 			return;
 		}
 		Messaging.sendErrorMsg(sender, Translation.of("config_and_lang_file_could_not_be_loaded"));
+	}
+
+	
+
+	private void parseCADeleteCultureCommand(CommandSender sender, String[] args) {
+		if (args.length == 0) {
+			Messaging.sendErrorMsg(sender, Translation.of("msg_err_not_enough_args", "/ca deletecultlure [culturename]"));
+			return;
+		}
+		
+		String culture = args[0];
+		boolean found = false;
+		for (Town town : new ArrayList<>(TownyUniverse.getInstance().getTowns())) {
+			if (TownyCultures.getCulture(town).equalsIgnoreCase(culture)) {
+				TownMetaDataController.setTownCulture(town, "");
+				found = true;
+			}
+		}
+		if (found)
+			Messaging.sendMsg(sender, Translation.of("msg_culture_purged", culture));
+		else 
+			Messaging.sendErrorMsg(sender, Translation.of("msg_err_no_towns_found_with_this_culture", culture));
+	}
+	
+	private void parseCACultureListCommand(CommandSender sender) {
+		
+		List<String> cultureList = gatherCultures();
+		if (cultureList.isEmpty()) {
+			Messaging.sendErrorMsg(sender, Translation.of("msg_err_no_cultures_found"));
+			return;
+		}
+		
+		if (sender instanceof ConsoleCommandSender) {
+			TownyCultures.info(Translation.of("msg_cultures_found"));
+			for (String culture : cultureList)
+				TownyCultures.info(" * " + culture);
+		} else if (sender instanceof Player) {
+			Player player = (Player) sender;
+			String booktext = Translation.of("msg_cultures_found");
+			for (String culture : cultureList)
+				booktext += "\n * " + culture;
+			player.openBook(BookFactory.makeBook("Cultures", "Cultures", booktext));
+		}
+	}
+	
+	private List<String> gatherCultures() {
+		List<String> cultureList = new ArrayList<>();
+		for (Town town : new ArrayList<>(TownyUniverse.getInstance().getTowns())) {
+			if (TownyCultures.hasCulture(town) && !cultureList.contains(TownyCultures.getCulture(town)))
+				cultureList.add(TownyCultures.getCulture(town));
+		}
+		return cultureList;
 	}
 
 	private void parseCultureAdminTownCommand(CommandSender sender, String[] args) {
