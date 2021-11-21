@@ -28,5 +28,7 @@ permissions:
         default: op
         children:
             townycultures.admin.reload: true
+            townycultures.admin.culturelist: true
+            townycultures.admin.deleteculture: true
             townycultures.admin.alltowns: true
             townycultures.admin.town: true

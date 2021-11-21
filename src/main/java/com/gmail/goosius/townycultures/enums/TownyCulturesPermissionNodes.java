@@ -11,6 +11,8 @@ public enum TownyCulturesPermissionNodes {
 	TOWNYCULTURES_COMMAND_SET_TOWN_CULTURE("townycultures.set_town_culture"),
 	TOWNYCULTURES_COMMAND_ADMIN("townycultures.admin.*"),
 	TOWNYCULTURES_COMMAND_ADMIN_RELOAD("townycultures.admin.reload"),
+	TOWNYCULTURES_COMMAND_ADMIN_CULTURELIST("townycultures.admin.culturelist"),
+	TOWNYCULTURES_COMMAND_ADMIN_DELETECULTURE("townycultures.admin.deleteculture"),
 	TOWNYCULTURES_COMMAND_ADMIN_SET_ALL_TOWN_CULTURES("townycultures.admin.alltowns"),
 	TOWNYCULTURES_COMMAND_ADMIN_SET_SPECIFIED_TOWN_CULTURE("townycultures.admin.town");
 
