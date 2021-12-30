@@ -6,6 +6,7 @@ import java.io.IOException;
 import com.gmail.goosius.townycultures.TownyCultures;
 
 import com.gmail.goosius.townycultures.utils.FileMgmt;
+import com.palmergames.bukkit.config.CommentedConfiguration;
 
 public class Settings {
 	private static CommentedConfiguration config, newConfig;
@@ -35,7 +36,7 @@ public class Settings {
 			File file = new File(filepath);
 
 			// read the config.yml into memory
-			config = new CommentedConfiguration(file);
+			config = new CommentedConfiguration(file.toPath());
 			if (!config.load())
 				TownyCultures.severe("Failed to load Config!");
 
@@ -72,7 +73,7 @@ public class Settings {
 	 */
 	private static void setDefaults(String version, File file) {
 
-		newConfig = new CommentedConfiguration(file);
+		newConfig = new CommentedConfiguration(file.toPath());
 		newConfig.load();
 
 		for (ConfigNodes root : ConfigNodes.values()) {
