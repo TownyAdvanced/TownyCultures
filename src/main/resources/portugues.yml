@@ -28,7 +28,7 @@ plugin_prefix: '&f[&6TownyCultures&f] '
 msg_err_command_disable: '&cVocê não tem permissão para isso.'
 
 #town screen
-status_town_culture: '&Cultura: &a%s'
+status_town_culture: '&2Cultura: &a%s'
 
 #culture setting
 msg_town_culture_set: '&Cultura da cidade setada: %s'
