@@ -2,11 +2,18 @@ package com.gmail.goosius.townycultures.settings;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
+import org.bukkit.plugin.Plugin;
 
 import com.gmail.goosius.townycultures.TownyCultures;
 
 import com.gmail.goosius.townycultures.utils.FileMgmt;
 import com.palmergames.bukkit.config.CommentedConfiguration;
+import com.palmergames.bukkit.towny.TownyAPI;
+import com.palmergames.bukkit.towny.exceptions.initialization.TownyInitException;
+import com.palmergames.bukkit.towny.object.TranslationLoader;
 
 public class Settings {
 	private static CommentedConfiguration config, newConfig;
@@ -22,12 +29,17 @@ public class Settings {
         }
 
 		try {
-			Translation.loadLanguage(townyCultures.getDataFolder().getPath() + File.separator, "english.yml");
-		} catch (IOException e) {
-	        e.printStackTrace();
-	        TownyCultures.severe("Language file failed to load! Disabling!");
-	        return false;
-	    }
+			Plugin plugin = TownyCultures.getTownyCultures(); 
+			Path langFolderPath = Paths.get(plugin.getDataFolder().getPath()).resolve("lang");
+			TranslationLoader loader = new TranslationLoader(langFolderPath, plugin, TownyCultures.class);
+			loader.load();
+			TownyAPI.getInstance().addTranslations(plugin, loader.getTranslations());
+		} catch (TownyInitException e) {
+			e.printStackTrace();
+			TownyCultures.severe("Locale files failed to load! Disabling!");
+			return false;
+		}
+
 		return true;
 	}
 	
