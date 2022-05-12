@@ -2,6 +2,7 @@ package com.gmail.goosius.townycultures.metadata;
 
 import com.gmail.goosius.townycultures.TownyCultures;
 import com.palmergames.bukkit.towny.object.Town;
+import com.palmergames.bukkit.towny.object.Translatable;
 import com.palmergames.bukkit.towny.object.metadata.StringDataField;
 
 /**
@@ -24,7 +25,7 @@ public class TownMetaDataController {
 		if (town.hasMeta(sdf.getKey()))
 			return MetaDataUtil.getString(town, sdf);
 		else
-			return "Unknown";
+			return Translatable.of("status_unknown").defaultLocale();
 	}
 
 	public static void setTownCulture(Town town, String culture) {

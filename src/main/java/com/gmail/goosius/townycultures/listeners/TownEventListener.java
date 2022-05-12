@@ -7,8 +7,8 @@ import org.bukkit.event.Listener;
 import com.gmail.goosius.townycultures.TownyCultures;
 import com.gmail.goosius.townycultures.metadata.TownMetaDataController;
 import com.gmail.goosius.townycultures.settings.TownyCulturesSettings;
-import com.gmail.goosius.townycultures.settings.Translation;
 import com.palmergames.bukkit.towny.event.statusscreen.TownStatusScreenEvent;
+import com.palmergames.bukkit.towny.object.Translatable;
 
 /**
  * 
@@ -21,8 +21,8 @@ public class TownEventListener implements Listener {
 	public void onTownStatusScreen(TownStatusScreenEvent event) {
 		if (TownyCulturesSettings.isTownyCulturesEnabled())
 			if (TownMetaDataController.hasTownCulture(event.getTown()))
-				event.addLines(Arrays.asList(Translation.of("status_town_culture", TownyCultures.getCulture(event.getTown()))));
+				event.addLines(Arrays.asList(Translatable.of("status_town_culture", TownyCultures.getCulture(event.getTown())).forLocale(event.getCommandSender())));
 			else
-				event.addLines(Arrays.asList(Translation.of("status_town_culture", "/culture set [culture]")));
+				event.addLines(Arrays.asList(Translatable.of("status_town_culture", "/culture set [culture]").forLocale(event.getCommandSender())));
 	}
 }

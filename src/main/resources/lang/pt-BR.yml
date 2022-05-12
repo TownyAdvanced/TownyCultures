@@ -24,7 +24,7 @@ description: >
 # Rose = &c, LightPurple = &d, Yellow = &e, White = &f
 
 #basics
-plugin_prefix: '&f[&6TownyCultures&f] '
+cultures_plugin_prefix: '&f[&6TownyCultures&f] '
 msg_err_command_disable: '&cVocê não tem permissão para isso.'
 
 #town screen

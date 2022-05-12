@@ -3,6 +3,7 @@ package com.gmail.goosius.townycultures.command;
 import com.palmergames.bukkit.towny.TownyMessaging;
 import com.palmergames.bukkit.towny.TownyUniverse;
 import com.palmergames.bukkit.towny.object.Town;
+import com.palmergames.bukkit.towny.object.Translatable;
 import com.palmergames.bukkit.towny.utils.NameUtil;
 import com.palmergames.bukkit.util.BookFactory;
 import com.palmergames.bukkit.util.ChatTools;
@@ -12,7 +13,6 @@ import com.gmail.goosius.townycultures.TownyCultures;
 import com.gmail.goosius.townycultures.enums.TownyCulturesPermissionNodes;
 import com.gmail.goosius.townycultures.metadata.TownMetaDataController;
 import com.gmail.goosius.townycultures.settings.Settings;
-import com.gmail.goosius.townycultures.settings.Translation;
 import com.gmail.goosius.townycultures.utils.CultureUtil;
 
 import org.bukkit.command.Command;
@@ -69,7 +69,7 @@ public class CultureAdminCommand implements CommandExecutor, TabCompleter {
 		if (args.length > 0) {
 
 			if (sender instanceof Player && !(sender.hasPermission(TownyCulturesPermissionNodes.TOWNYCULTURES_COMMAND_ADMIN.getNode(args[0])))) {
-				Messaging.sendErrorMsg(sender, Translation.of("msg_err_command_disable"));
+				Messaging.sendErrorMsg(sender, Translatable.of("msg_err_command_disable"));
 				return;
 			}
 
@@ -99,7 +99,7 @@ public class CultureAdminCommand implements CommandExecutor, TabCompleter {
 
 	private void showHelp(CommandSender sender) {
 		sender.sendMessage(ChatTools.formatTitle("/cultureadmin"));
-		sender.sendMessage(ChatTools.formatCommand("Eg", "/ca", "reload", Translation.of("admin_help_1")));
+		sender.sendMessage(ChatTools.formatCommand("Eg", "/ca", "reload", Translatable.of("admin_help_1").forLocale(sender)));
 		sender.sendMessage(ChatTools.formatCommand("Eg", "/ca", "alltowns set culture [culture]", ""));
 		sender.sendMessage(ChatTools.formatCommand("Eg", "/ca", "town [town_name] set culture [culture]", ""));
 		sender.sendMessage(ChatTools.formatCommand("Eg", "/ca", "culturelist", ""));
@@ -116,17 +116,17 @@ public class CultureAdminCommand implements CommandExecutor, TabCompleter {
 
 	private void parseCultureAdminReloadCommand(CommandSender sender) {
 		if (Settings.loadSettingsAndLang()) {
-			Messaging.sendMsg(sender, Translation.of("config_and_lang_file_reloaded_successfully"));
+			Messaging.sendMsg(sender, Translatable.of("config_and_lang_file_reloaded_successfully"));
 			return;
 		}
-		Messaging.sendErrorMsg(sender, Translation.of("config_and_lang_file_could_not_be_loaded"));
+		Messaging.sendErrorMsg(sender, Translatable.of("config_and_lang_file_could_not_be_loaded"));
 	}
 
 	
 
 	private void parseCADeleteCultureCommand(CommandSender sender, String[] args) {
 		if (args.length == 0) {
-			Messaging.sendErrorMsg(sender, Translation.of("msg_err_not_enough_args", "/ca deletecultlure [culturename]"));
+			Messaging.sendErrorMsg(sender, Translatable.of("msg_err_not_enough_args", "/ca deletecultlure [culturename]"));
 			return;
 		}
 		
@@ -139,26 +139,26 @@ public class CultureAdminCommand implements CommandExecutor, TabCompleter {
 			}
 		}
 		if (found)
-			Messaging.sendMsg(sender, Translation.of("msg_culture_purged", culture));
+			Messaging.sendMsg(sender, Translatable.of("msg_culture_purged", culture));
 		else 
-			Messaging.sendErrorMsg(sender, Translation.of("msg_err_no_towns_found_with_this_culture", culture));
+			Messaging.sendErrorMsg(sender, Translatable.of("msg_err_no_towns_found_with_this_culture", culture));
 	}
 	
 	private void parseCACultureListCommand(CommandSender sender) {
 		
 		List<String> cultureList = gatherCultures();
 		if (cultureList.isEmpty()) {
-			Messaging.sendErrorMsg(sender, Translation.of("msg_err_no_cultures_found"));
+			Messaging.sendErrorMsg(sender, Translatable.of("msg_err_no_cultures_found"));
 			return;
 		}
 		
 		if (sender instanceof ConsoleCommandSender) {
-			TownyCultures.info(Translation.of("msg_cultures_found"));
+			TownyCultures.info(Translatable.of("msg_cultures_found").forLocale(sender));
 			for (String culture : cultureList)
 				TownyCultures.info(" * " + culture);
 		} else if (sender instanceof Player) {
 			Player player = (Player) sender;
-			String booktext = Translation.of("msg_cultures_found");
+			String booktext = Translatable.of("msg_cultures_found").forLocale(sender);
 			for (String culture : cultureList)
 				booktext += "\n * " + culture;
 			player.openBook(BookFactory.makeBook("Cultures", "Cultures", booktext));
@@ -181,7 +181,7 @@ public class CultureAdminCommand implements CommandExecutor, TabCompleter {
 
 			Town town = TownyUniverse.getInstance().getTown(args[0]);
 			if (town == null) {
-				Messaging.sendErrorMsg(sender, Translation.of("msg_err_town_not_registered", args[0]));
+				Messaging.sendErrorMsg(sender, Translatable.of("msg_err_town_not_registered", args[0]));
 				return;
 			}
 
@@ -206,9 +206,9 @@ public class CultureAdminCommand implements CommandExecutor, TabCompleter {
 			TownMetaDataController.setTownCulture(town, newCulture);
 			
 			//Prepare feedback message.
-			String message= Translation.of("msg_culture_removed");
+			String message= Translatable.of("msg_culture_removed").forLocale(sender);
 			if (!newCulture.isEmpty())
-				message = Translation.of("msg_specific_town_cultures_set", town.getName(), StringMgmt.capitalize(newCulture));
+				message = Translatable.of("msg_specific_town_cultures_set", town.getName(), StringMgmt.capitalize(newCulture)).forLocale(sender);
 			
 			TownyMessaging.sendPrefixedTownMessage(town, message);
 
@@ -250,9 +250,9 @@ public class CultureAdminCommand implements CommandExecutor, TabCompleter {
 			}
 
 			//Prepare feedback message.
-			String message = Translation.of("msg_culture_removed_all_towns");
+			String message = Translatable.of("msg_culture_removed_all_towns").forLocale(sender);
 			if (!newCulture.isEmpty())
-				message = Translation.of("msg_all_town_cultures_set", StringMgmt.capitalize(newCulture));
+				message = Translatable.of("msg_all_town_cultures_set", StringMgmt.capitalize(newCulture)).forLocale(sender);
 			
 			Messaging.sendGlobalMessage(message);
 			

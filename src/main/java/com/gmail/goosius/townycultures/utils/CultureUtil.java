@@ -3,9 +3,10 @@ package com.gmail.goosius.townycultures.utils;
 import com.gmail.goosius.townycultures.metadata.TownMetaDataController;
 
 import com.palmergames.bukkit.towny.TownyAPI;
+import com.palmergames.bukkit.towny.exceptions.TownyException;
 import com.gmail.goosius.townycultures.settings.TownyCulturesSettings;
-import com.gmail.goosius.townycultures.settings.Translation;
 import com.palmergames.bukkit.towny.object.Resident;
+import com.palmergames.bukkit.towny.object.Translatable;
 import com.palmergames.bukkit.util.NameValidation;
 
 public class CultureUtil {
@@ -19,10 +20,10 @@ public class CultureUtil {
 		String culture = "";
 		if (!newCulture.equalsIgnoreCase("none")) {
 			if (!NameValidation.isValidString(newCulture))
-				throw new Exception(Translation.of("msg_err_invalid_characters"));
+				throw new TownyException(Translatable.of("msg_err_invalid_characters"));
 			
 			if (newCulture.length() > TownyCulturesSettings.maxNameLength()) 
-				throw new Exception(Translation.of("msg_err_culture_name_too_long", TownyCulturesSettings.maxNameLength()));
+				throw new TownyException(Translatable.of("msg_err_culture_name_too_long", TownyCulturesSettings.maxNameLength()));
 			
 			culture = newCulture.toLowerCase();
 		}

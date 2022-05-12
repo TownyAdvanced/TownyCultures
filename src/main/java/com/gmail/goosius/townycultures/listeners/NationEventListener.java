@@ -14,9 +14,9 @@ import org.bukkit.event.Listener;
 
 import com.gmail.goosius.townycultures.metadata.TownMetaDataController;
 import com.gmail.goosius.townycultures.settings.TownyCulturesSettings;
-import com.gmail.goosius.townycultures.settings.Translation;
 import com.palmergames.bukkit.towny.event.statusscreen.NationStatusScreenEvent;
 import com.palmergames.bukkit.towny.object.Town;
+import com.palmergames.bukkit.towny.object.Translatable;
 import com.palmergames.util.StringMgmt;
 
 public class NationEventListener implements Listener {
@@ -80,7 +80,7 @@ public class NationEventListener implements Listener {
 				output = String.join(", ", cultures); // there's more than one.
 			
 			// Add our line to the NationStatusScreenEvent.
-			event.addLines(Arrays.asList(Translation.of("status_town_culture", output)));
+			event.addLines(Arrays.asList(Translatable.of("status_town_culture", output).forLocale(event.getCommandSender())));
 		}
 	}
 

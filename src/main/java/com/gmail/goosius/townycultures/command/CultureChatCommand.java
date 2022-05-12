@@ -6,9 +6,9 @@ import com.gmail.goosius.townycultures.metadata.TownMetaDataController;
 import com.palmergames.bukkit.towny.TownyAPI;
 import com.palmergames.bukkit.towny.TownyUniverse;
 import com.palmergames.bukkit.towny.object.Resident;
+import com.palmergames.bukkit.towny.object.Translatable;
 import com.palmergames.bukkit.util.ChatTools;
 import com.palmergames.util.StringMgmt;
-import com.gmail.goosius.townycultures.settings.Translation;
 import com.gmail.goosius.townycultures.utils.CultureUtil;
 
 import org.bukkit.Bukkit;
@@ -49,11 +49,9 @@ public class CultureChatCommand implements CommandExecutor, TabCompleter {
 		if (resident != null && resident.hasTown() && TownMetaDataController.hasTownCulture(TownyAPI.getInstance().getResidentTownOrNull(resident))) {
 			townCulture = TownyCultures.getCulture(TownyAPI.getInstance().getResidentTownOrNull(resident));
 		} else {
-			Messaging.sendErrorMsg(player, Translation.of("msg_err_command_disable"));
+			Messaging.sendErrorMsg(player, Translatable.of("msg_err_command_disable"));
 			return;
 		}
-
-		String formattedMessage = Translation.of("culture_chat_message", townCulture, resident.getName(), StringMgmt.join(args, " "));
 
 		Resident otherResident;
 		for(Player otherPlayer: Bukkit.getOnlinePlayers()) {
@@ -61,7 +59,7 @@ public class CultureChatCommand implements CommandExecutor, TabCompleter {
 			if (otherResident != null && CultureUtil.isSameCulture(otherResident, townCulture)) {
 
 				//Send message
-				otherPlayer.sendMessage(formattedMessage);
+				otherPlayer.sendMessage(Translatable.of("culture_chat_message", townCulture, resident.getName(), StringMgmt.join(args, " ")).forLocale(otherPlayer));
 				//TownyMessaging........
 			}
 		}

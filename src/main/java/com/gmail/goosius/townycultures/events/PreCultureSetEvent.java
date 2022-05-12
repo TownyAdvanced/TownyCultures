@@ -4,8 +4,8 @@ import org.bukkit.event.Cancellable;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 
-import com.gmail.goosius.townycultures.settings.Translation;
 import com.palmergames.bukkit.towny.object.Town;
+import com.palmergames.bukkit.towny.object.Translatable;
 
 public class PreCultureSetEvent extends Event implements Cancellable {
 
@@ -15,7 +15,7 @@ public class PreCultureSetEvent extends Event implements Cancellable {
 	private final Town town;
 
 	private boolean isCancelled = false;
-	private String cancelMessage = Translation.of("msg_err_command_disable");
+	private String cancelMessage = Translatable.of("msg_err_command_disable").defaultLocale();
 	
 	public PreCultureSetEvent(String culture, Town town) {
 		this.culture = culture;

@@ -2,6 +2,7 @@ package com.gmail.goosius.townycultures;
 
 import com.gmail.goosius.townycultures.command.*;
 import com.gmail.goosius.townycultures.listeners.TownyDynmapListener;
+import com.gmail.goosius.townycultures.listeners.TownyListener;
 import com.gmail.goosius.townycultures.metadata.TownMetaDataController;
 import com.gmail.goosius.townycultures.settings.TownyCulturesSettings;
 import com.gmail.goosius.townycultures.utils.CultureUtil;
@@ -15,6 +16,7 @@ import com.gmail.goosius.townycultures.settings.Settings;
 import com.palmergames.bukkit.towny.TownyAPI;
 import com.palmergames.bukkit.towny.object.Resident;
 import com.palmergames.bukkit.towny.object.Town;
+import com.palmergames.bukkit.towny.object.Translatable;
 import com.palmergames.bukkit.util.Version;
 import com.palmergames.util.StringMgmt;
 import com.gmail.goosius.townycultures.listeners.NationEventListener;
@@ -24,7 +26,7 @@ public class TownyCultures extends JavaPlugin {
 	
 	private static TownyCultures plugin;
 	public static String prefix = "[TownyCultures] ";
-	private static Version requiredTownyVersion = Version.fromString("0.97.5.0");
+	private static Version requiredTownyVersion = Version.fromString("0.98.1.0");
 	private static boolean dynmapTowny = false;
 
 	public static TownyCultures getTownyCultures() {
@@ -100,6 +102,7 @@ public class TownyCultures extends JavaPlugin {
 		PluginManager pm = Bukkit.getServer().getPluginManager();
 		pm.registerEvents(new TownEventListener(), this);
 		pm.registerEvents(new NationEventListener(), this);
+		pm.registerEvents(new TownyListener(), this);
 		if (dynmapTowny)
 			pm.registerEvents(new TownyDynmapListener(), this);
 	}
@@ -129,14 +132,14 @@ public class TownyCultures extends JavaPlugin {
 	public static String getCulture(Player player) {
 		Resident resident = TownyAPI.getInstance().getResident(player.getUniqueId());
 		if (resident == null)
-			return "None";
+			return Translatable.of("status_no_town").defaultLocale();
 		return getCulture(resident);
 	}
 	
 	public static String getCulture(Resident resident) {
 		if (resident.hasTown())
 			return getCulture(resident.getTownOrNull());
-		return "None";
+		return Translatable.of("status_no_town").defaultLocale();
 	}
 	
 	public static String getCulture(Town town) {

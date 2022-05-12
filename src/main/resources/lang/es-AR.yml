@@ -24,7 +24,7 @@ description: >
 # Rosa = &c, Morado Claro = &d, Amarillo = &e, Claro = &f
 
 # Cosas basicas
-plugin_prefix: '&f[&6TownyCultures&f] '
+cultures_plugin_prefix: '&f[&6TownyCultures&f] '
 msg_err_command_disable: '&cNo tienes los permisos necesarios para usar ese comando.'
 
 # Pantalla de ciudad

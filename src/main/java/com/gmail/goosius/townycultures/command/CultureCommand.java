@@ -4,13 +4,13 @@ import com.gmail.goosius.townycultures.Messaging;
 import com.gmail.goosius.townycultures.enums.TownyCulturesPermissionNodes;
 import com.gmail.goosius.townycultures.events.PreCultureSetEvent;
 import com.gmail.goosius.townycultures.metadata.TownMetaDataController;
-import com.gmail.goosius.townycultures.settings.Translation;
 import com.gmail.goosius.townycultures.utils.CultureUtil;
 import com.palmergames.bukkit.towny.TownyAPI;
 import com.palmergames.bukkit.towny.TownyMessaging;
 import com.palmergames.bukkit.towny.TownyUniverse;
 import com.palmergames.bukkit.towny.object.Resident;
 import com.palmergames.bukkit.towny.object.Town;
+import com.palmergames.bukkit.towny.object.Translatable;
 import com.palmergames.bukkit.towny.utils.NameUtil;
 import com.palmergames.bukkit.util.ChatTools;
 import com.palmergames.util.StringMgmt;
@@ -70,7 +70,7 @@ public class CultureCommand implements CommandExecutor, TabCompleter {
 		}	
 		
 		if (!player.hasPermission(TownyCulturesPermissionNodes.TOWNYCULTURES_COMMAND_SET_TOWN_CULTURE.getNode())) {
-			Messaging.sendErrorMsg(player, Translation.of("msg_err_command_disable"));
+			Messaging.sendErrorMsg(player, Translatable.of("msg_err_command_disable"));
 			return;
 		}
 
@@ -79,7 +79,7 @@ public class CultureCommand implements CommandExecutor, TabCompleter {
 			return;
 
 		if(!resident.hasTown()) {
-			player.sendMessage(Translation.of("msg_err_command_disable"));
+			Messaging.sendErrorMsg(player, Translatable.of("msg_err_command_disable"));
 			return;
 		}
 
@@ -98,7 +98,7 @@ public class CultureCommand implements CommandExecutor, TabCompleter {
 			return;
 		}
 		if (newCulture == null) {
-			Messaging.sendErrorMsg(player, Translation.of("msg_err_invalid_string_town_culture_not_set"));
+			Messaging.sendErrorMsg(player, Translatable.of("msg_err_invalid_string_town_culture_not_set"));
 		} else {
 			
 			//Fire cancellable event.
@@ -112,9 +112,9 @@ public class CultureCommand implements CommandExecutor, TabCompleter {
 			//Set town culture
 			TownMetaDataController.setTownCulture(town, newCulture);
 			if (newCulture.isEmpty())
-				TownyMessaging.sendPrefixedTownMessage(town, Translation.of("msg_culture_removed"));
+				TownyMessaging.sendPrefixedTownMessage(town, Translatable.of("msg_culture_removed"));
 			else
-				TownyMessaging.sendPrefixedTownMessage(town, Translation.of("msg_town_culture_set", StringMgmt.capitalize(newCulture)));
+				TownyMessaging.sendPrefixedTownMessage(town, Translatable.of("msg_town_culture_set", StringMgmt.capitalize(newCulture)));
 		}
 	}
 }

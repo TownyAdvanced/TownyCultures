@@ -23,7 +23,7 @@ description: >
 # Rosarot = &c, LightPurple = &d, Yellow = &e, White = &f
 ###
 #Grundlegende Einstellungen
-plugin_prefix: '&f[&6TownyCultures&f]'
+cultures_plugin_prefix: '&f[&6TownyCultures&f]'
 msg_err_command_disable: '&cDu hast keine Berechtigung um diesen Befehl zu Verwenden.'
 
 #Stadt-Anzeige
