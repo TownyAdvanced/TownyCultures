@@ -9,7 +9,7 @@
     <java.version>1.8</java.version>
     <project.bukkitAPIVersion>1.13</project.bukkitAPIVersion>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <towny.version>0.98.4.0</towny.version>
+    <towny.version>0.98.5.0</towny.version>
   </properties>
 
   <repositories>
@@ -27,7 +27,7 @@
     </repository>
     <repository>
       <id>dynmap-repo</id>
-      <url>http://repo.mikeprimm.com/</url>
+      <url>https://repo.mikeprimm.com/</url>
     </repository>
     <repository>
       <id>placeholderapi</id>
@@ -45,7 +45,7 @@
     <dependency>
       <groupId>com.palmergames.bukkit.towny</groupId>
       <artifactId>towny</artifactId>
-      <version>${towny.version}</version>
+      <version>0.98.5.0</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
