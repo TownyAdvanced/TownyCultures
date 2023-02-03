@@ -4,8 +4,8 @@ import com.gmail.goosius.townycultures.enums.TownyCulturesPermissionNodes;
 import com.gmail.goosius.townycultures.events.PreCultureSetEvent;
 import com.gmail.goosius.townycultures.metadata.TownMetaDataController;
 import com.gmail.goosius.townycultures.utils.CultureUtil;
+import com.gmail.goosius.townycultures.utils.Messaging;
 import com.palmergames.bukkit.towny.TownyCommandAddonAPI;
-import com.palmergames.bukkit.towny.TownyMessaging;
 import com.palmergames.bukkit.towny.command.BaseCommand;
 import com.palmergames.bukkit.towny.exceptions.TownyException;
 import com.palmergames.bukkit.towny.TownyCommandAddonAPI.CommandType;
@@ -17,21 +17,29 @@ import com.palmergames.bukkit.util.BukkitTools;
 import com.palmergames.bukkit.util.ChatTools;
 import com.palmergames.util.StringMgmt;
 
+import java.util.Collections;
+import java.util.List;
+
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
 import org.bukkit.entity.Player;
 
-public class CultureCommand extends BaseCommand implements TabExecutor {
+public class TownSetCultureAddon extends BaseCommand implements TabExecutor {
 	
-	public CultureCommand() {
+	public TownSetCultureAddon() {
 		AddonCommand townSetCultureCommand = new AddonCommand(CommandType.TOWN_SET, "culture", this);
 		TownyCommandAddonAPI.addSubCommand(townSetCultureCommand);
 	}
 
+	public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
+		return Collections.emptyList();
+	}
+
 	private void showCultureHelp(CommandSender sender) {
 		sender.sendMessage(ChatTools.formatTitle("/town set culture"));
-		sender.sendMessage(ChatTools.formatCommand("Eg", "/t set culture", "[culturename]", ""));
+		sender.sendMessage(ChatTools.formatCommand("Eg", "/t set culture", "[culturename]", "Set your culture."));
+		sender.sendMessage(ChatTools.formatCommand("Eg", "/t set culture", "", "Remove your culture."));
 	}
 	
 	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
@@ -39,7 +47,7 @@ public class CultureCommand extends BaseCommand implements TabExecutor {
 			try {
 				parseSetCultureCommand(player, args);
 			} catch (TownyException e) {
-				TownyMessaging.sendErrorMsg(player, e.getMessage(player));
+				Messaging.sendErrorMsg(player, e.getMessage(player));
 			}
 		} else
 			showCultureHelp(sender);
@@ -64,8 +72,8 @@ public class CultureCommand extends BaseCommand implements TabExecutor {
 		//Set town culture
 		TownMetaDataController.setTownCulture(town, newCulture);
 		if (newCulture.isEmpty())
-			TownyMessaging.sendPrefixedTownMessage(town, Translatable.of("msg_culture_removed"));
+			Messaging.sendPrefixedTownMessage(town, Translatable.of("msg_culture_removed"));
 		else
-			TownyMessaging.sendPrefixedTownMessage(town, Translatable.of("msg_town_culture_set", StringMgmt.capitalize(newCulture)));
+			Messaging.sendPrefixedTownMessage(town, Translatable.of("msg_town_culture_set", StringMgmt.capitalize(newCulture)));
 	}
 }

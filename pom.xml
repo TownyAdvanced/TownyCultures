@@ -6,8 +6,8 @@
   <name>townycultures</name> <!-- Leave lower-cased -->
 
   <properties>
-    <java.version>1.8</java.version>
-    <project.bukkitAPIVersion>1.13</project.bukkitAPIVersion>
+    <java.version>1.17</java.version>
+    <project.bukkitAPIVersion>1.16</project.bukkitAPIVersion>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <towny.version>0.98.6.0</towny.version>
   </properties>
@@ -70,6 +70,12 @@
       <version>2.11.1</version>
       <scope>provided</scope>
     </dependency>
+    <dependency>
+      <groupId>com.github.bsideup.jabel</groupId>
+      <artifactId>jabel-javac-plugin</artifactId>
+      <version>1.0.0</version>
+      <scope>provided</scope>
+    </dependency>
   </dependencies>
 
   <build>
@@ -77,10 +83,14 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.8.0</version>
+        <version>3.10.1</version>
         <configuration>
-          <source>${java.version}</source>
-          <target>${java.version}</target>
+          <release>8</release>
+          <source>17</source>
+          <target>17</target>
+          <compilerArgs>
+            <arg>-Xplugin:jabel</arg>
+          </compilerArgs>
         </configuration>
       </plugin>
     </plugins>
@@ -92,4 +102,29 @@
     </resources>
   </build>
   
+  <profiles>
+    <profile>
+      <id>intellij-idea-only</id>
+      <activation>
+        <property>
+          <name>idea.maven.embedder.version</name>
+        </property>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <configuration>
+              <release>8</release>
+              <compilerArgs>
+                <arg>--enable-preview</arg>
+              </compilerArgs>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
+
 </project>

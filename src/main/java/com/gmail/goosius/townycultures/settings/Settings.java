@@ -21,10 +21,12 @@ public class Settings {
 		try {
 			Settings.loadConfig();
 		} catch (IOException e) {
-            e.printStackTrace();
-            TownyCultures.severe("Config.yml failed to load! Disabling!");
-            return false;
-        }
+			TownyCultures.severe(String.format("Loading error: Failed to load file %s (does it pass a yaml parser?).", configPath));
+			TownyCultures.severe("https://jsonformatter.org/yaml-parser");
+			TownyCultures.severe(e.getMessage());
+			TownyCultures.severe("Config.yml failed to load! Disabling!");
+			return false;
+		}
 
 		try {
 			Plugin plugin = TownyCultures.getTownyCultures(); 
@@ -150,4 +152,11 @@ public class Settings {
 		config.save();
 	}
 
+	public static boolean isTownyCulturesEnabled() {
+		return Settings.getBoolean(ConfigNodes.TOWNY_CULTURES_ENABLED);
+	}
+
+	public static int maxNameLength() {
+		return Settings.getInt(ConfigNodes.MAXIMUM_NAME_LENGTH);
+	}
 }

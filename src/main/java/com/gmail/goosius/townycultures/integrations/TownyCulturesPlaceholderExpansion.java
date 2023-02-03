@@ -1,7 +1,9 @@
-package com.gmail.goosius.townycultures;
+package com.gmail.goosius.townycultures.integrations;
 
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
+
+import com.gmail.goosius.townycultures.TownyCultures;
 
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 

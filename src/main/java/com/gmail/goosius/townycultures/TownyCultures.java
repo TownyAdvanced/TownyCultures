@@ -1,10 +1,13 @@
 package com.gmail.goosius.townycultures;
 
-import com.gmail.goosius.townycultures.command.*;
+import com.gmail.goosius.townycultures.command.TownyAdminCultureAddon;
+import com.gmail.goosius.townycultures.command.CultureChatCommand;
+import com.gmail.goosius.townycultures.command.TownSetCultureAddon;
+import com.gmail.goosius.townycultures.command.TownyAdminReloadAddon;
+import com.gmail.goosius.townycultures.integrations.TownyCulturesPlaceholderExpansion;
 import com.gmail.goosius.townycultures.listeners.TownyDynmapListener;
 import com.gmail.goosius.townycultures.listeners.TownyListener;
 import com.gmail.goosius.townycultures.metadata.TownMetaDataController;
-import com.gmail.goosius.townycultures.settings.TownyCulturesSettings;
 import com.gmail.goosius.townycultures.utils.CultureUtil;
 
 import org.bukkit.Bukkit;
@@ -19,8 +22,7 @@ import com.palmergames.bukkit.towny.object.Town;
 import com.palmergames.bukkit.towny.object.Translatable;
 import com.palmergames.bukkit.util.Version;
 import com.palmergames.util.StringMgmt;
-import com.gmail.goosius.townycultures.listeners.NationEventListener;
-import com.gmail.goosius.townycultures.listeners.TownEventListener;
+import com.gmail.goosius.townycultures.listeners.StatusScreenListener;
 
 public class TownyCultures extends JavaPlugin {
 
@@ -53,7 +55,7 @@ public class TownyCultures extends JavaPlugin {
 			return;
 		}
 
-		if (TownyCulturesSettings.isTownyCulturesEnabled()) {
+		if (Settings.isTownyCulturesEnabled()) {
 
 			checkPlugins();
 
@@ -98,33 +100,28 @@ public class TownyCultures extends JavaPlugin {
 	}
 
 	private void registerListeners(PluginManager pm) {
-		pm.registerEvents(new TownEventListener(), this);
-		pm.registerEvents(new NationEventListener(), this);
+		pm.registerEvents(new StatusScreenListener(), this);
 		pm.registerEvents(new TownyListener(), this);
 		if (dynmapTowny)
 			pm.registerEvents(new TownyDynmapListener(), this);
 	}
 
 	private void registerCommands() {
-		new CultureCommand();
-		new CultureAdminCommand();
+		new TownSetCultureAddon();
+		new TownyAdminCultureAddon();
 		new TownyAdminReloadAddon();
 		getCommand("cc").setExecutor(new CultureChatCommand());
 	}
 
 	private void printSickASCIIArt() {
-		Bukkit.getConsoleSender().sendMessage("   .---.                                     ");
-		Bukkit.getConsoleSender().sendMessage("     |                                       ");
-		Bukkit.getConsoleSender().sendMessage("     | .-..  .    ._.--. .  .                ");
-		Bukkit.getConsoleSender().sendMessage("     |(   )\\  \\  /  |  | |  |              ");
-		Bukkit.getConsoleSender().sendMessage("     ' `-'  `' `'   '  `-`--|                ");
-		Bukkit.getConsoleSender().sendMessage("                            ;                ");
-		Bukkit.getConsoleSender().sendMessage("          .--.     . .   `-'                 ");
-		Bukkit.getConsoleSender().sendMessage("         :         |_|_                      ");
-		Bukkit.getConsoleSender().sendMessage("         |    .  . | |  .  . .--..-. .--.    ");
-		Bukkit.getConsoleSender().sendMessage("         :    |  | | |  |  | |  (.-' `--.    ");
-		Bukkit.getConsoleSender().sendMessage("          `--'`--`-`-`-'`--`-'   `--'`--'    ");
-		Bukkit.getConsoleSender().sendMessage("                          by Goosius & LlmDl ");
+		Bukkit.getConsoleSender().sendMessage(" .---.                           .--.     . . ");
+		Bukkit.getConsoleSender().sendMessage("   |                            :         |_|_");
+		Bukkit.getConsoleSender().sendMessage("   | .-..  .    ._.--. .  .     |    .  . | |  .  . .--..-. .--.");
+		Bukkit.getConsoleSender().sendMessage("   |(   )\\  \\  /  |  | |  |     :    |  | | |  |  | |  (.-' `--.");
+		Bukkit.getConsoleSender().sendMessage("   ' `-'  `' `'   '  `-`--|      `--'`--`-`-`-'`--`-'   `--'`--'");
+		Bukkit.getConsoleSender().sendMessage("                          ;");
+		Bukkit.getConsoleSender().sendMessage("                       `-'");
+		Bukkit.getConsoleSender().sendMessage("                        by Goosius & LlmDl");
 		Bukkit.getConsoleSender().sendMessage("");
 	}
 
@@ -146,12 +143,12 @@ public class TownyCultures extends JavaPlugin {
 	}
 
 	public static boolean hasCulture(Object obj) {
-		if (obj instanceof Player) {
-			return !CultureUtil.isValidCultureName(getCulture((Player) obj));
-		} else if (obj instanceof Resident) {
-			return !CultureUtil.isValidCultureName(getCulture((Resident) obj));
-		} else if (obj instanceof Town) {
-			return TownMetaDataController.hasTownCulture((Town) obj);
+		if (obj instanceof Player player) {
+			return !CultureUtil.isValidCultureName(getCulture(player));
+		} else if (obj instanceof Resident resident) {
+			return !CultureUtil.isValidCultureName(getCulture(resident));
+		} else if (obj instanceof Town town ) {
+			return TownMetaDataController.hasTownCulture(town);
 		}
 		return false;
 	}

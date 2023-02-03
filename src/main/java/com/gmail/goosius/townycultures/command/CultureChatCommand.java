@@ -2,16 +2,14 @@ package com.gmail.goosius.townycultures.command;
 
 import com.gmail.goosius.townycultures.TownyCultures;
 import com.gmail.goosius.townycultures.metadata.TownMetaDataController;
-import com.palmergames.bukkit.towny.TownyMessaging;
-import com.palmergames.bukkit.towny.TownyUniverse;
 import com.palmergames.bukkit.towny.command.BaseCommand;
 import com.palmergames.bukkit.towny.exceptions.TownyException;
-import com.palmergames.bukkit.towny.object.Resident;
 import com.palmergames.bukkit.towny.object.Town;
 import com.palmergames.bukkit.towny.object.Translatable;
 import com.palmergames.bukkit.util.ChatTools;
 import com.palmergames.util.StringMgmt;
 import com.gmail.goosius.townycultures.utils.CultureUtil;
+import com.gmail.goosius.townycultures.utils.Messaging;
 
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -39,7 +37,7 @@ public class CultureChatCommand extends BaseCommand implements TabExecutor {
 			else
 				showCultureCommunicationHelp(player);
 		} catch (TownyException e) {
-			TownyMessaging.sendErrorMsg(sender, e.getMessage(sender));
+			Messaging.sendErrorMsg(sender, e.getMessage(sender));
 		}
 
 		return true;
@@ -51,14 +49,10 @@ public class CultureChatCommand extends BaseCommand implements TabExecutor {
 	private void parseCultureCommunicationCommand(Player player, String[] args) throws TownyException {
 		//Ensure the sender has a Culture.
 		String townCulture = getTownCultureOrThrow(player);
-		Resident otherResident;
-		for (Player otherPlayer: Bukkit.getOnlinePlayers()) {
-			otherResident = TownyUniverse.getInstance().getResident(otherPlayer.getUniqueId());
-			if (otherResident == null || !CultureUtil.isSameCulture(otherResident, townCulture))
-				continue;
-			//Send message
-			otherPlayer.sendMessage(Translatable.of("culture_chat_message", townCulture, player.getName(), StringMgmt.join(args, " ")).forLocale(otherPlayer));
-		}
+		Translatable message = Translatable.of("culture_chat_message", townCulture, player.getName(), StringMgmt.join(args, " "));
+		Bukkit.getOnlinePlayers().stream()
+			.filter(p -> CultureUtil.isSameCulture(p, townCulture))
+			.forEach(p -> Messaging.sendMessage(p, message));
 	}
 
 	private String getTownCultureOrThrow(Player player) throws TownyException {

@@ -1,16 +1,18 @@
 # TownyCultures
 
-INTRODUCTION
-- TownyCultures is an add on plugin for Towny, which enables "cultures" on Towny servers.
- 
-FEATURES
+## Introduction
+- TownyCultures is an add-on plugin for Towny, which enables "cultures" on Towny servers.
+- Players that share a culture have their own "chat" channel.
+- Towns choose what culture they want to be a part of.
+
+## Features
 - Each town has a 'culture' e.g. "Greek", "Celtic", "Roman", "Azurian" etc.
 - Each town culture is displayed on the Town screen.
-- Town residents can communicate with all other town residents of the same culture (regardless of nation), 
+- Town residents can communicate with all other town residents of the same culture (regardless of nation),
   <br>using the Culture Channel: `/cc <message>`.
 - Town culture is fluid and dynamic. 
   There is no central administrator for each culture.
-  <br>A new culture can be created by a mayor, using: `/c set <culture>`.
+  <br>A new culture can be created by a mayor, using: `/town set culture <culture>`.
   <br>The same command can be used to join an existing culture.
 - Nations do not create or specify culture in this way.
   <br>Instead their culture is the sum of whichever cultures their component towns identify with, 
@@ -23,24 +25,48 @@ FEATURES
   <br>Add %culture% in your Dynmap-Towny config's InfoWindow.
 - Culture can be shown using the placeholder: %townycultures_culture%
 
-COMMANDS
+## Commands
+```
+PLAYER
+- `/cc <message>` - As a town resident, talk to others in the same culture
+- `/town set culture <culture>` - As a mayor, have the town create or join a culture
 
-    PLAYER
-    - `/cc <message>` - As a town resident, talk to others in the same culture
-    - `/c set culture` - As a mayor, have the town create or join a culture
-    
-    ADMIN
-    - `/ca reload` - Reload the plugin configs & language files
-    - '/ca alltowns set culture <culture> - Set a culture for all towns
-    - '/ca town <town> set culture <culture> - Set a culture for 1 town
-      
-INSTALLATION STEPS
+ADMIN
+- `/ta reload townycultures` - Reload the plugin configs & language files
+- '/ta culture alltowns set culture <culture> - Set a culture for all towns
+- '/ta culture town <town> set culture <culture> - Set a culture for 1 town
+- '/ta culture culturelist - View a book listing the cultures on the server.
+- '/ta culture deleteculture <culture> - Deletes the specified culture from the server.
+```   
+
+## Installation
 1. Download the TownyCultures jar file here: https://github.com/TownyAdvanced/TownyCultures/releases
-2. Drop the jar file into your normal plugins folder.
-3. Stop your server.
+2. Stop your server.
+3. Drop the jar file into your server's plugins folder.
 4. Start your server.
-5. Edit your townyperms.yml file in the Towny/settings folder, 
-   and add the following permission for mayors (& other ranks if appropriate):
-   `- townycultures.set_town_culture`.
-6. Run the command `/ta reload townyperms`.   
-7. That's it.
+5. Give mayors the ability to set their town culture using this command:
+```
+/ta townyperms group towns.mayor addperm townycultures.set_town_culture
+```
+6. That's it.
+
+## Permissions
+- townycultures.set_town_culture:
+  - description: User is able to set town culture. (usually town mayors or assistants)
+  - default: op
+
+- townycultures.admin:
+  - description: User is able to use all TownyCulture admin commands.
+  - default: op
+  - children:
+    - townycultures.admin.reload: true
+    - townycultures.admin.culturelist: true
+    - townycultures.admin.deleteculture: true
+    - townycultures.admin.alltowns: true
+    - townycultures.admin.town: true
+
+## Events
+- PreCultureSetEvent - Cancellable event thrown before a Town sets their culture.
+
+## PAPI Placeholders
+- `%townycultures_culture%` - Shows the player's culture. 

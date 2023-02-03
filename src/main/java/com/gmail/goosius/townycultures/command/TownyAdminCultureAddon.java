@@ -1,7 +1,6 @@
 package com.gmail.goosius.townycultures.command;
 
 import com.palmergames.bukkit.towny.TownyCommandAddonAPI;
-import com.palmergames.bukkit.towny.TownyMessaging;
 import com.palmergames.bukkit.towny.TownyUniverse;
 import com.palmergames.bukkit.towny.command.BaseCommand;
 import com.palmergames.bukkit.towny.exceptions.TownyException;
@@ -17,6 +16,7 @@ import com.gmail.goosius.townycultures.TownyCultures;
 import com.gmail.goosius.townycultures.enums.TownyCulturesPermissionNodes;
 import com.gmail.goosius.townycultures.metadata.TownMetaDataController;
 import com.gmail.goosius.townycultures.utils.CultureUtil;
+import com.gmail.goosius.townycultures.utils.Messaging;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
@@ -30,11 +30,11 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 
-public class CultureAdminCommand extends BaseCommand implements TabExecutor {
+public class TownyAdminCultureAddon extends BaseCommand implements TabExecutor {
 
 	private static final List<String> townyCulturesAdminTabCompletes = Arrays.asList("alltowns", "town", "culturelist", "deleteculture");
 
-	public CultureAdminCommand() {
+	public TownyAdminCultureAddon() {
 		AddonCommand townyAdminCultureCommand = new AddonCommand(CommandType.TOWNYADMIN, "culture", this);
 		TownyCommandAddonAPI.addSubCommand(townyAdminCultureCommand);
 	}
@@ -51,7 +51,7 @@ public class CultureAdminCommand extends BaseCommand implements TabExecutor {
 					return Collections.emptyList();
 			case "town":
 				if (args.length == 2)
-					return BaseCommand.getTownyStartingWith(args[1], "t");
+					return getTownyStartingWith(args[1], "t");
 				else if (args.length == 3)
 					return NameUtil.filterByStart(Arrays.asList("set"), args[2]);
 				else if (args.length == 4)
@@ -69,7 +69,7 @@ public class CultureAdminCommand extends BaseCommand implements TabExecutor {
 		try {
 			parseCultureAdminCommand(sender, args);
 		} catch (TownyException e) {
-			TownyMessaging.sendErrorMsg(sender, e.getMessage(sender));
+			Messaging.sendErrorMsg(sender, e.getMessage(sender));
 		}
 		return true;
 	}
@@ -122,9 +122,9 @@ public class CultureAdminCommand extends BaseCommand implements TabExecutor {
 			}
 		}
 		if (found)
-			TownyMessaging.sendMsg(sender, Translatable.of("msg_culture_purged", culture));
+			Messaging.sendMsg(sender, Translatable.of("msg_culture_purged", culture));
 		else 
-			TownyMessaging.sendErrorMsg(sender, Translatable.of("msg_err_no_towns_found_with_this_culture", culture));
+			Messaging.sendErrorMsg(sender, Translatable.of("msg_err_no_towns_found_with_this_culture", culture));
 	}
 	
 	private void parseCultureListCommand(CommandSender sender) throws TownyException {
@@ -133,12 +133,11 @@ public class CultureAdminCommand extends BaseCommand implements TabExecutor {
 			throw new TownyException(Translatable.of("msg_err_no_cultures_found"));
 
 		if (sender instanceof ConsoleCommandSender) {
-			TownyCultures.info(Translatable.of("msg_cultures_found").forLocale(sender));
+			TownyCultures.info(Translatable.of("msg_cultures_found").defaultLocale());
 			for (String culture : cultureList)
 				TownyCultures.info(" * " + culture);
-		} else if (sender instanceof Player) {
-			Player player = (Player) sender;
-			String booktext = Translatable.of("msg_cultures_found").forLocale(sender);
+		} else if (sender instanceof Player player) {
+			String booktext = Translatable.of("msg_cultures_found").forLocale(player);
 			for (String culture : cultureList)
 				booktext += "\n * " + culture;
 			player.openBook(BookFactory.makeBook("Cultures", "Cultures", booktext));
@@ -169,9 +168,9 @@ public class CultureAdminCommand extends BaseCommand implements TabExecutor {
 			Translatable message = newCulture.isEmpty() ? Translatable.of("msg_culture_removed")
 				: Translatable.of("msg_specific_town_cultures_set", town.getName(), StringMgmt.capitalize(newCulture));
 
-			TownyMessaging.sendPrefixedTownMessage(town, message);
-			if (sender instanceof Player)
-				TownyMessaging.sendErrorMsg(sender, message);
+			Messaging.sendPrefixedTownMessage(town, message);
+			if (sender instanceof Player) // Console will already see the town message.
+				Messaging.sendErrorMsg(sender, message);
 
 		} else {
 			showCultureAdminTownHelp(sender);
@@ -193,7 +192,7 @@ public class CultureAdminCommand extends BaseCommand implements TabExecutor {
 			Translatable message = newCulture.isEmpty() ? Translatable.of("msg_culture_removed_all_towns")
 				: Translatable.of("msg_all_town_cultures_set", StringMgmt.capitalize(newCulture));
 
-			TownyMessaging.sendGlobalMessage(message);
+			Messaging.sendGlobalMessage(message);
 
 		} else {
 			showCultureAdminAllTownsHelp(sender);
