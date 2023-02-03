@@ -1,7 +1,6 @@
 package com.gmail.goosius.townycultures.listeners;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -14,6 +13,7 @@ import org.bukkit.event.Listener;
 
 import com.gmail.goosius.townycultures.metadata.TownMetaDataController;
 import com.gmail.goosius.townycultures.settings.TownyCulturesSettings;
+import com.palmergames.adventure.text.Component;
 import com.palmergames.bukkit.towny.event.statusscreen.NationStatusScreenEvent;
 import com.palmergames.bukkit.towny.object.Town;
 import com.palmergames.bukkit.towny.object.Translatable;
@@ -75,12 +75,11 @@ public class NationEventListener implements Listener {
 			for (Map.Entry<String, Integer> entry: cultureIntegerMap.entrySet())
 				cultures.add(StringMgmt.capitalize(entry.getKey()) + " " + entry.getValue() + "%");
 
-			String output = cultures.get(0);
-			if (cultures.size() > 1)                  // Join the lines if  
-				output = String.join(", ", cultures); // there's more than one.
-			
+			// Join the lines if need be.
+			String output = StringMgmt.join(cultures, ", ");
+
 			// Add our line to the NationStatusScreenEvent.
-			event.addLines(Arrays.asList(Translatable.of("status_town_culture", output).forLocale(event.getCommandSender())));
+			event.getStatusScreen().addComponentOf("cultures", Component.text(Translatable.of("status_town_culture", output).forLocale(event.getCommandSender())));
 		}
 	}
 

@@ -1,6 +1,5 @@
 package com.gmail.goosius.townycultures.settings;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -8,20 +7,19 @@ import java.nio.file.Paths;
 import org.bukkit.plugin.Plugin;
 
 import com.gmail.goosius.townycultures.TownyCultures;
-
-import com.gmail.goosius.townycultures.utils.FileMgmt;
 import com.palmergames.bukkit.config.CommentedConfiguration;
 import com.palmergames.bukkit.towny.TownyAPI;
 import com.palmergames.bukkit.towny.exceptions.initialization.TownyInitException;
 import com.palmergames.bukkit.towny.object.TranslationLoader;
+import com.palmergames.util.FileMgmt;
 
 public class Settings {
 	private static CommentedConfiguration config, newConfig;
+	private static Path configPath = TownyCultures.getTownyCultures().getDataFolder().toPath().resolve("config.yml");
 
 	public static boolean loadSettingsAndLang() {
-		TownyCultures townyCultures = TownyCultures.getTownyCultures();
 		try {
-			Settings.loadConfig(townyCultures.getDataFolder().getPath() + File.separator + "config.yml", townyCultures.getVersion());
+			Settings.loadConfig();
 		} catch (IOException e) {
             e.printStackTrace();
             TownyCultures.severe("Config.yml failed to load! Disabling!");
@@ -43,16 +41,14 @@ public class Settings {
 		return true;
 	}
 	
-	public static void loadConfig(String filepath, String version) throws IOException {
-		if (FileMgmt.checkOrCreateFile(filepath)) {
-			File file = new File(filepath);
-
+	private static void loadConfig() throws IOException {
+		if (FileMgmt.checkOrCreateFile(configPath.toString())) {
 			// read the config.yml into memory
-			config = new CommentedConfiguration(file.toPath());
+			config = new CommentedConfiguration(configPath);
 			if (!config.load())
 				TownyCultures.severe("Failed to load Config!");
 
-			setDefaults(version, file);
+			setDefaults(TownyCultures.getTownyCultures().getVersion(), configPath);
 			config.save();
 		}
 	}
@@ -83,9 +79,9 @@ public class Settings {
 	/**
 	 * Builds a new config reading old config data.
 	 */
-	private static void setDefaults(String version, File file) {
+	private static void setDefaults(String version, Path configPath) {
 
-		newConfig = new CommentedConfiguration(file.toPath());
+		newConfig = new CommentedConfiguration(configPath);
 		newConfig.load();
 
 		for (ConfigNodes root : ConfigNodes.values()) {

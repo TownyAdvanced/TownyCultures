@@ -16,7 +16,7 @@ public class CultureUtil {
 	 * @param newCulture
 	 * @return returns new name or null if name is invalid.
 	 */
-	public static String validateCultureName(String newCulture) throws Exception {
+	public static String validateCultureName(String newCulture) throws TownyException {
 		String culture = "";
 		if (!newCulture.equalsIgnoreCase("none")) {
 			if (!NameValidation.isValidString(newCulture))
