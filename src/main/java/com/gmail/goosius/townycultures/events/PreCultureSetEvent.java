@@ -1,13 +1,12 @@
 package com.gmail.goosius.townycultures.events;
 
-import org.bukkit.event.Cancellable;
-import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 
+import com.palmergames.bukkit.towny.event.CancellableTownyEvent;
 import com.palmergames.bukkit.towny.object.Town;
 import com.palmergames.bukkit.towny.object.Translatable;
 
-public class PreCultureSetEvent extends Event implements Cancellable {
+public class PreCultureSetEvent extends CancellableTownyEvent {
 
 	private static final HandlerList handlers = new HandlerList();
 	private final String culture;

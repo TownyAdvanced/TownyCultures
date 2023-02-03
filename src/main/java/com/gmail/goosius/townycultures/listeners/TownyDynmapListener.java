@@ -16,14 +16,9 @@ public class TownyDynmapListener implements Listener {
      */
     @EventHandler
     public void on(BuildTownMarkerDescriptionEvent event) {
-            if (event.getDescription().contains("%culture%")) {
-                String finalDescription;
-                    if (TownMetaDataController.hasTownCulture(event.getTown())) {
-                        finalDescription = event.getDescription().replace("%culture%", TownyCultures.getCulture(event.getTown()));
-                    } else {
-                        finalDescription = event.getDescription().replace("%culture%", "");
-                    }
-                event.setDescription(finalDescription);
-        }
+        if (!event.getDescription().contains("%culture%"))
+            return;
+        String slug = TownMetaDataController.hasTownCulture(event.getTown()) ? TownyCultures.getCulture(event.getTown()) : "";
+        event.setDescription(event.getDescription().replace("%culture%", slug));
     }
 }
