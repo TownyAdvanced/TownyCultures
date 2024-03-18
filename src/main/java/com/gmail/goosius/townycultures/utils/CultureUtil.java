@@ -1,17 +1,22 @@
 package com.gmail.goosius.townycultures.utils;
 
+import java.util.regex.Pattern;
+import java.util.regex.PatternSyntaxException;
+
 import org.bukkit.entity.Player;
 
+import com.gmail.goosius.townycultures.TownyCultures;
 import com.gmail.goosius.townycultures.metadata.TownMetaDataController;
 
 import com.palmergames.bukkit.towny.TownyAPI;
+import com.palmergames.bukkit.towny.TownySettings;
 import com.palmergames.bukkit.towny.exceptions.TownyException;
 import com.gmail.goosius.townycultures.settings.Settings;
 import com.palmergames.bukkit.towny.object.Resident;
 import com.palmergames.bukkit.towny.object.Translatable;
-import com.palmergames.bukkit.util.NameValidation;
 
 public class CultureUtil {
+	private static Pattern stringPattern = null;
 
 	/**
 	 * Checks that a culture is named correctly, sets the name to lowercase.
@@ -21,7 +26,7 @@ public class CultureUtil {
 	public static String validateCultureName(String newCulture) throws TownyException {
 		String culture = "";
 		if (!newCulture.equalsIgnoreCase("none")) {
-			if (!NameValidation.isValidString(newCulture))
+			if (!isValidString(newCulture))
 				throw new TownyException(Translatable.of("msg_err_invalid_characters"));
 
 			if (newCulture.length() > Settings.maxNameLength()) 
@@ -56,5 +61,21 @@ public class CultureUtil {
 	public static boolean isSameCulture(Player player, String culture) {
 		Resident res = TownyAPI.getInstance().getResident(player);
 		return res != null && isSameCulture(res, culture);
+	}
+
+	public static boolean isValidString(String message) {
+		
+		if (message.contains("'") || message.contains("`")) {
+			return false;
+		}
+
+		try {
+			if (stringPattern == null)
+				stringPattern = Pattern.compile(TownySettings.getStringCheckRegex(), Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CHARACTER_CLASS);
+			return stringPattern.matcher(message).find();
+		} catch (PatternSyntaxException e) {
+			TownyCultures.severe("Failed to compile the string check regex pattern because it contains errors (" + TownySettings.getStringCheckRegex() + ")");
+			return false;
+		}
 	}
 }
