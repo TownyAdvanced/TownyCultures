@@ -159,7 +159,7 @@ public class TownyAdminCultureAddon extends BaseCommand implements TabExecutor {
 			&& args[2].equalsIgnoreCase("culture")) {
 
 			Town town = getTownOrThrow(args[0]);
-			String newCulture = CultureUtil.validateCultureName(StringMgmt.join(StringMgmt.remArgs(args, 2), " "));
+			String newCulture = CultureUtil.validateCultureName(StringMgmt.join(StringMgmt.remArgs(args, 3), " "));
 
 			//Set culture
 			TownMetaDataController.setTownCulture(town, newCulture);
