@@ -1,6 +1,7 @@
 package com.gmail.goosius.townycultures.command;
 
 import com.palmergames.bukkit.towny.TownyCommandAddonAPI;
+import com.palmergames.bukkit.towny.TownyMessaging;
 import com.palmergames.bukkit.towny.TownyUniverse;
 import com.palmergames.bukkit.towny.command.BaseCommand;
 import com.palmergames.bukkit.towny.exceptions.TownyException;
@@ -94,19 +95,19 @@ public class TownyAdminCultureAddon extends BaseCommand implements TabExecutor {
 	}
 
 	private void showHelp(CommandSender sender) {
-		sender.sendMessage(ChatTools.formatTitle("/townyadmin culture"));
-		sender.sendMessage(ChatTools.formatCommand("Eg", "/ta culture", "alltowns set culture [culture]", ""));
-		sender.sendMessage(ChatTools.formatCommand("Eg", "/ta culture", "town [town_name] set culture [culture]", ""));
-		sender.sendMessage(ChatTools.formatCommand("Eg", "/ta culture", "culturelist", ""));
-		sender.sendMessage(ChatTools.formatCommand("Eg", "/ta culture", "deleteculture [culturename]", ""));
+		TownyMessaging.sendMessage(sender, ChatTools.formatTitle("/townyadmin culture"));
+		TownyMessaging.sendMessage(sender, ChatTools.formatCommand("Eg", "/ta culture", "alltowns set culture [culture]", ""));
+		TownyMessaging.sendMessage(sender, ChatTools.formatCommand("Eg", "/ta culture", "town [town_name] set culture [culture]", ""));
+		TownyMessaging.sendMessage(sender, ChatTools.formatCommand("Eg", "/ta culture", "culturelist", ""));
+		TownyMessaging.sendMessage(sender, ChatTools.formatCommand("Eg", "/ta culture", "deleteculture [culturename]", ""));
 	}
 
 	private void showCultureAdminTownHelp(CommandSender sender) {
-		sender.sendMessage(ChatTools.formatCommand("Eg", "/ta culture", "town [town_name] set culture [culture]", ""));
+		TownyMessaging.sendMessage(sender, ChatTools.formatCommand("Eg", "/ta culture", "town [town_name] set culture [culture]", ""));
 	}
 
 	private void showCultureAdminAllTownsHelp(CommandSender sender) {
-		sender.sendMessage(ChatTools.formatCommand("Eg", "/ta culture", "alltowns set culture [culture]", ""));
+		TownyMessaging.sendMessage(sender, ChatTools.formatCommand("Eg", "/ta culture", "alltowns set culture [culture]", ""));
 	}
 
 	private void parseDeleteCultureCommand(CommandSender sender, String[] args) throws TownyException {

@@ -26,7 +26,7 @@ public class CultureChatCommand extends BaseCommand implements TabExecutor {
 	}
 
 	private void showCultureCommunicationHelp(CommandSender sender) {
-		sender.sendMessage(ChatTools.formatCommand("Eg", "/cc", "[msg]", ""));
+		Messaging.sendMessage(sender, ChatTools.formatCommand("Eg", "/cc", "[msg]", ""));
 	}
 	
 	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
