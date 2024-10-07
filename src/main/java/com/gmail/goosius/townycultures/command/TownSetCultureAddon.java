@@ -37,9 +37,9 @@ public class TownSetCultureAddon extends BaseCommand implements TabExecutor {
 	}
 
 	private void showCultureHelp(CommandSender sender) {
-		sender.sendMessage(ChatTools.formatTitle("/town set culture"));
-		sender.sendMessage(ChatTools.formatCommand("Eg", "/t set culture", "[culturename]", "Set your culture."));
-		sender.sendMessage(ChatTools.formatCommand("Eg", "/t set culture", "", "Remove your culture."));
+		Messaging.sendMessage(sender, ChatTools.formatTitle("/town set culture"));
+		Messaging.sendMessage(sender, ChatTools.formatCommand("Eg", "/t set culture", "[culturename]", "Set your culture."));
+		Messaging.sendMessage(sender, ChatTools.formatCommand("Eg", "/t set culture", "", "Remove your culture."));
 	}
 	
 	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {

@@ -15,19 +15,19 @@ public class Messaging {
 	public static void sendErrorMsg(CommandSender sender, String message) {
 		// Ensure the sender is not null (i.e. is an online player who is not an npc)
 		if (sender != null)
-			sender.sendMessage(Translatable.of("cultures_plugin_prefix").forLocale(sender) + Colors.Red + message);
+			TownyMessaging.sendMessage(sender, Translatable.of("cultures_plugin_prefix").forLocale(sender) + Colors.Red + message);
 	}
 
 	public static void sendErrorMsg(CommandSender sender, Translatable message) {
 		// Ensure the sender is not null (i.e. is an online player who is not an npc)
 		if (sender != null)
-			sender.sendMessage(Translatable.of("cultures_plugin_prefix").forLocale(sender) + Colors.Red + message.forLocale(sender));
+			TownyMessaging.sendMessage(sender, Translatable.of("cultures_plugin_prefix").forLocale(sender) + Colors.Red + message.forLocale(sender));
 	}
 
 	public static void sendMsg(CommandSender sender, Translatable message) {
 		// Ensure the sender is not null (i.e. is an online player who is not an npc)
 		if (sender != null)
-			sender.sendMessage(Translatable.of("cultures_plugin_prefix").forLocale(sender) + Colors.White + message.forLocale(sender));
+			TownyMessaging.sendMessage(sender, Translatable.of("cultures_plugin_prefix").forLocale(sender) + Colors.White + message.forLocale(sender));
 	}
 
 	public static void sendGlobalMessage(Translatable message) {
@@ -47,7 +47,16 @@ public class Messaging {
 	 * @param player Player to show the message to.
 	 * @param message Translatable to display as a message.
 	 */
-	public static void sendMessage(Player player, Translatable message) {
-		player.sendMessage(message.forLocale(player));
+	public static void sendMessage(CommandSender sender, String message) {
+		TownyMessaging.sendMessage(sender, message);
+	}
+
+	/**
+	 * Send a message with no prefix prepended.
+	 * @param player Player to show the message to.
+	 * @param message Translatable to display as a message.
+	 */
+	public static void sendMessage(CommandSender sender, Translatable message) {
+		TownyMessaging.sendMessage(sender, message.forLocale(sender));
 	}
 }
