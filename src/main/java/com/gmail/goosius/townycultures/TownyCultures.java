@@ -28,7 +28,7 @@ public class TownyCultures extends JavaPlugin {
 
 	private static TownyCultures plugin;
 	public static String prefix = "[TownyCultures] ";
-	private static Version requiredTownyVersion = Version.fromString("0.100.3.0");
+	private static Version requiredTownyVersion = Version.fromString("0.100.4.0");
 	private static boolean dynmapTowny = false;
 
 	public static TownyCultures getTownyCultures() {
