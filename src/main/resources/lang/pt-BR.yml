@@ -10,41 +10,41 @@ description: >
     [language] na config.yml
 #
 #
-#         You MUST retain spacing in the texts.
-#  If a text begins or ends with a space, it must remain that way.
+#         Você DEVE manter os espaços nos textos. 
+#  Se um texto começa ou termina com espaço, você deve deixa-lo deste jeito.
 #
 #
-#       %s = data to be supplied by the plugin.
+#       %s = informação a ser modificada pelo plugin
 
-# Text colouring
+# Cores de texto
 # --------------
-# Black = &0, Navy = &1, Green = &2, Blue = &3, Red = &4
-# Purple = &5, Gold = &6, LightGray = &7, Gray = &8
-# DarkPurple = &9, LightGreen = &a, LightBlue = &b
-# Rose = &c, LightPurple = &d, Yellow = &e, White = &f
+# Preto = &0, Azu escuro = &1, Verde = &2, Aqua escuro = &3, Vermelho escuro= &4
+# Roxo = &5, Gold = &6, Cinza claro = &7, Cinza = &8
+# Azul = &9, Verde claro = &a, Aqua = &b
+# Vermelho claro = &c, Rosa claro = &d, Amarelo = &e, Branco = &f
 
 #basics
 cultures_plugin_prefix: '&f[&6TownyCultures&f] '
 msg_err_command_disable: '&cVocê não tem permissão para isso.'
 
 #town screen
-status_town_culture: '&2Cultura: &a%s'
+status_town_culture: '&aCultura: &a%s'
 
 #culture setting
-msg_town_culture_set: '&Cultura da cidade setada: %s'
-msg_culture_removed: '&Cultura da cidade foi removida.'
-msg_culture_removed_all_towns: '&bA cultura de todas as cidades foram removidas.'
+msg_town_culture_set: '&bCultura da cidade setada: %s'
+msg_culture_removed: '&cCultura da cidade foi removida.'
+msg_culture_removed_all_towns: '&cA cultura de todas as cidades foram removidas.'
 msg_err_invalid_characters: '&cCaractere invalido utilizdado, a cultura não foi setada.'
-msg_err_culture_name_too_long: '&c Nome da cultura maior que o limite de caracteres (%d), a cultura não foi setada.'
+msg_err_culture_name_too_long: '&cNome da cultura maior que o limite de caracteres (%d), a cultura não foi setada.'
 
 
 #chat
 culture_chat_message: '&f[&5CC&f] &f[&6%s&f] %s: &d%s'
 
 #admin
-admin_help_1: 'Recarregue o arquivo de configuração e de idioma.'
-config_and_lang_file_reloaded_successfully: 'Arquivo de configuração e idioma recarregado com sucesso.'
-config_and_lang_file_could_not_be_loaded: 'Falha ao recarregar. Consulte o console para obter detalhes.'
+admin_help_1: '&cRecarregue o arquivo de configuração e de idioma.'
+config_and_lang_file_reloaded_successfully: '&bArquivo de configuração e idioma recarregado com sucesso.'
+config_and_lang_file_could_not_be_loaded: '&cFalha ao recarregar. Consulte o console para obter detalhes.'
 msg_all_town_cultures_set: '&bCultura de todas as cidades foram setadas para: %s'
 msg_specific_town_cultures_set: '&bCultura da cidade %s setada para: %s'
-msg_err_town_not_registered: '&aA cidade %s não está registrada.'
+msg_err_town_not_registered: '&cA cidade %s não está registrada.'
