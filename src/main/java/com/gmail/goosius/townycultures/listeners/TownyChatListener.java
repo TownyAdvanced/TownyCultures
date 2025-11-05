@@ -17,15 +17,6 @@ import java.util.Set;
 
 public class TownyChatListener implements Listener {
 
-<<<<<<< HEAD
-=======
-    /**
-     * This method updates the town popup box on Dynmap-Towny
-     *
-     * 1. It looks for the %culture% tag in the popup
-     * 2. If the %culture% tag exists, it replaces it with the town culture (or blank if there is no town culture)
-     */
->>>>>>> c26a5f2 (Added support for a true culture channel)
     @EventHandler
     public void onTownyChat(AsyncChatHookEvent event) {
         //Verify player can use the culture channel

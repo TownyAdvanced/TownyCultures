@@ -43,7 +43,7 @@
       <scope>provided</scope>
     </dependency>
     <dependency>
-      <groupId>com.github.TownyAdvanced.Towny</groupId>
+      <groupId>com.palmergames.bukkit.towny</groupId>
       <artifactId>towny</artifactId>
       <version>${towny.version}</version>
     </dependency>

@@ -30,7 +30,7 @@ public class StatusScreenListener implements Listener {
 	@EventHandler
 	public void onTownStatusScreen(TownStatusScreenEvent event) {
         //[Culture]
-        //  Southern: The People of the South are barbarous and isolationist.
+        //  Town Culture: Pataxian
 
 		if (!Settings.isTownyCulturesEnabled())
 			return;
@@ -64,7 +64,7 @@ public class StatusScreenListener implements Listener {
 	public void onNationStatus(NationStatusScreenEvent event) {
 
         //[Cultures]
-        //  Nation Cultures: Southern: 50%, Western: 50%
+        //  Nation Cultures: Pataxian: 50%, Bilarian: 50%
 
 		if (!Settings.isTownyCulturesEnabled())
 			return;

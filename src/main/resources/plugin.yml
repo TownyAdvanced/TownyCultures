@@ -5,13 +5,8 @@ api-version: ${project.bukkitAPIVersion}
 author: [Goosius,LlmDl]
 website: 'townyadvanced.github.io'
 prefix: ${project.artifactId}
-<<<<<<< HEAD
 depend: [Towny]
 softdepend: [TownyChat,Dynmap-Towny,PlaceholderAPI]
-=======
-depend: [Towny, TownyChat]
-softdepend: [Dynmap-Towny,PlaceholderAPI]
->>>>>>> c26a5f2 (Added support for a true culture channel)
 
 description: A culture system made by Goosius for Towny.
 
