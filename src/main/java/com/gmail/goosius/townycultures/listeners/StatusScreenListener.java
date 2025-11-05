@@ -26,7 +26,8 @@ import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.event.HoverEvent;
 
 public class StatusScreenListener implements Listener {
-    
+
+
 	@EventHandler
 	public void onTownStatusScreen(TownStatusScreenEvent event) {
         //[Culture]
