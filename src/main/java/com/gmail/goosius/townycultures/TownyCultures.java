@@ -29,6 +29,7 @@ public class TownyCultures extends JavaPlugin {
 	private static TownyCultures plugin;
 	private static Version requiredTownyVersion = Version.fromString("0.101.2.5");
 	private static boolean dynmapTowny = false;
+	private static boolean townyChatPresent = false;
 
     public TownyCultures() {
         plugin = this;
@@ -81,6 +82,9 @@ public class TownyCultures extends JavaPlugin {
 		if (test != null)
 			dynmapTowny = true;
 
+		test = getServer().getPluginManager().getPlugin("TownyChat");
+		if (test != null)
+			townyChatPresent = true;
 	}
 
 	@Override
@@ -103,7 +107,8 @@ public class TownyCultures extends JavaPlugin {
 	private void registerListeners(PluginManager pm) {
 		pm.registerEvents(new StatusScreenListener(), this);
 		pm.registerEvents(new TownyListener(), this);
-        pm.registerEvents(new TownyChatListener(), this);
+		if (townyChatPresent)
+			pm.registerEvents(new TownyChatListener(), this);
 		if (dynmapTowny)
 			pm.registerEvents(new TownyDynmapListener(), this);
 	}
