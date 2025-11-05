@@ -3,8 +3,10 @@ package com.gmail.goosius.townycultures.command;
 import com.gmail.goosius.townycultures.enums.TownyCulturesPermissionNodes;
 import com.gmail.goosius.townycultures.events.PreCultureSetEvent;
 import com.gmail.goosius.townycultures.metadata.TownMetaDataController;
+import com.gmail.goosius.townycultures.settings.Settings;
 import com.gmail.goosius.townycultures.utils.CultureUtil;
 import com.gmail.goosius.townycultures.utils.Messaging;
+import com.gmail.goosius.townycultures.utils.PresetCulturesUtil;
 import com.palmergames.bukkit.towny.TownyCommandAddonAPI;
 import com.palmergames.bukkit.towny.command.BaseCommand;
 import com.palmergames.bukkit.towny.exceptions.TownyException;
@@ -61,19 +63,30 @@ public class TownSetCultureAddon extends BaseCommand implements TabExecutor {
 		Resident resident = getResidentOrThrow(player);
 		Town town = getTownFromResidentOrThrow(resident);
 
-		String newCulture = CultureUtil.validateCultureName(StringMgmt.join(args, " "));
+		String newCultureName = CultureUtil.validateCultureName(StringMgmt.join(args, " "));
 
-		if (newCulture == null)
+		if (newCultureName == null)
 			throw new TownyException(Translatable.of("msg_err_invalid_string_town_culture_not_set"));
 
 		//Fire cancellable event.
-		BukkitTools.ifCancelledThenThrow(new PreCultureSetEvent(newCulture, town));
+		BukkitTools.ifCancelledThenThrow(new PreCultureSetEvent(newCultureName, town));
+
+        //If preset cultures is enabled, check that the given name is valid
+        if(Settings.isPresetCulturesEnabled()) {
+            if(newCultureName.isEmpty())
+                throw new TownyException(Translatable.of("msg_err_culture_name_not_a_preset_culture", newCultureName, PresetCulturesUtil.getPresetCultureNamesAsSet().toString()));
+            String correctlyCapitalizedCultureName = PresetCulturesUtil.findCorrectlyCapitalizedCultureName(newCultureName);
+            if (correctlyCapitalizedCultureName == null)
+                throw new TownyException(Translatable.of("msg_err_culture_name_not_a_preset_culture", newCultureName, PresetCulturesUtil.getPresetCultureNamesAsSet().toString()));
+            else
+                newCultureName = correctlyCapitalizedCultureName;
+        }
 
 		//Set town culture
-		TownMetaDataController.setTownCulture(town, newCulture);
-		if (newCulture.isEmpty())
+		TownMetaDataController.setTownCulture(town, newCultureName);
+		if (newCultureName.isEmpty())
 			Messaging.sendPrefixedTownMessage(town, Translatable.of("msg_culture_removed"));
 		else
-			Messaging.sendPrefixedTownMessage(town, Translatable.of("msg_town_culture_set", StringMgmt.capitalize(newCulture)));
+			Messaging.sendPrefixedTownMessage(town, Translatable.of("msg_town_culture_set", newCultureName));
 	}
 }

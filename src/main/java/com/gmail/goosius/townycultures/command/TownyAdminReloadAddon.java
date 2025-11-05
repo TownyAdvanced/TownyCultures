@@ -1,5 +1,6 @@
 package com.gmail.goosius.townycultures.command;
 
+import com.gmail.goosius.townycultures.utils.PresetCulturesUtil;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
@@ -38,5 +39,7 @@ public class TownyAdminReloadAddon extends BaseCommand implements TabExecutor {
 			Messaging.sendMsg(sender, Translatable.of("config_and_lang_file_reloaded_successfully"));
 		else
 			Messaging.sendErrorMsg(sender, Translatable.of("config_and_lang_file_could_not_be_loaded"));
+
+        PresetCulturesUtil.sanitizeTownCultures();
 	}
 }

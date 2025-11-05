@@ -32,8 +32,13 @@ status_format_hover_bracket_colour: '&7'    # Colour applied to the brackets of 
 
 #town screen
 status_town_hover_title_culture: "%s[%sCulture%s]"
-status_town_hover_content_culture: '&2Town Culture: &a%s'
+status_town_hover_content_culture_name: '&2Town Culture: &a%s'
+status_town_hover_content_culture_name_and_description: '&2%s: &a%s'
 status_town_hover_content_culture_not_set: '&2/town set culture [culture]'
+
+#nation screen
+status_nation_hover_title_cultures:  "%s[%sCultures%s]"
+status_nation_hover_content_cultures: '&2Nation Cultures: &a%s'
 
 #nation screen
 status_nation_hover_title_cultures:  "%s[%sCultures%s]"
@@ -45,6 +50,7 @@ msg_culture_removed: '&bTown culture removed.'
 msg_culture_removed_all_towns: '&bTown culture removed from all towns.'
 msg_err_invalid_characters: '&cInvalid characters used, unable to set culture.'
 msg_err_culture_name_too_long: '&cCulture name longer than character limit (%d), unable to set culture.'
+msg_err_culture_name_not_a_preset_culture: '&cCulture name %s is not a valid culture name. Valid names are: %s'
 
 #chat
 msg_err_cannot_use_cc_no_town: '&cYou cannot use culture chat as you have no town.'

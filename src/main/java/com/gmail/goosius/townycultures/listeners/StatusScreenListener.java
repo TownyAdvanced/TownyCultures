@@ -8,6 +8,8 @@ import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+
+import com.gmail.goosius.townycultures.utils.PresetCulturesUtil;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
@@ -24,12 +26,11 @@ import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.event.HoverEvent;
 
 public class StatusScreenListener implements Listener {
-
-
+    
 	@EventHandler
 	public void onTownStatusScreen(TownStatusScreenEvent event) {
         //[Culture]
-        //  Town Culture: Pataxian
+        //  Southern: The People of the South are barbarous and isolationist.
 
 		if (!Settings.isTownyCulturesEnabled())
 			return;
@@ -38,7 +39,12 @@ public class StatusScreenListener implements Listener {
         final Translator translator = Translator.locale(event.getCommandSender());
         Component hoverText = Component.empty();
         if(TownMetaDataController.hasTownCulture(event.getTown())) {
-            hoverText = hoverText.append(Component.text(translator.of("status_town_hover_content_culture", TownyCultures.getCulture(event.getTown()))));
+            String cultureName = TownyCultures.getCulture(event.getTown());
+            if(Settings.isPresetCulturesEnabled() && PresetCulturesUtil.isPresetCulture(cultureName)) {
+                hoverText = hoverText.append(Component.text(translator.of("status_town_hover_content_culture_name_and_description", cultureName, PresetCulturesUtil.getPresetCulture(cultureName).getDescription())));
+            } else {
+                hoverText = hoverText.append(Component.text(translator.of("status_town_hover_content_culture_name", cultureName)));
+            }
         } else {
             hoverText = hoverText.append(Component.text(translator.of("status_town_hover_content_culture_not_set")));
         }
@@ -58,7 +64,7 @@ public class StatusScreenListener implements Listener {
 	public void onNationStatus(NationStatusScreenEvent event) {
 
         //[Cultures]
-        //  Nation Cultures: Pataxian: 50%, Bilarian: 50%
+        //  Nation Cultures: Southern: 50%, Western: 50%
 
 		if (!Settings.isTownyCulturesEnabled())
 			return;

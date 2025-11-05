@@ -53,7 +53,10 @@ ADMIN
     permission: towny.chat.culture
     range: '-1'
     spam_time: '0.5'
+<<<<<<< HEAD
     hooked: true
+=======
+>>>>>>> c26a5f2 (Added support for a true culture channel)
 ```
 5. Start your server.
 6. Give mayors the ability to set their town culture using this command:
