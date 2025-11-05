@@ -23,4 +23,4 @@ jobs:
               uses: actions/upload-artifact@v4
               with:
                   name: TownyCultures
-                  path: TownyCultures/target/TownyCultures-*.jar
+                  path: target/TownyCultures-*.jar
