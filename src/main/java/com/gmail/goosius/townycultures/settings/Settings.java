@@ -19,7 +19,7 @@ public class Settings {
 
 	public static boolean loadSettingsAndLang() {
 		try {
-			Settings.loadConfig();
+			loadConfig();
 		} catch (IOException e) {
 			TownyCultures.severe(String.format("Loading error: Failed to load file %s (does it pass a yaml parser?).", configPath));
 			TownyCultures.severe("https://jsonformatter.org/yaml-parser");

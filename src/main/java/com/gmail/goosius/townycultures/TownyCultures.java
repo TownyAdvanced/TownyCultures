@@ -1,10 +1,10 @@
 package com.gmail.goosius.townycultures;
 
 import com.gmail.goosius.townycultures.command.TownyAdminCultureAddon;
-import com.gmail.goosius.townycultures.command.CultureChatCommand;
 import com.gmail.goosius.townycultures.command.TownSetCultureAddon;
 import com.gmail.goosius.townycultures.command.TownyAdminReloadAddon;
 import com.gmail.goosius.townycultures.integrations.TownyCulturesPlaceholderExpansion;
+import com.gmail.goosius.townycultures.listeners.TownyChatListener;
 import com.gmail.goosius.townycultures.listeners.TownyDynmapListener;
 import com.gmail.goosius.townycultures.listeners.TownyListener;
 import com.gmail.goosius.townycultures.metadata.TownMetaDataController;
@@ -27,9 +27,12 @@ import com.gmail.goosius.townycultures.listeners.StatusScreenListener;
 public class TownyCultures extends JavaPlugin {
 
 	private static TownyCultures plugin;
-	public static String prefix = "[TownyCultures] ";
 	private static Version requiredTownyVersion = Version.fromString("0.101.2.5");
 	private static boolean dynmapTowny = false;
+
+    public TownyCultures() {
+        plugin = this;
+    }
 
 	public static TownyCultures getTownyCultures() {
 		return plugin;
@@ -37,8 +40,6 @@ public class TownyCultures extends JavaPlugin {
 
 	@Override
 	public void onEnable() {
-
-		plugin = this;
 
 		printSickASCIIArt();
 
@@ -102,6 +103,7 @@ public class TownyCultures extends JavaPlugin {
 	private void registerListeners(PluginManager pm) {
 		pm.registerEvents(new StatusScreenListener(), this);
 		pm.registerEvents(new TownyListener(), this);
+        pm.registerEvents(new TownyChatListener(), this);
 		if (dynmapTowny)
 			pm.registerEvents(new TownyDynmapListener(), this);
 	}
@@ -110,7 +112,6 @@ public class TownyCultures extends JavaPlugin {
 		new TownSetCultureAddon();
 		new TownyAdminCultureAddon();
 		new TownyAdminReloadAddon();
-		getCommand("cc").setExecutor(new CultureChatCommand());
 	}
 
 	private void printSickASCIIArt() {
