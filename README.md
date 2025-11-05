@@ -43,12 +43,24 @@ ADMIN
 1. Download the TownyCultures jar file here: https://github.com/TownyAdvanced/TownyCultures/releases
 2. Stop your server.
 3. Drop the jar file into your server's plugins folder.
-4. Start your server.
-5. Give mayors the ability to set their town culture using this command:
+4. To enable the culture channel, copy this into your Towny channels.yml file:
+```
+  culture:
+    commands: cc
+    type: DEFAULT
+    channeltag: '&f[&5CC&f]'
+    messagecolour: '&d'
+    permission: towny.chat.culture
+    range: '-1'
+    spam_time: '0.5'
+    hooked: true
+```
+5. Start your server.
+6. Give mayors the ability to set their town culture using this command:
 ```
 /ta townyperms group towns.mayor addperm townycultures.set_town_culture
 ```
-6. That's it.
+7. That's it.
 
 ## Permissions
 - townycultures.set_town_culture:

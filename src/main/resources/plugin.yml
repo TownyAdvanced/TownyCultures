@@ -6,17 +6,9 @@ author: [Goosius,LlmDl]
 website: 'townyadvanced.github.io'
 prefix: ${project.artifactId}
 depend: [Towny]
-softdepend: [Dynmap-Towny,PlaceholderAPI]
+softdepend: [TownyChat,Dynmap-Towny,PlaceholderAPI]
 
 description: A culture system made by Goosius for Towny.
-
-commands:
-    culture:
-        aliases: [c]
-    cultureAdmin:
-        aliases: [ca]
-    cc:
-        aliases: []
 
 permissions:
     townycultures.set_town_culture:

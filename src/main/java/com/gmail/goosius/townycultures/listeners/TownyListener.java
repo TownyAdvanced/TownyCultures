@@ -4,6 +4,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Map;
 
+import com.palmergames.bukkit.towny.TownyAPI;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.Plugin;
@@ -26,5 +27,7 @@ public class TownyListener implements Listener {
 		for (String language : translations.keySet())
 			for (Map.Entry<String, String> map : translations.get(language).entrySet())
 				event.addTranslation(language, map.getKey(), map.getValue());
-	}
+
+        TownyAPI.getInstance().addTranslations(plugin, loader.getTranslations());
+    }
 }
