@@ -27,9 +27,17 @@ description: >
 #basics
 cultures_plugin_prefix: '&f[&6TownyCultures&f] '
 msg_err_command_disable: '&cYou don''t have enough permissions for that command.'
+status_format_hover_key: '&a'               # Colour applied to a status screen element which is a hover-able key, ex: [Rank List]
+status_format_hover_bracket_colour: '&7'    # Colour applied to the brackets of a hover-able status screen element.
 
 #town screen
-status_town_culture: '&2Culture: &a%s'
+status_town_hover_title_culture: "%s[%sCulture%s]"
+status_town_hover_content_culture: '&2Town Culture: &a%s'
+status_town_hover_content_culture_not_set: '&a/town set culture [culture]'
+
+#nation screen
+status_nation_hover_title_cultures:  "%s[%sCultures%s]"
+status_nation_hover_content_cultures: '&2Nation Cultures: &a%s'
 
 #culture setting
 msg_town_culture_set: '&bTown culture set to %s'
@@ -37,7 +45,6 @@ msg_culture_removed: '&bTown culture removed.'
 msg_culture_removed_all_towns: '&bTown culture removed from all towns.'
 msg_err_invalid_characters: '&cInvalid characters used, unable to set culture.'
 msg_err_culture_name_too_long: '&cCulture name longer than character limit (%d), unable to set culture.'
-
 
 #chat
 culture_chat_message: '&f[&5CC&f] &f[&6%s&f] %s: &d%s'
