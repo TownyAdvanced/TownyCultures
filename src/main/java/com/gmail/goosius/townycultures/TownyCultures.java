@@ -67,6 +67,8 @@ public class TownyCultures extends JavaPlugin {
 
 			registerCommands();
 
+            PresetCulturesUtil.loadPresetCultures();
+
             PresetCulturesUtil.sanitizeTownCultures();
 
 			info("TownyCultures loaded successfully.");

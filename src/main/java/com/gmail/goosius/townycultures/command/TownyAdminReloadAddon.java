@@ -40,6 +40,8 @@ public class TownyAdminReloadAddon extends BaseCommand implements TabExecutor {
 		else
 			Messaging.sendErrorMsg(sender, Translatable.of("config_and_lang_file_could_not_be_loaded"));
 
+        PresetCulturesUtil.clearPresetCultures();
+        PresetCulturesUtil.loadPresetCultures();
         PresetCulturesUtil.sanitizeTownCultures();
 	}
 }

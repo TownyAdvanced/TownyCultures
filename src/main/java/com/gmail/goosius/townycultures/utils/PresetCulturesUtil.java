@@ -17,13 +17,21 @@ import java.util.Set;
 
 public class PresetCulturesUtil {
 
-    //Note: In this map, the keys are all lowercase
+    /**
+     * Convenience map of the preset cultures, to allow faster loading than config file reads
+     */
     private static final Map<String, PresetCulture> presetCulturesMap = new HashMap<>();
 
+    /**
+     * Clear the preset cultures map
+     */
     public static void clearPresetCultures() {
         presetCulturesMap.clear();
     }
 
+    /**
+     * Load the preset cultures from the config file into the convenience-map
+     */
     public static void loadPresetCultures() {
         List<PresetCulture> presetCulturesList = Settings.getPresetCulturesList();
         for(PresetCulture presetCulture: presetCulturesList)
