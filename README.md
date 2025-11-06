@@ -10,7 +10,7 @@
 - Town residents can communicate with all other town residents of the same culture by using the Culture Channel: `/cc <message>`.
 - If the "Preset Cultures" feature is *disabled*, new cultures names can be created by mayors, simply by running `/town set culture <culture>`.
   <br>The same command can be used to join an existing culture.
-- If the "Preset Cultures" feature is *enabled*, cultures names and descriptions are condifured by the server, and can be based on the game-world location of the town e.g.
+- If the "Preset Cultures" feature is *enabled*, cultures names and descriptions are confured by the server, and can be based on the game-world location of the town e.g.
    <img width="4538" height="2586" alt="mapped_cultures_example_png" src="https://github.com/user-attachments/assets/184e2f59-617b-4fb9-a521-ea5d6bb79a19" />
 - Nations do not technically have their own culture, but rather their culture is the sum of whichever cultures their towns are part of.
 - Culture can be shown on dynmap town popups.
