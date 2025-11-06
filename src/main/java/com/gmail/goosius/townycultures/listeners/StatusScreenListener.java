@@ -8,6 +8,8 @@ import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+
+import com.gmail.goosius.townycultures.utils.PresetCulturesUtil;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 
@@ -38,7 +40,12 @@ public class StatusScreenListener implements Listener {
         final Translator translator = Translator.locale(event.getCommandSender());
         Component hoverText = Component.empty();
         if(TownMetaDataController.hasTownCulture(event.getTown())) {
-            hoverText = hoverText.append(Component.text(translator.of("status_town_hover_content_culture", TownyCultures.getCulture(event.getTown()))));
+            String cultureName = TownyCultures.getCulture(event.getTown());
+            if(Settings.isPresetCulturesEnabled() && PresetCulturesUtil.isPresetCulture(cultureName)) {
+                hoverText = hoverText.append(Component.text(translator.of("status_town_hover_content_culture_name_and_description", cultureName, PresetCulturesUtil.getPresetCulture(cultureName).getDescription())));
+            } else {
+                hoverText = hoverText.append(Component.text(translator.of("status_town_hover_content_culture_name", cultureName)));
+            }
         } else {
             hoverText = hoverText.append(Component.text(translator.of("status_town_hover_content_culture_not_set")));
         }

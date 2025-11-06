@@ -5,11 +5,13 @@ import com.gmail.goosius.townycultures.command.TownSetCultureAddon;
 import com.gmail.goosius.townycultures.command.TownyAdminReloadAddon;
 import com.gmail.goosius.townycultures.integrations.TownyCulturesPlaceholderExpansion;
 import com.gmail.goosius.townycultures.listeners.TownyChatListener;
+import com.gmail.goosius.townycultures.listeners.TownListener;
 import com.gmail.goosius.townycultures.listeners.TownyDynmapListener;
 import com.gmail.goosius.townycultures.listeners.TownyListener;
 import com.gmail.goosius.townycultures.metadata.TownMetaDataController;
 import com.gmail.goosius.townycultures.utils.CultureUtil;
 
+import com.gmail.goosius.townycultures.utils.PresetCulturesUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
@@ -65,6 +67,10 @@ public class TownyCultures extends JavaPlugin {
 
 			registerCommands();
 
+            PresetCulturesUtil.loadPresetCultures();
+
+            PresetCulturesUtil.sanitizeTownCultures();
+
 			info("TownyCultures loaded successfully.");
 		} else {
 			info("TownyCultures loaded successfully but is disabled by config.");
@@ -106,6 +112,7 @@ public class TownyCultures extends JavaPlugin {
 
 	private void registerListeners(PluginManager pm) {
 		pm.registerEvents(new StatusScreenListener(), this);
+        pm.registerEvents(new TownListener(), this);
 		pm.registerEvents(new TownyListener(), this);
 		if (townyChatPresent)
 			pm.registerEvents(new TownyChatListener(), this);

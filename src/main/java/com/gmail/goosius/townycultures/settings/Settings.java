@@ -3,7 +3,13 @@ package com.gmail.goosius.townycultures.settings;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
+import org.jetbrains.annotations.NotNull;
 
+import com.gmail.goosius.townycultures.objects.PresetCulture;
+import com.gmail.goosius.townycultures.enums.AutomaticCultureSelectionType;
+import com.palmergames.bukkit.towny.object.Coord;
 import org.bukkit.plugin.Plugin;
 
 import com.gmail.goosius.townycultures.TownyCultures;
@@ -159,4 +165,33 @@ public class Settings {
 	public static int maxNameLength() {
 		return Settings.getInt(ConfigNodes.MAXIMUM_NAME_LENGTH);
 	}
+
+    public static boolean isPresetCulturesEnabled() {
+        return getBoolean(ConfigNodes.PRESET_CULTURES_ENABLED);
+    }
+
+    public static AutomaticCultureSelectionType getAutomaticCultureSelectionType() {
+        return AutomaticCultureSelectionType.parseText(getString(ConfigNodes.PRESET_CULTURES_AUTOMATIC_CULTURE_SELECTION_TYPE));
+    }
+
+    public static List<PresetCulture> getPresetCulturesList() {
+        List<PresetCulture> presetCulturesAsList = new ArrayList<>();
+        String presetCulturesListAsString = getString(ConfigNodes.PRESET_CULTURES_LIST);
+        String[] presetCulturesListAsArray = presetCulturesListAsString.split("\\|");
+        for(String singlePresetCultureAsString: presetCulturesListAsArray)
+        {
+            String[] singlePresetCultureAsArray = singlePresetCultureAsString.replaceAll("\\[","").replaceAll("]","").split(",");
+            PresetCulture singlePresetCulture = getSinglePresetCulture(singlePresetCultureAsArray);
+            presetCulturesAsList.add(singlePresetCulture);
+        }
+        return presetCulturesAsList;
+    }
+
+    private static @NotNull PresetCulture getSinglePresetCulture(String[] singleCultureAsArray) {
+        Coord topLeftCoord = Coord.parseCoord(Integer.parseInt(singleCultureAsArray[0].trim()), Integer.parseInt(singleCultureAsArray[1].trim()));
+        Coord bottomRightCoord = Coord.parseCoord(Integer.parseInt(singleCultureAsArray[2].trim()), Integer.parseInt(singleCultureAsArray[3].trim()));
+        String cultureName = singleCultureAsArray[4].trim();
+        String cultureDescription = singleCultureAsArray[5].trim();
+        return new PresetCulture(topLeftCoord,bottomRightCoord,cultureName,cultureDescription);
+    }
 }
