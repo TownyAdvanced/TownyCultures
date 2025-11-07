@@ -62,7 +62,6 @@ ADMIN
 - townycultures.set_town_culture:
   - description: User is able to set town culture. (usually town mayors or assistants)
   - default: op
-
 - townycultures.admin:
   - description: User is able to use all TownyCulture admin commands.
   - default: op
