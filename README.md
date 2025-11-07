@@ -50,7 +50,7 @@ ADMIN
 6. If you wish to use the 'Preset Cultures' feature:
    - Edit your TownyCultures config.yml file, and set preset_cultures.enabled to true.
    - Edit your TownyCultures config.yml file, and set automatic_culture_selection_type as you wish.
-   - Edit your TownyCultures config.yml file, and configure the list of preset cultures as you wish. Each culture entry is in the following form: `[top left x, top left y], [bottom right x, bottom right y], name, description`.
+   - Edit your TownyCultures config.yml file, and configure the list of preset cultures as you wish. Each culture entry is in the following form: `{[top left x, top left y], [bottom right x, bottom right y], name, description}`.
    - Run this command: `/ta reload townycultures`.
 7. If you wish to give mayors the ability to set their town culture:
    - Run this command: `/ta townyperms group towns.mayor addperm townycultures.set_town_culture`.

@@ -53,15 +53,15 @@ public enum ConfigNodes {
             "# LOCATION = If town does not have a preset culture, one is selected based on town location."),
     PRESET_CULTURES_LIST(
             "townycultures.preset_cultures.list",
-            "[-20000, -20000], [-6667, -6667], North-Western, The people of the North-West are scavengers and traders. | " +
-            "[-6667, -20000], [6667, -6667], Northern, The people of the North are peaceful farmers. | " +
-            "[6667, -20000], [20000, -6667], North-Eastern, The people of the North-East are savage and warlike. | " +
-            "[-20000, -6667], [-6667, 6667], Western, The people of the West are ambitious empire builders. | " +
-            "[-6667, -6667], [6667, 6667], Central, The people of the Center are hard working industrialists. | " +
-            "[6667, -6667], [20000, 6667], Eastern, The people of the East are skilled merchants. | " +
-            "[-20000, 6667], [-6667, 20000], South-Western, The people of the South-West are peaceful and spiritual. | " +
-            "[-6667, 6667], [6667, 20000], Southern, The people of the South are barbarous and isolationist. | " +
-            "[6667, 6667], [20000, 20000], South-Eastern, The people of the South-East are polite and diplomatic.",
+            "{[-20000, -20000], [-6667, -6667], North-Western, The people of the North-West are scavengers and traders.}," +
+            "{[-6667, -20000], [6667, -6667], Northern, The people of the North are peaceful farmers.},"+
+            "{[6667, -20000], [20000, -6667], North-Eastern, The people of the North-East are savage and warlike.}," +
+            "{[-20000, -6667], [-6667, 6667], Western, The people of the West are ambitious empire builders.}," +
+            "{[-6667, -6667], [6667, 6667], Central, The people of the Center are hard working industrialists.}," +
+            "{[6667, -6667], [20000, 6667], Eastern, The people of the East are skilled merchants.}," +
+            "{[-20000, 6667], [-6667, 20000], South-Western, The people of the South-West are peaceful and spiritual.}," +
+            "{[-6667, 6667], [6667, 20000], Southern, The people of the South are barbarous and isolationist.}," +
+            "{[6667, 6667], [20000, 20000], South-Eastern, The people of the South-East are polite and diplomatic.}",
             "",
             "# The list of preset cultures.");
 

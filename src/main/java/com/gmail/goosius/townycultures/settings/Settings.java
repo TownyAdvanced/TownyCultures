@@ -5,6 +5,10 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import org.bukkit.Material;
 import org.jetbrains.annotations.NotNull;
 
 import com.gmail.goosius.townycultures.objects.PresetCulture;
@@ -22,6 +26,7 @@ import com.palmergames.util.FileMgmt;
 public class Settings {
 	private static CommentedConfiguration config, newConfig;
 	private static Path configPath = TownyCultures.getTownyCultures().getDataFolder().toPath().resolve("config.yml");
+    private final static Pattern LIST_REGEX_PATTERN = Pattern.compile("\\{([^}]+)}", Pattern.CASE_INSENSITIVE);
 
 	public static boolean loadSettingsAndLang() {
 		try {
@@ -177,21 +182,29 @@ public class Settings {
     public static List<PresetCulture> getPresetCulturesList() {
         List<PresetCulture> presetCulturesAsList = new ArrayList<>();
         String presetCulturesListAsString = getString(ConfigNodes.PRESET_CULTURES_LIST);
-        String[] presetCulturesListAsArray = presetCulturesListAsString.split("\\|");
-        for(String singlePresetCultureAsString: presetCulturesListAsArray)
-        {
-            String[] singlePresetCultureAsArray = singlePresetCultureAsString.replaceAll("\\[","").replaceAll("]","").split(",");
-            PresetCulture singlePresetCulture = getSinglePresetCulture(singlePresetCultureAsArray);
-            presetCulturesAsList.add(singlePresetCulture);
+
+        if(!presetCulturesListAsString.isEmpty()) {
+            Matcher matcher = LIST_REGEX_PATTERN.matcher(presetCulturesListAsString);
+            String presetCultureAsString;
+            String[] presetCultureAsArray;
+            PresetCulture presetCulture;
+
+            while (matcher.find()) {
+                //Read one culture
+                presetCultureAsString = matcher.group(1);
+                presetCultureAsArray = presetCultureAsString.replaceAll("\\[", "").replaceAll("]", "").split(",");
+                presetCulture = getPresetCulture(presetCultureAsArray);
+                presetCulturesAsList.add(presetCulture);
+            }
         }
         return presetCulturesAsList;
     }
 
-    private static @NotNull PresetCulture getSinglePresetCulture(String[] singleCultureAsArray) {
-        Coord topLeftCoord = Coord.parseCoord(Integer.parseInt(singleCultureAsArray[0].trim()), Integer.parseInt(singleCultureAsArray[1].trim()));
-        Coord bottomRightCoord = Coord.parseCoord(Integer.parseInt(singleCultureAsArray[2].trim()), Integer.parseInt(singleCultureAsArray[3].trim()));
-        String cultureName = singleCultureAsArray[4].trim();
-        String cultureDescription = singleCultureAsArray[5].trim();
+    private static @NotNull PresetCulture getPresetCulture(String[] presetCultureAsArray) {
+        Coord topLeftCoord = Coord.parseCoord(Integer.parseInt(presetCultureAsArray[0].trim()), Integer.parseInt(presetCultureAsArray[1].trim()));
+        Coord bottomRightCoord = Coord.parseCoord(Integer.parseInt(presetCultureAsArray[2].trim()), Integer.parseInt(presetCultureAsArray[3].trim()));
+        String cultureName = presetCultureAsArray[4].trim();
+        String cultureDescription = presetCultureAsArray[5].trim();
         return new PresetCulture(topLeftCoord,bottomRightCoord,cultureName,cultureDescription);
     }
 }
