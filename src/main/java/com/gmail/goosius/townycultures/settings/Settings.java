@@ -200,11 +200,11 @@ public class Settings {
         return presetCulturesAsList;
     }
 
-    private static @NotNull PresetCulture getPresetCulture(String[] singleCultureAsArray) {
-        Coord topLeftCoord = Coord.parseCoord(Integer.parseInt(singleCultureAsArray[0].trim()), Integer.parseInt(singleCultureAsArray[1].trim()));
-        Coord bottomRightCoord = Coord.parseCoord(Integer.parseInt(singleCultureAsArray[2].trim()), Integer.parseInt(singleCultureAsArray[3].trim()));
-        String cultureName = singleCultureAsArray[4].trim();
-        String cultureDescription = singleCultureAsArray[5].trim();
+    private static @NotNull PresetCulture getPresetCulture(String[] presetCultureAsArray) {
+        Coord topLeftCoord = Coord.parseCoord(Integer.parseInt(presetCultureAsArray[0].trim()), Integer.parseInt(presetCultureAsArray[1].trim()));
+        Coord bottomRightCoord = Coord.parseCoord(Integer.parseInt(presetCultureAsArray[2].trim()), Integer.parseInt(presetCultureAsArray[3].trim()));
+        String cultureName = presetCultureAsArray[4].trim();
+        String cultureDescription = presetCultureAsArray[5].trim();
         return new PresetCulture(topLeftCoord,bottomRightCoord,cultureName,cultureDescription);
     }
 }
